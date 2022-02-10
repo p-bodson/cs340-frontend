@@ -29,7 +29,7 @@ const Home: NextPage = () => {
             <p>See registered members.</p>
           </a>
 
-          <a href="#" className={styles.card}>
+          <a href="/libraries" className={styles.card}>
             <h2>Libraries &rarr;</h2>
             <p>See the libraries registered.</p>
           </a>
