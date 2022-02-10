@@ -24,12 +24,12 @@ const Home: NextPage = () => {
         </p>
 
         <div className={styles.grid}>
-          <a href="/members" className={styles.card}>
+          <a href="./members" className={styles.card}>
             <h2>Members &rarr;</h2>
             <p>See registered members.</p>
           </a>
 
-          <a href="/libraries" className={styles.card}>
+          <a href="./libraries" className={styles.card}>
             <h2>Libraries &rarr;</h2>
             <p>See the libraries registered.</p>
           </a>
@@ -44,7 +44,7 @@ const Home: NextPage = () => {
             <p>See the Books and Authors known to the network.</p>
           </a>
 
-          <a href="#" className={styles.card}>
+          <a href="./rentals" className={styles.card}>
             <h2>Rentals &rarr;</h2>
             <p>See the rental requests made.</p>
           </a>       
@@ -53,18 +53,6 @@ const Home: NextPage = () => {
             <h2>Transfers &rarr;</h2>
             <p>See the transfers made between libraries.</p>
           </a>
-
-          <a href="#" className={styles.card}>
-            <h2>Rental Items &rarr;</h2>
-            <p>See what resources are rented.</p>
-          </a>
-
-          <a href="#" className={styles.card}>
-            <h2>Transfer Items &rarr;</h2>
-            <p>See what resources are transferred.</p>
-          </a>
-
-          
 
         </div>
       </main>
