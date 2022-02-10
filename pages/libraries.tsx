@@ -7,7 +7,7 @@ const Libraries: NextPage = () => {
     return (
       <div className={styles.container}>
         <Head>
-          <title>Libraries Page</title>
+          <title>Libraries</title>
           <meta name="description" content="libraries page" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
@@ -41,15 +41,15 @@ const Libraries: NextPage = () => {
                 <legend> Add a New Library </legend>
                 <p>Fill out the form below with the information of the new library</p>
                 <label>
-                    Name: <input type="text" name="member_first_name" />
+                    Name: <input type="text" name="member_first_name" required/>
                 </label>
                 <br/>
                 <label>
-                    Address: <input type="text" name="member_last_name" />
+                    Address: <input type="text" name="member_last_name" required/>
                 </label>
                 <br/>
                 <br />
-                <input type="submit" value="Add Member" />
+                <input type="submit" value="Add Member" required/>
             </fieldset>
           </form>
 

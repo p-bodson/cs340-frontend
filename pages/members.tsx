@@ -7,7 +7,7 @@ const Members: NextPage = () => {
     return (
       <div className={styles.container}>
         <Head>
-          <title>Members Page</title>
+          <title>Members</title>
           <meta name="description" content="members page" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
@@ -45,15 +45,15 @@ const Members: NextPage = () => {
                 <legend> Add a New Member </legend>
                 <p>Fill out the form below with the information of the new member</p>
                 <label>
-                    First Name: <input type="text" name="member_first_name" />
+                    First Name: <input type="text" name="member_first_name" required/>
                 </label>
                 <br/>
                 <label>
-                    Last Name: <input type="text" name="member_last_name" />
+                    Last Name: <input type="text" name="member_last_name" required/>
                 </label>
                 <br/>
                 <label>
-                    Phone Number: <input type="number" name="member_phone" />
+                    Phone Number: <input type="number" name="member_phone" required/>
                 </label>
                 <br />
                 <br />
