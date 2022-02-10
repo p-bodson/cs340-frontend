@@ -65,9 +65,6 @@ const Books_And_Authors: NextPage = () => {
 
         </main>
   
-        <footer className={styles.footer}>
-         Created by Kevin Peralta and Liam Gombart
-        </footer>
       </div>
     )
   }

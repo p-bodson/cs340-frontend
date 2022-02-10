@@ -99,10 +99,7 @@ const Rentals: NextPage = () => {
           <p>Click on a rental_ID above to be taken to that rental{"'"} rental_items page</p>
 
         </main>
-  
-        <footer className={styles.footer}>
-         Created by Kevin Peralta and Liam Gombart
-        </footer>
+
       </div>
     )
   }

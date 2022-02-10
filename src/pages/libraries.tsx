@@ -54,9 +54,6 @@ const Libraries: NextPage = () => {
 
         </main>
   
-        <footer className={styles.footer}>
-         Created by Kevin Peralta and Liam Gombart
-        </footer>
       </div>
     )
   }
