@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         </p>
 
         <div className={styles.grid}>
-          <a href="#" className={styles.card}>
+          <a href="/members" className={styles.card}>
             <h2>Members &rarr;</h2>
             <p>See registered members.</p>
           </a>
