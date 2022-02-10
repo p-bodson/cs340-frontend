@@ -104,6 +104,7 @@ const Transfers: NextPage = () => {
           <p>Click on a transfer_ID above to be taken to that transfer{"'"}s transfer_items page</p>
 
         </main>
+        
       </div>
     )
   }
