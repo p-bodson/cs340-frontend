@@ -7,8 +7,8 @@ const Members: NextPage = () => {
     return (
       <div className={styles.container}>
         <Head>
-          <title>CS340 Project</title>
-          <meta name="description" content="project of OSU CS340 class" />
+          <title>Members Page</title>
+          <meta name="description" content="members page" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
   
@@ -20,7 +20,7 @@ const Members: NextPage = () => {
           <form>
             <fieldset>
                 <legend> Find Super Duper Library Network Members </legend>
-                <br/>
+                <p>Fill out zero or more of the fields below to find matching members</p>
                 <label>
                     Member ID: <input type="number" name="member_ID"/>
                 </label>
@@ -38,10 +38,29 @@ const Members: NextPage = () => {
                 </label>
                 <br />
                 <br />
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Search" />
+            </fieldset>
+            <br />
+            <fieldset>
+                <legend> Add a New Member </legend>
+                <p>Fill out the form below with the information of the new member</p>
+                <label>
+                    First Name: <input type="text" name="member_first_name" />
+                </label>
+                <br/>
+                <label>
+                    Last Name: <input type="text" name="member_last_name" />
+                </label>
+                <br/>
+                <label>
+                    Phone Number: <input type="number" name="member_phone" />
+                </label>
+                <br />
+                <br />
+                <input type="submit" value="Add Member" />
             </fieldset>
           </form>
-          
+
 
         </main>
   
