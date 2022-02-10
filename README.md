@@ -34,7 +34,7 @@ git add .
 git commit -m "some commit before tagging"
 git tag -a v3.1415 -m "tag annotation"
 git checkout master
-git pull master
+git pull origin master
 git merge v3.1415
 git push origin master
 ```
