@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -12,23 +10,30 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## How to work on the project
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+There are two branches '''master''' and '''develop'''
 
-## Learn More
+The '''master''' branch is continuously integrated into AWS Amplify for deployment to cs340.liamgombart.com.  Deployment is triggered on every commit to master.
 
-To learn more about Next.js, take a look at the following resources:
+The '''develop''' branch is the branch where we work on stuff and make feature branches off of.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+We can make as many commits to develop branch as we want.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Getting ready to deploy
 
-## Deploy on Vercel
+When we are ready to deploy onto our website, we can simply tag the develop branch.  Then merge the tag onto the master branch.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+With git commands this looks like this (change v3.1415 to whatever version we're at):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+'''
+git add .
+git commit -m "some commit before tagging"
+git tag -a v3.1415 -m "tag annotation"
+git checkout master
+git merge v3.1415
+'''
+
+
+Doing commits and merges this way conserves the free tier build minutes on AWS Amplify.  The first 1000 minutes are free.  That sounds like quite a lot, but each deployment to AWS uses about 10 minutes of build time, so there are really on 100 free commits to the '''master''' branch and as of this writing, 60 minutes have already been used.
