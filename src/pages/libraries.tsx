@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 
 const Libraries: NextPage = () => {
     return (
@@ -41,15 +40,15 @@ const Libraries: NextPage = () => {
                 <legend> Add a New Library </legend>
                 <p>Fill out the form below with the information of the new library</p>
                 <label>
-                    Name: <input type="text" name="member_first_name" required/>
+                    Name: <input type="text" name="library_name" required/>
                 </label>
                 <br/>
                 <label>
-                    Address: <input type="text" name="member_last_name" required/>
+                    Address: <input type="text" name="address" required/>
                 </label>
                 <br/>
                 <br />
-                <input type="submit" value="Add Member" required/>
+                <input type="submit" value="Add Library" required/>
             </fieldset>
           </form>
 

@@ -1,8 +1,7 @@
-import { builtinModules } from 'module'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Link from 'next/link'
+import styles from '@/styles/Home.module.css'
 
 const Transfers: NextPage = () => {
     return (
@@ -89,7 +88,10 @@ const Transfers: NextPage = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td><a style={{color: "blue" }} href="./transfer_items">202</a></td>
+                  <td> <Link href="/transfer-items">
+                    <a style={{color: "blue" }} >202</a>
+                    </Link>
+                  </td>
                   <td>1</td>
                   <td>3</td>
                   <td>2022-02-10</td>

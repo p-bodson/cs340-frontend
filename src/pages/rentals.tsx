@@ -1,8 +1,8 @@
-import { builtinModules } from 'module'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Link from 'next/link'
+import styles from '@/styles/Home.module.css'
+
 
 const Rentals: NextPage = () => {
     return (
@@ -83,7 +83,10 @@ const Rentals: NextPage = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td><a style={{color: "blue" }} href="./rental_items">101</a></td>
+                  <td> <Link href="/rental-items">
+                    <a style={{color: "blue" }} >101</a>
+                    </Link>
+                  </td>
                   <td>3</td>
                   <td>2</td>
                   <td>2022-02-10</td>
@@ -93,7 +96,7 @@ const Rentals: NextPage = () => {
                 </tr>
               </tbody>
           </table>
-          <p>Click on a rental_ID above to be taken to that rental's rental_items page</p>
+          <p>Click on a rental_ID above to be taken to that rental{"'"} rental_items page</p>
 
         </main>
   
