@@ -23,11 +23,13 @@ We can make as many commits to develop branch as we want.
 
 ## Getting ready to deploy
 
-When we are ready to deploy onto our website, we can tag the develop branch.  Then merge the tag onto the master branch.
+When we are ready to deploy onto our website, we can tag the ```develop``` branch.  Then merge the tag onto the ```master``` branch.
 
 With git commands it looks something like this (change v3.1415 to whatever version we're at):
 
 ```
+git checkout develop
+... doing some awesome coding ...
 git add .
 git commit -m "some commit before tagging"
 git tag -a v3.1415 -m "tag annotation"
