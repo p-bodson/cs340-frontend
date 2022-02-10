@@ -49,7 +49,7 @@ const Home: NextPage = () => {
             <p>See the rental requests made.</p>
           </a>       
 
-          <a href="#" className={styles.card}>
+          <a href="./transfers" className={styles.card}>
             <h2>Transfers &rarr;</h2>
             <p>See the transfers made between libraries.</p>
           </a>
