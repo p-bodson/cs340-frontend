@@ -37,6 +37,7 @@ git checkout master
 git pull origin master
 git merge v3.1415
 git push origin master
+git push origin v3.1415
 ```
 
 
