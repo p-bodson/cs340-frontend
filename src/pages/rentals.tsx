@@ -70,9 +70,8 @@ const Rentals: NextPage = () => {
             </fieldset>
           </form>
           <br />
-
           <table>
-              <caption><b>Search Results</b></caption>
+              <caption><b>Rentals</b></caption>
               <thead>
                 <tr>
                   <th>rental_ID</th>
@@ -94,12 +93,22 @@ const Rentals: NextPage = () => {
                       <button>DELETE</button>
                   </td>
                 </tr>
+                <tr>
+                  <td style={{color: "blue" }}>102</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>2022-02-15</td>
+                  <td>
+                      <button>DELETE</button>
+                  </td>
+                </tr>
               </tbody>
           </table>
-          <p>Click on a rental_ID above to be taken to that rental{"'"} rental_items page</p>
-
+          <ul>
+            <li>Clicking on a rental_ID above redirects to that rental{"'"}s rental_items page</li>
+            <li>Clicking DELETE button deletes that rental along with its associated rental_items</li>
+          </ul>
         </main>
-
       </div>
     )
   }

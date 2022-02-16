@@ -28,10 +28,29 @@ const Rental_Items: NextPage = () => {
                 <input type="submit" value="Add Rental Item" />
             </fieldset>
           </form>
-          
           <br />
           <table>
-              <caption><b>Current Rental Items</b></caption>
+              <caption><b>Selected Rental</b></caption>
+              <thead>
+                <tr>
+                  <th>rental_ID</th>
+                  <th>member_ID</th>
+                  <th>library_ID</th>
+                  <th>rental_date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> 101 </td>
+                  <td>3</td>
+                  <td>2</td>
+                  <td>2022-02-10</td>
+                </tr>
+              </tbody>
+          </table>
+          <br />
+          <table>
+              <caption><b>Rental Items for Selected Rental</b></caption>
               <thead>
                 <tr>
                   <th>rental_ID</th>
@@ -39,6 +58,7 @@ const Rental_Items: NextPage = () => {
                   <th>queue_numb</th>
                   <th>rental_item_status</th>
                   <th>return_date</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>

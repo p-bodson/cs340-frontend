@@ -59,7 +59,38 @@ const Members: NextPage = () => {
                 <input type="submit" value="Add Member" />
             </fieldset>
           </form>
-
+          <br />
+          <table>
+              <caption><b>Members</b></caption>
+              <thead>
+                <tr>
+                  <th>member_ID</th>
+                  <th>member_first_name</th>
+                  <th>member_last_name</th>
+                  <th>member_phone</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>8008675309</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jane</td>
+                  <td>Doe</td>
+                  <td>8005550840</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Gene</td>
+                  <td>Parmesan</td>
+                  <td>8005550113</td>
+                </tr>
+              </tbody>
+          </table>
 
         </main>
   

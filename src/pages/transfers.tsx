@@ -75,9 +75,8 @@ const Transfers: NextPage = () => {
             </fieldset>
           </form>
           <br />
-
           <table>
-              <caption><b>Search Results</b></caption>
+              <caption><b>Transfers</b></caption>
               <thead>
                 <tr>
                   <th>transfer_ID</th>
@@ -99,12 +98,22 @@ const Transfers: NextPage = () => {
                       <button>DELETE</button>
                   </td>
                 </tr>
+                <tr>
+                  <td style={{color: "blue" }}>203</td>
+                  <td>2</td>
+                  <td>1</td>
+                  <td>2022-02-15</td>
+                  <td>
+                      <button>DELETE</button>
+                  </td>
+                </tr>
               </tbody>
           </table>
-          <p>Click on a transfer_ID above to be taken to that transfer{"'"}s transfer_items page</p>
-
+          <ul>
+            <li>Clicking on a transfer_ID above redirects to that transfer{"'"}s transfer_items page</li>
+            <li>Clicking DELETE button deletes that transfer along with its associated transfer_items</li>
+          </ul>
         </main>
-        
       </div>
     )
   }
