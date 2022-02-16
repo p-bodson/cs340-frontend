@@ -47,6 +47,16 @@ const Books_And_Authors: NextPage = () => {
                     Title: <input type="text" name="book_title_add" required/>
                 </label>
                 <br/>
+                <label>
+                    Author ID: <select name="book_author_add">
+                      <option value="1"> 1</option>
+                      <option value="2"> 2</option>
+                      <option value="3"> 3</option>
+                      <option value="4"> 4</option>
+                      <option value="5"> 5</option>
+                    </select>
+                </label>
+                <br/>
                 <br />
                 <input type="submit" value="Add Book" required/>
             </fieldset>
@@ -62,6 +72,82 @@ const Books_And_Authors: NextPage = () => {
                 <input type="submit" value="Add Author" required/>
             </fieldset>
           </form>
+          <br/>
+          <table>
+              <caption><b>Books {"&"} Authors</b></caption>
+              <thead>
+                <tr>
+                  <th>isbn</th>
+                  <th>title</th>
+                  <th>author_ID</th>
+                  <th>author_name</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>978-0-123456-47-2</td>
+                  <td>An Afternoon to Spanghew Frogs</td>
+                  <td>1</td>
+                  <td>Mister Moneybags</td>
+                  <td>
+                      <button>UPDATE</button>
+                  </td>
+                  <td>
+                      <button>DELETE</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>978-0-654321-47-1</td>
+                  <td>A Barrel Full of Monkeys</td>
+                  <td>2</td>
+                  <td>Ape Hangers</td>
+                  <td>
+                      <button>UPDATE</button>
+                  </td>
+                  <td>
+                      <button>DELETE</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>978-1-178456-79-4</td>
+                  <td>Protein {"&"} Fiber: A Poor Man{"'"}s Guide to DIY Colonoscopy</td>
+                  <td>3</td>
+                  <td>Doctor Doctor</td>
+                  <td>
+                      <button>UPDATE</button>
+                  </td>
+                  <td>
+                      <button>DELETE</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>978-1-178456-79-4</td>
+                  <td>Protein {"&"} Fiber: A Poor Man{"'"}s Guide to DIY Colonoscopy</td>
+                  <td>4</td>
+                  <td>Hugh Man</td>
+                  <td>
+                      <button>UPDATE</button>
+                  </td>
+                  <td>
+                      <button>DELETE</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>5</td>
+                  <td>Joe Average</td>
+                  <td>
+                      <button>UPDATE</button>
+                  </td>
+                  <td>
+                      <button>DELETE</button>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
 
         </main>
   

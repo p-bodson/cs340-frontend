@@ -118,7 +118,7 @@ const Resources: NextPage = () => {
                 <tr>
                   <td>3</td>
                   <td>978-1-178456-79-4</td>
-                  <td>Protein {"&"} Fiber: A Poor Man's Guide to DIY Colonoscopy</td>
+                  <td>Protein {"&"} Fiber: A Poor Man{"'"}s Guide to DIY Colonoscopy</td>
                   <td>2</td>
                   <td>0</td>
                   <td>10</td>
