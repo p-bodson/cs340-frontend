@@ -19,3 +19,8 @@ table, td, th{
   border: 1px solid black;
   border-collapse: collapse;
 }
+
+ol > li{
+  display: inline-block;
+  margin: 10px;
+}

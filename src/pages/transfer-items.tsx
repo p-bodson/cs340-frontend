@@ -32,16 +32,36 @@ const Transfer_Items: NextPage = () => {
                 <input type="submit" value="Add Transfer Item" />
             </fieldset>
           </form>
-          
           <br />
           <table>
-              <caption><b>Current Rental Items</b></caption>
+              <caption><b>Selected Transfer</b></caption>
+              <thead>
+                <tr>
+                  <th>transfer_ID</th>
+                  <th>source_library_ID</th>
+                  <th>destination_library_ID</th>
+                  <th>transfer_date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>202</td>
+                  <td>1</td>
+                  <td>3</td>
+                  <td>2022-02-10</td>
+                </tr>
+              </tbody>
+          </table>
+          <br />
+          <table>
+              <caption><b>Transfer Items for Selected Transfer</b></caption>
               <thead>
                 <tr>
                   <th>transfer_ID</th>
                   <th>resource_ID</th>
                   <th>quantity</th>
                   <th>transfer_item_status</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>

@@ -51,9 +51,35 @@ const Libraries: NextPage = () => {
                 <input type="submit" value="Add Library" required/>
             </fieldset>
           </form>
-
+          <br />
+          <table>
+              <caption><b>Libraries</b></caption>
+              <thead>
+                <tr>
+                  <th>library_ID</th>
+                  <th>library_name</th>
+                  <th>library_address</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Books R Us</td>
+                  <td>308 Negro Arroyo Lane</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Book Depot</td>
+                  <td>742 Evergreen Terrace</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Bookworms</td>
+                  <td>1313 Mockingbird Lane</td>
+                </tr>
+              </tbody>
+          </table>
         </main>
-  
       </div>
     )
   }
