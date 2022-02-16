@@ -71,6 +71,66 @@ const Resources: NextPage = () => {
                 <input type="submit" value="Add Resource" required/>
             </fieldset>
           </form>
+          <br/>
+          <table>
+              <caption><b>Resources</b></caption>
+              <thead>
+                <tr>
+                  <th>resource_ID</th>
+                  <th>isbn</th>
+                  <th>title</th>
+                  <th>library_ID</th>
+                  <th>quantity_available</th>
+                  <th>quantity_checked_out</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>978-0-123456-47-2</td>
+                  <td>An Afternoon to Spanghew Frogs</td>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>0</td>
+                  <td>
+                      <button>UPDATE</button>
+                  </td>
+                  <td>
+                      <button>DELETE</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>978-0-654321-47-1</td>
+                  <td>A Barrel Full of Monkeys</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>
+                      <button>UPDATE</button>
+                  </td>
+                  <td>
+                      <button>DELETE</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>978-1-178456-79-4</td>
+                  <td>Protein {"&"} Fiber: A Poor Man's Guide to DIY Colonoscopy</td>
+                  <td>2</td>
+                  <td>0</td>
+                  <td>10</td>
+                  <td>
+                      <button>UPDATE</button>
+                  </td>
+                  <td>
+                      <button>DELETE</button>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
 
         </main>
   
