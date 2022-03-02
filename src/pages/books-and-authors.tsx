@@ -1,8 +1,13 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
+import Table from '@/components/table'
+import Dropdown from '@/components/dropdown'
 
 const Books_And_Authors: NextPage = () => {
+  const API_ENDPOINT = "yes";
+
+
     return (
       <div className={styles.container}>
         <Head>
@@ -48,13 +53,13 @@ const Books_And_Authors: NextPage = () => {
                 </label>
                 <br/>
                 <label>
-                    Author ID: <select name="book_author_add">
-                      <option value="1"> 1</option>
-                      <option value="2"> 2</option>
-                      <option value="3"> 3</option>
-                      <option value="4"> 4</option>
-                      <option value="5"> 5</option>
-                    </select>
+                    Author ID: {" "}
+                    <Dropdown 
+                      name="book_author_add"
+                      locator="authors"
+                      value_attribute="author_ID"
+                    />
+                      
                 </label>
                 <br/>
                 <br />
@@ -73,82 +78,18 @@ const Books_And_Authors: NextPage = () => {
             </fieldset>
           </form>
           <br/>
-          <table>
-              <caption><b>Books {"&"} Authors</b></caption>
-              <thead>
-                <tr>
-                  <th>isbn</th>
-                  <th>title</th>
-                  <th>author_ID</th>
-                  <th>author_name</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>978-0-123456-47-2</td>
-                  <td>An Afternoon to Spanghew Frogs</td>
-                  <td>1</td>
-                  <td>Mister Moneybags</td>
-                  <td>
-                      <button>UPDATE</button>
-                  </td>
-                  <td>
-                      <button>DELETE</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>978-0-654321-47-1</td>
-                  <td>A Barrel Full of Monkeys</td>
-                  <td>2</td>
-                  <td>Ape Hangers</td>
-                  <td>
-                      <button>UPDATE</button>
-                  </td>
-                  <td>
-                      <button>DELETE</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>978-1-178456-79-4</td>
-                  <td>Protein {"&"} Fiber: A Poor Man{"'"}s Guide to DIY Colonoscopy</td>
-                  <td>3</td>
-                  <td>Doctor Doctor</td>
-                  <td>
-                      <button>UPDATE</button>
-                  </td>
-                  <td>
-                      <button>DELETE</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>978-1-178456-79-4</td>
-                  <td>Protein {"&"} Fiber: A Poor Man{"'"}s Guide to DIY Colonoscopy</td>
-                  <td>4</td>
-                  <td>Hugh Man</td>
-                  <td>
-                      <button>UPDATE</button>
-                  </td>
-                  <td>
-                      <button>DELETE</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td>5</td>
-                  <td>Joe Average</td>
-                  <td>
-                      <button>UPDATE</button>
-                  </td>
-                  <td>
-                      <button>DELETE</button>
-                  </td>
-                </tr>
-              </tbody>
-          </table>
-
+          <Table 
+            locator="books-and-authors"
+            caption={<b>Books {"&"} Authors</b>}
+          />
+          <Table 
+            locator="books"
+            caption={<b>Books</b>}
+          />
+          <Table 
+            locator="authors"
+            caption={<b>Authors</b>}
+          />
         </main>
   
       </div>
