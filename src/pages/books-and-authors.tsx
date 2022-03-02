@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Table from '@/components/table'
+import Dropdown from '@/components/dropdown'
 
 const Books_And_Authors: NextPage = () => {
   const API_ENDPOINT = "yes";
@@ -19,8 +20,6 @@ const Books_And_Authors: NextPage = () => {
 
           <h1 className={styles.title}>Books And Authors</h1>
           <p>Welcome to the Books And Authors page</p>
-
-          
 
           <form>
             <fieldset>
@@ -54,13 +53,13 @@ const Books_And_Authors: NextPage = () => {
                 </label>
                 <br/>
                 <label>
-                    Author ID: <select name="book_author_add">
-                      <option value="1"> 1</option>
-                      <option value="2"> 2</option>
-                      <option value="3"> 3</option>
-                      <option value="4"> 4</option>
-                      <option value="5"> 5</option>
-                    </select>
+                    Author ID: {" "}
+                    <Dropdown 
+                      name="book_author_add"
+                      locator="authors"
+                      value_attribute="author_ID"
+                    />
+                      
                 </label>
                 <br/>
                 <br />
@@ -82,6 +81,14 @@ const Books_And_Authors: NextPage = () => {
           <Table 
             locator="books-and-authors"
             caption={<b>Books {"&"} Authors</b>}
+          />
+          <Table 
+            locator="books"
+            caption={<b>Books</b>}
+          />
+          <Table 
+            locator="authors"
+            caption={<b>Authors</b>}
           />
         </main>
   

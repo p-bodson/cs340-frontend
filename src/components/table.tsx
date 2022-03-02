@@ -1,6 +1,6 @@
 import Link from "next/link"
 import styles from '@/styles/Home.module.css'
-import TableRow from "./table-row";
+import TableRow from "@/components/table-row";
 import { v4 as uuidv4 } from 'uuid';
 import useData from '@/hooks/useData';
 

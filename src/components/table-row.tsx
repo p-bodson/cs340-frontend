@@ -6,11 +6,14 @@ export default function TableRow(props: any) {
     
     const renderRow = (rowData: any) => {
         const attributeArray: any = [];
-
+        
+        // create an array of the data
+        // for the row
         for (const key in rowData) {
             attributeArray.push(rowData[key]);
         }
 
+        // map the row data from array to component
         return attributeArray.map( (e: any) => {
             return <td key={uuidv4()}>{`${e}`}</td>
         });
