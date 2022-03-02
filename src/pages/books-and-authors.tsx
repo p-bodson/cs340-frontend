@@ -42,11 +42,6 @@ const Books_And_Authors: NextPage = () => {
     "setter": setBaaPath
   });
 
-  useEffect(() => {
-    console.log(`marking change : ${books_and_authors_path}`)
-  }, [books_and_authors_path])
-
-
   const handleSecond = useSubmit("", () => {console.log("no")}, {});
   const handleThird = useSubmit("", () => {console.log("maybe")}, {});
 
