@@ -23,7 +23,8 @@ export default function Table( props: any ) {
 
   const renderTableHeaders = (arrayData: Array<Object>) => {
     // there needs to be at least one item in
-    // arrayData for this to work. No error handling performed
+    // arrayData for this to work. No error handling performed]
+    if (!arrayData[0]) return <th>no data matches the criteria...</th>
     const keys: any = Object.keys(arrayData[0]);
     return keys.map( (e: any) => {
       return <th key={uuidv4()}>{`${e}`}</th>
