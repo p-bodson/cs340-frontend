@@ -15,34 +15,8 @@ export default function FormAuthor ( props: any ) {
     })
 
     const onChangeAuthorAdd = useChange(author_form, setAuthorForm);
-    const sendPost = (args: any) => {
-        const {url, data} = args;
-                
-        const options: Object = {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        };
-
-        const fetcher = async (url: any, options: any) => {
-            const response = await fetch(url, options);
-            const payload = await response.json();
-            return payload;
-        }
-
-        return fetcher(url, data);
-    };
-
-    console.log(sendPost({
-        "url": apiUrl,
-        "data": author_form
-    }))
-
-
-    const handleAuthorAdd = useSubmit("", () => {}, {
+    const sendPost = usePost();
+    const handleAuthorAdd = useSubmit("", sendPost, {
         "url": apiUrl,
         "data": author_form
     });

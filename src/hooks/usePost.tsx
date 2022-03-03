@@ -1,32 +1,29 @@
 export default function usePost () {
 
-    const makePost = () => {
+    const makePost = (args: any) => {
 
-        const someFun = (args: any) => {
-        
-            const {url, data} = args;
+        const {url, data} = args;
                 
-            const options: Object = {
-                method: 'POST',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            };
+        const options: Object = {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        };
 
-            const fetcher = async (url: any, options: any) => {
-                const response = await fetch(url, options);
-                const payload = await response.json();
-                return payload;
-            }
-            
-            return fetcher(url, data);
+        console.log(data);
+
+        const fetcher = async (url: any, options: any) => {
+            const response = await fetch(url, options);
+            const payload = await response.json();
+            return payload;
         }
 
-        return someFun;
-    };
+        fetcher(url, options);
+    }
 
-    return makePost
+    return makePost;    
 }
 
