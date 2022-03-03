@@ -6,7 +6,8 @@ import Dropdown from '@/components/dropdown'
 import useSubmit from '@/hooks/useSubmit'
 import useChange from '@/hooks/useChange'
 import { useState} from 'react';
-import FormAuthor from '@/components/form-author'
+import FormAuthors from '@/components/form-authors'
+import FormBooks from '@/components/form-books'
 
 // this context is to trigger reloads after a post
 // just changing incrementing the value with be
@@ -112,35 +113,11 @@ const Books_And_Authors: NextPage = () => {
 
             <br />
 
-          <form onSubmit={handleSecond}>
-            <fieldset>
-                <legend> Add a New Book </legend>
-                <p>Fill out the form below with the information of the new Book</p>
-                <label>
-                    ISBN: <input type="text" name="book_isbn_add" required/>
-                </label>
-                <br/>
-                <label>
-                    Title: <input type="text" name="book_title_add" required/>
-                </label>
-                <br/>
-                <label>
-                    Author ID: {" "}
-                    <Dropdown 
-                      name="book_author_add"
-                      locator="authors"
-                      value_attribute="author_ID"
-                    />
-                </label>
-                <br/>
-                <br />
-                <input type="submit" value="Add Book" required/>
-            </fieldset>
-          </form>
+          <FormBooks locator="books"/>
 
             <br />
 
-          <FormAuthor locator="authors" />
+          <FormAuthors locator="authors" />
 
           <br/>
 

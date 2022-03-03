@@ -5,7 +5,7 @@ import usePost from '@/hooks/usePost'
 
 
 
-export default function FormAuthor ( props: any ) {
+export default function FormAuthors ( props: any ) {
 
     const {locator} = props;
 
@@ -13,15 +13,15 @@ export default function FormAuthor ( props: any ) {
     const apiUrl: string = `${apiTld}/${locator}`
 
     // make some controlled state for the form
-    const [author_form, setAuthorForm] = useState({
+    const [authors_form, setAuthorsForm] = useState({
         author_name: "",
     })
 
-    const onChangeAuthorAdd = useChange(author_form, setAuthorForm);
+    const onChangeAuthorAdd = useChange(authors_form, setAuthorsForm);
     const sendPost = usePost();
     const handleAuthorAdd = useSubmit("", sendPost, {
         "url": apiUrl,
-        "data": author_form
+        "data": authors_form
     });
 
     return (
