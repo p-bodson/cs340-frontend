@@ -2,48 +2,16 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Table from '@/components/table'
-import Dropdown from '@/components/dropdown'
-import { useSubmit } from '@/hooks/useSubmit'
-import { useChange } from '@/hooks/useChange'
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
+import FormAuthors from '@/components/form-authors'
+import FormBooks from '@/components/form-books'
+import FormBooksAndAuthors from '@/components/form-books-and-authors'
+
 
 const Books_And_Authors: NextPage = () => {
-  
 
-  // make some controlled state for the forms
-  const [searchForm, setSearchForm] = useState({
-    book_isbn: "",
-    book_title: "",
-    author_name: "",
-    author_ID: ""
-  })
-  const onChangeSearchForm = useChange(searchForm, setSearchForm);
-  // for onChange to work, the names of each input
-  // element in the forms must be unique and match
-  // the names of the values in the form state
-
-  const books_and_authors_path_root = "books-and-authors"
+  const books_and_authors_path_root = "books-and-authors"  
   const [books_and_authors_path, setBaaPath] = useState(books_and_authors_path_root)
-
-
-  // make some submission handlers for the different forms
-  const sendSearch = (args: any) => {   
-    let path = `${args.path_root}?`   
-    for (const key in args.data) {
-      if (`${args.data[key]}` !== "") {
-        path += `${key}=${encodeURIComponent(args.data[key])}&`;
-      }   
-    }
-    args.setter(path);
-  };
-  const handleSearch = useSubmit("", sendSearch, {
-    "data": searchForm, 
-    "path_root": books_and_authors_path_root, 
-    "setter": setBaaPath
-  });
-
-  const handleSecond = useSubmit("", () => {console.log("no")}, {});
-  const handleThird = useSubmit("", () => {console.log("maybe")}, {});
 
     return (
       <div className={styles.container}>
@@ -58,105 +26,25 @@ const Books_And_Authors: NextPage = () => {
           <h1 className={styles.title}>Books And Authors</h1>
           <p>Welcome to the Books And Authors page</p>
 
-          <form onSubmit={handleSearch}>
-            <fieldset>
-                <legend> Find Super Duper Books And Authors in the Network </legend>
-                <p>Fill out zero or more of the fields below to find matching Books or Authors</p>
-                <label>
-                    Book ISBN: <input 
-                      type="text" 
-                      name="book_isbn"
-                      value={searchForm.book_isbn}
-                      onChange={onChangeSearchForm}
-                    />
-                </label>
-                <br/>
-                <label>
-                    Book Title: <input 
-                      type="text"
-                      name="book_title" 
-                      value={searchForm.book_title}
-                      onChange={onChangeSearchForm}
-                    />
-                </label>
-                <br/>
-                <label>
-                    Author Name: <input
-                      type="text"
-                      name="author_name"
-                      value={searchForm.author_name}
-                      onChange={onChangeSearchForm}
-                    />
-                </label>
-                <br/>
-                <label>
-                    Author ID: <input
-                      type="text"
-                      name="author_ID"
-                      value={searchForm.author_ID}
-                      onChange={onChangeSearchForm}
-                    />
-                </label>
-                <br />
-                <br />
-                <input type="submit" value="Search" />
-            </fieldset>
-          </form>
-
-            <br />
-
-          <form onSubmit={handleSecond}>
-            <fieldset>
-                <legend> Add a New Book </legend>
-                <p>Fill out the form below with the information of the new Book</p>
-                <label>
-                    ISBN: <input type="text" name="book_isbn_add" required/>
-                </label>
-                <br/>
-                <label>
-                    Title: <input type="text" name="book_title_add" required/>
-                </label>
-                <br/>
-                <label>
-                    Author ID: {" "}
-                    <Dropdown 
-                      name="book_author_add"
-                      locator="authors"
-                      value_attribute="author_ID"
-                    />
-                      
-                </label>
-                <br/>
-                <br />
-                <input type="submit" value="Add Book" required/>
-            </fieldset>
-          </form>
-
-            <br />
-
-          <form onSubmit={handleThird}>
-            <fieldset>
-                <legend> Add a New Author </legend>
-                <p>Fill out the form below with the information of the new Author</p>
-                <label>
-                    Name: <input type="text" name="author_name_add" required/>
-                </label>
-                <br/>
-                <br />
-                <input type="submit" value="Add Author" required/>
-            </fieldset>
-          </form>
-
+          <FormBooksAndAuthors 
+            locator={books_and_authors_path_root}
+            setPath={setBaaPath}
+          />
           <br/>
-
           <Table 
             locator={books_and_authors_path}
             caption={<b>Books {"&"} Authors</b>}
           />
+          <br />
+          <FormBooks locator="books"/>
+          <br />
           <Table 
             locator="books"
             caption={<b>Books</b>}
           />
+          <br/>
+          <FormAuthors locator="authors" />
+          <br/>
           <Table 
             locator="authors"
             caption={<b>Authors</b>}

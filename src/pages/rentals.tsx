@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 import Table from '@/components/table'
-import { useSubmit } from '@/hooks/useSubmit'
-import { useChange } from '@/hooks/useChange'
+import useSubmit from '@/hooks/useSubmit'
+import useChange from '@/hooks/useChange'
 import { useState, useEffect } from 'react';
 
 
