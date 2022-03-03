@@ -2,8 +2,8 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Table from '@/components/table'
-import { useSubmit } from '@/hooks/useSubmit'
-import { useChange } from '@/hooks/useChange'
+import useSubmit from '@/hooks/useSubmit'
+import useChange from '@/hooks/useChange'
 import { useState, useEffect } from 'react';
 
 const Libraries: NextPage = () => {
