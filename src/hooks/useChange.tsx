@@ -1,4 +1,4 @@
-function useChange(state: Object, setState: Function) {
+export default function useChange(state: Object, setState: Function) {
 
     function handleChange(e: any) {
         const target = e.target;
@@ -13,5 +13,3 @@ function useChange(state: Object, setState: Function) {
 
     return handleChange;
 }
-
-export { useChange };
