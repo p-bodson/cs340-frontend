@@ -102,7 +102,7 @@ const Members: NextPage = () => {
             </fieldset>
           </form>
           <br />
-          <form>
+          <form onSubmit={handleSecond}>
             <fieldset>
                 <legend> Add a New Member </legend>
                 <p>Fill out the form below with the information of the new member</p>
@@ -119,7 +119,7 @@ const Members: NextPage = () => {
                 </label>
                 <br />
                 <br />
-                <input type="submit" value="Add Member" />
+                <input type="submit" value="Add Member" required/>
             </fieldset>
           </form>
           <br />
