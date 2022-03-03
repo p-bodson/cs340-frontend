@@ -3,28 +3,29 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Table from '@/components/table'
 import Dropdown from '@/components/dropdown'
-import { useSubmit } from '@/hooks/useSubmit'
-import { useChange } from '@/hooks/useChange'
-import { useState, useEffect } from 'react';
+import useSubmit from '@/hooks/useSubmit'
+import useChange from '@/hooks/useChange'
+import { useState } from 'react';
+
+import FormAuthor from '@/components/form-author'
 
 const Books_And_Authors: NextPage = () => {
   
 
-  // make some controlled state for the forms
-  const [searchForm, setSearchForm] = useState({
+  // make some controlled state for the search form
+  const [search_form, setSearchForm] = useState({
     book_isbn: "",
     book_title: "",
     author_name: "",
     author_ID: ""
   })
-  const onChangeSearchForm = useChange(searchForm, setSearchForm);
+  const onChangeSearchForm = useChange(search_form, setSearchForm);
   // for onChange to work, the names of each input
   // element in the forms must be unique and match
   // the names of the values in the form state
 
   const books_and_authors_path_root = "books-and-authors"
   const [books_and_authors_path, setBaaPath] = useState(books_and_authors_path_root)
-
 
   // make some submission handlers for the different forms
   const sendSearch = (args: any) => {   
@@ -37,13 +38,17 @@ const Books_And_Authors: NextPage = () => {
     args.setter(path);
   };
   const handleSearch = useSubmit("", sendSearch, {
-    "data": searchForm, 
+    "data": search_form, 
     "path_root": books_and_authors_path_root, 
     "setter": setBaaPath
   });
 
+  // now create the assets for adding a book.
+
   const handleSecond = useSubmit("", () => {console.log("no")}, {});
-  const handleThird = useSubmit("", () => {console.log("maybe")}, {});
+
+  // now create the assets for adding an author
+
 
     return (
       <div className={styles.container}>
@@ -66,7 +71,7 @@ const Books_And_Authors: NextPage = () => {
                     Book ISBN: <input 
                       type="text" 
                       name="book_isbn"
-                      value={searchForm.book_isbn}
+                      value={search_form.book_isbn}
                       onChange={onChangeSearchForm}
                     />
                 </label>
@@ -75,7 +80,7 @@ const Books_And_Authors: NextPage = () => {
                     Book Title: <input 
                       type="text"
                       name="book_title" 
-                      value={searchForm.book_title}
+                      value={search_form.book_title}
                       onChange={onChangeSearchForm}
                     />
                 </label>
@@ -84,7 +89,7 @@ const Books_And_Authors: NextPage = () => {
                     Author Name: <input
                       type="text"
                       name="author_name"
-                      value={searchForm.author_name}
+                      value={search_form.author_name}
                       onChange={onChangeSearchForm}
                     />
                 </label>
@@ -93,7 +98,7 @@ const Books_And_Authors: NextPage = () => {
                     Author ID: <input
                       type="text"
                       name="author_ID"
-                      value={searchForm.author_ID}
+                      value={search_form.author_ID}
                       onChange={onChangeSearchForm}
                     />
                 </label>
@@ -124,7 +129,6 @@ const Books_And_Authors: NextPage = () => {
                       locator="authors"
                       value_attribute="author_ID"
                     />
-                      
                 </label>
                 <br/>
                 <br />
@@ -133,19 +137,8 @@ const Books_And_Authors: NextPage = () => {
           </form>
 
             <br />
-
-          <form onSubmit={handleThird}>
-            <fieldset>
-                <legend> Add a New Author </legend>
-                <p>Fill out the form below with the information of the new Author</p>
-                <label>
-                    Name: <input type="text" name="author_name_add" required/>
-                </label>
-                <br/>
-                <br />
-                <input type="submit" value="Add Author" required/>
-            </fieldset>
-          </form>
+            
+          <FormAuthor locator="authors" />
 
           <br/>
 
