@@ -1,8 +1,7 @@
 export default function usePost () {
 
     const makePost = (args: any) => {
-
-        const {url, data} = args;
+        const {url, data, trigger} = args;
                 
         const options: Object = {
             method: 'POST',
@@ -12,8 +11,6 @@ export default function usePost () {
             },
             body: JSON.stringify(data)
         };
-
-        console.log(data);
 
         const fetcher = async (url: any, options: any) => {
             const response = await fetch(url, options);

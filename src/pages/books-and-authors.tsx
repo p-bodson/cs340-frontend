@@ -5,12 +5,15 @@ import Table from '@/components/table'
 import Dropdown from '@/components/dropdown'
 import useSubmit from '@/hooks/useSubmit'
 import useChange from '@/hooks/useChange'
-import { useState } from 'react';
-
+import { useState} from 'react';
 import FormAuthor from '@/components/form-author'
 
+// this context is to trigger reloads after a post
+// just changing incrementing the value with be
+// used to trigger a reload using GET and useEffect
+
+
 const Books_And_Authors: NextPage = () => {
-  
 
   // make some controlled state for the search form
   const [search_form, setSearchForm] = useState({
@@ -47,8 +50,7 @@ const Books_And_Authors: NextPage = () => {
 
   const handleSecond = useSubmit("", () => {console.log("no")}, {});
 
-  // now create the assets for adding an author
-
+  let reload_trigger = 0;
 
     return (
       <div className={styles.container}>
@@ -137,7 +139,7 @@ const Books_And_Authors: NextPage = () => {
           </form>
 
             <br />
-            
+
           <FormAuthor locator="authors" />
 
           <br/>

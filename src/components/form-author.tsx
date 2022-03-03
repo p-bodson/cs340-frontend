@@ -1,9 +1,12 @@
 import useSubmit from '@/hooks/useSubmit'
 import useChange from '@/hooks/useChange'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import usePost from '@/hooks/usePost'
 
+
+
 export default function FormAuthor ( props: any ) {
+
     const {locator} = props;
 
     const apiTld = process.env.NEXT_PUBLIC_API_TLD;
