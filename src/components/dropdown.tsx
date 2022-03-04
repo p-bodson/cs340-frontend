@@ -27,7 +27,8 @@ export default function Dropdown( props: any ) {
   if (isError) return <div>Failed to load data</div>
 
     return (
-        <select name={name}>
+        <select name={name} required>
+            <option value="" selected disabled hidden></option>
             {renderDropdownItems(data)}
         </select>
     )
