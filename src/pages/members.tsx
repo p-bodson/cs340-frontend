@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import FormMembers from '@/components/form-members'
+import FormMembersPost from '@/components/form-members-post'
 import { useState } from 'react'
 import Table from '@/components/table'
 
@@ -28,26 +29,7 @@ const Members: NextPage = () => {
             setPath={setMembersPath}
           />
           <br />
-          <form>
-            <fieldset>
-                <legend> Add a New Member </legend>
-                <p>Fill out the form below with the information of the new member</p>
-                <label>
-                    First Name: <input type="text" name="member_first_name_add" required/>
-                </label>
-                <br/>
-                <label>
-                    Last Name: <input type="text" name="member_last_name_add" required/>
-                </label>
-                <br/>
-                <label>
-                    Phone Number: <input type="number" name="member_phone_add" required/>
-                </label>
-                <br />
-                <br />
-                <input type="submit" value="Add Member" required/>
-            </fieldset>
-          </form>
+          <FormMembersPost locator="members"/>
           <br />
           <Table 
             locator={members_path}

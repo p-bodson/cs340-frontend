@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import FormRentals from '@/components/form-rentals'
+import FormRentalsPost from '@/components/form-rentals-post'
 import { useState } from 'react'
 import Table from '@/components/table'
 
@@ -28,32 +29,7 @@ const Rentals: NextPage = () => {
             locator={rentals_path_root}
             setPath={setRentalsPath}
           />
-          <form>
-            <fieldset>
-                <legend> Add a Rental Order </legend>
-                <p>Fill out the form below with the information of the new member</p>
-                <label>
-                    Member ID: <input type="number" name="member_ID" />
-                </label>
-                <br/>
-                <label>
-                    Library ID: {' '}
-                    <select name="library_ID">
-                        <option value=""></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </label>
-                <br/>
-                <label>
-                    Rental Date: <input type="date" name="rental_date" />
-                </label>
-                <br />
-                <br />
-                <input type="submit" value="Add Rental" />
-            </fieldset>
-          </form>
+          <FormRentalsPost locator="rentals"/>
           <br />
           <Table 
             locator={rentals_path}

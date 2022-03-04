@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import FormLibraries from '@/components/form-libraries'
+import FormLibrariesPost from '@/components/form-libraries-post'
 import { useState } from 'react'
 import Table from '@/components/table'
 
@@ -28,22 +29,7 @@ const Libraries: NextPage = () => {
             setPath={setLibrariesPath}
           />
           <br />
-          <form>
-            <fieldset>
-                <legend> Add a New Library </legend>
-                <p>Fill out the form below with the information of the new library</p>
-                <label>
-                    Name: <input type="text" name="library_name" required/>
-                </label>
-                <br/>
-                <label>
-                    Address: <input type="text" name="address" required/>
-                </label>
-                <br/>
-                <br />
-                <input type="submit" value="Add Library" required/>
-            </fieldset>
-          </form>
+          <FormLibrariesPost locator="libraries"/>
           <br />
           <Table 
             locator={libraries_path}
