@@ -10,7 +10,8 @@ export default function Table( props: any ) {
   const {caption} = props;
 
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-  const apiUrl: string = `${apiTld}/${locator}`
+  const apiUrl: string = `${apiTld}/${locator}`;
+  const urlBase = locator.split("?")[0];
   const { data, isLoading, isError } = useData(apiUrl);
 
   const renderTableRows = (arrayData: Array<Object>) => {
@@ -35,6 +36,7 @@ export default function Table( props: any ) {
   if (isError) return <div>Failed to load data</div>
 
     return (
+      <div className="tables">
         <table>
           <caption>{caption}</caption>
           <thead>
@@ -47,7 +49,8 @@ export default function Table( props: any ) {
           <tbody>
             { renderTableRows(data) }
           </tbody>
-          
         </table>
+        <a href={urlBase} ><a>Reset Search Filters</a></a>
+      </div>
     )
 }

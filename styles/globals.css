@@ -24,3 +24,7 @@ ol > li{
   display: inline-block;
   margin: 10px;
 }
+
+div.tables > a {
+  color: blue;
+}
