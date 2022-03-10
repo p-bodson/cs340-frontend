@@ -24,7 +24,8 @@ export default function TableRow(props: any) {
                     if (pathName == "/rentals"){
                         rows.push(
                             <td key={uuidv4()}>
-                                <Link href={{ pathname: '/rental_items', query:{rental_ID: `${row}`} }}>
+                                <Link 
+                                href={{ pathname: '/rental-items', query:{rental_ID: `${row}`} }}>
                                     <a>{`${row}`}</a>
                                 </Link>
                             </td>
@@ -32,7 +33,7 @@ export default function TableRow(props: any) {
                     } else{
                         rows.push(
                             <td key={uuidv4()}>
-                                <Link href={{ pathname: '/transfer_items', query:{transfer_ID: `${row}`} }}>
+                                <Link href={{ pathname: '/transfer-items', query:{transfer_ID: `${row}`} }}>
                                     <a>{`${row}`}</a>
                                 </Link>
                             </td>
