@@ -50,7 +50,7 @@ export default function Table( props: any ) {
             { renderTableRows(data) }
           </tbody>
         </table>
-        <a href={urlBase} ><a>Reset Search Filters</a></a>
+        <a href={urlBase}>Reset Search Filters</a>
       </div>
     )
 }

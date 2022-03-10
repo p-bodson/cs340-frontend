@@ -25,6 +25,10 @@ ol > li{
   margin: 10px;
 }
 
-div.tables > a {
+div.tables > a{
+  color: blue;
+}
+
+tr a{
   color: blue;
 }
