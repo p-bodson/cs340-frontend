@@ -1,95 +1,44 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
+import FormRentalItems from '@/components/form-rental-items'
+import FormRentalItemsPost from '@/components/form-rental-items-post'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import Table from '@/components/table'
 
-const Rental_Items: NextPage = () => {
+const RentalItems: NextPage = () => {
+
+  const router = useRouter();
+  const rental_items_path_root = router.asPath.replace('/','')
+  const [rental_items_path, setRentalItemsPath] = useState(rental_items_path_root)
+  
     return (
       <div className={styles.container}>
         <Head>
           <title>Rental Items</title>
-          <meta name="description" content="Rental Items page" />
+          <meta name="description" content="rental items page" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
   
         <main className={styles.main}>
 
           <h1 className={styles.title}>Rental Items</h1>
-          <p>This is the Rental Items page for Rental with rental_ID 101</p>
+          <p>Welcome to the Rental Items page</p>
 
-          <form>
-            <fieldset>
-                <legend> Add a Rental Item </legend>
-                <p>Provide the resource ID of the the rental item to add</p>
-                <label>
-                    Resource ID: <input type="number" name="resource_ID" />
-                </label>
-                <br />
-                <br />
-                <input type="submit" value="Add Rental Item" />
-            </fieldset>
-          </form>
+          <FormRentalItems 
+            locator={rental_items_path_root}
+            setPath={setRentalItemsPath}
+          />
           <br />
-          <table>
-              <caption><b>Selected Rental</b></caption>
-              <thead>
-                <tr>
-                  <th>rental_ID</th>
-                  <th>member_ID</th>
-                  <th>library_ID</th>
-                  <th>rental_date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td> 101 </td>
-                  <td>3</td>
-                  <td>2</td>
-                  <td>2022-02-10</td>
-                </tr>
-              </tbody>
-          </table>
+          <FormRentalItemsPost
+            locator={rental_items_path_root}
+          />
           <br />
-          <table>
-              <caption><b>Rental Items for Selected Rental</b></caption>
-              <thead>
-                <tr>
-                  <th>rental_ID</th>
-                  <th>resource_ID</th>
-                  <th>queue_numb</th>
-                  <th>rental_item_status</th>
-                  <th>return_date</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>101</td>
-                  <td>55</td>
-                  <td>0</td>
-                  <td>READY</td>
-                  <td>2022-02-22</td>
-                  <td>
-                      <button>DELETE</button>
-                  </td>
-                  <td>
-                      <button>UPDATE</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>101</td>
-                  <td>287</td>
-                  <td>2</td>
-                  <td>WAITING</td>
-                  <td></td>
-                  <td>
-                      <button>DELETE</button>
-                  </td>
-                  <td>
-                      <button>UPDATE</button>
-                  </td>
-                </tr>
-              </tbody>
-          </table>
+          <Table 
+            locator={rental_items_path}
+            caption={<b>Rental Items</b>}
+          />
 
         </main>
   
@@ -97,4 +46,4 @@ const Rental_Items: NextPage = () => {
     )
   }
   
-  export default Rental_Items
+  export default RentalItems

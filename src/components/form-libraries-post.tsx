@@ -30,8 +30,7 @@ export default function FormLibrariesPost ( props: any ) {
             <fieldset>
                 <legend> Add a New Library </legend>
                 <p>
-                    Fill out the form below with the information of the new library.
-                    Refresh page after pressing <i>Add Library</i> to see updated table.
+                    Fill out the form below with the information of the new library
                 </p>
                 <label>
                     Name: <input 
