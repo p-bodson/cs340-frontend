@@ -1,18 +1,21 @@
 import useSubmit from '@/hooks/useSubmit'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react'; 
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
 import usePost from '@/hooks/usePost'
 
 export default function FormRentalItemsPost ( props: any ) {
 
     const {locator} = props;
+    const router = useRouter();
+    const rentalID = router.query.rental_ID;
 
     const apiTld = process.env.NEXT_PUBLIC_API_TLD;
     const apiUrl: string = `${apiTld}/${locator}`
 
     // make some controlled state for the form
     const [rentalItemsFormPost, setRentalItemsForm] = useState({
-        rental_ID: "",
+        rental_ID: rentalID,
         resource_ID: "",
         queue_numb: "",
         rental_item_status: "",
@@ -21,7 +24,7 @@ export default function FormRentalItemsPost ( props: any ) {
 
     const onChangeRentalItemAdd = useChange(rentalItemsFormPost, setRentalItemsForm);
     const sendPost = usePost();
-    const handleRentalItemAdd = useSubmit("", sendPost, {
+    const handleRentalItemAdd = useSubmit(router.asPath, sendPost, {
         "url": apiUrl,
         "data": rentalItemsFormPost
     });
@@ -30,10 +33,18 @@ export default function FormRentalItemsPost ( props: any ) {
 
         <form onSubmit={handleRentalItemAdd}>
             <fieldset>
-                <legend> Add a New Member </legend>
+                <legend> Add a New Rental Item </legend>
                 <p>
-                    Fill out the form below with the information of the new member
+                    Fill out the form below with the information of the new rental item to add to this rental
                 </p>
+                {/* <label>
+                    Rental ID: <input 
+                    type="number" 
+                    name="rental_ID"
+                    onChange={onChangeRentalItemAdd}
+                    required/>
+                </label>
+                <br/> */}
                 <label>
                     Resource ID: <input 
                     type="number" 

@@ -11,7 +11,10 @@ export default function Table( props: any ) {
 
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
   const apiUrl: string = `${apiTld}/${locator}`;
-  const urlBase = locator.split("?")[0];
+  let urlBase = locator.split('?')[0];
+  if (urlBase == "rental-items" || urlBase == "transfer-items"){
+    urlBase = locator.split("&")[0];
+  }
   const { data, isLoading, isError } = useData(apiUrl);
 
   const renderTableRows = (arrayData: Array<Object>) => {

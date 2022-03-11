@@ -4,11 +4,13 @@ import styles from '@/styles/Home.module.css'
 import FormRentalItems from '@/components/form-rental-items'
 import FormRentalItemsPost from '@/components/form-rental-items-post'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import Table from '@/components/table'
 
 const RentalItems: NextPage = () => {
 
-  const rental_items_path_root = "rental-items/" + location.search
+  const router = useRouter();
+  const rental_items_path_root = router.asPath.replace('/','')
   const [rental_items_path, setRentalItemsPath] = useState(rental_items_path_root)
   
     return (
@@ -29,7 +31,9 @@ const RentalItems: NextPage = () => {
             setPath={setRentalItemsPath}
           />
           <br />
-          <FormRentalItemsPost locator={rental_items_path_root}/>
+          <FormRentalItemsPost
+            locator={rental_items_path_root}
+          />
           <br />
           <Table 
             locator={rental_items_path}

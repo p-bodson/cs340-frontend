@@ -1,9 +1,11 @@
 import useSubmit from '@/hooks/useSubmit'
 import useChange from '@/hooks/useChange'
+import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react';
 
 export default function FormRentalItems ( props: any ) {
 
+    const router = useRouter();
     const {locator, setPath} = props;
 
     // make some controlled state for the forms
@@ -29,7 +31,7 @@ export default function FormRentalItems ( props: any ) {
         }
         args.setter(path);
     };
-    const handleSearch = useSubmit("", sendSearch, {
+    const handleSearch = useSubmit(router.asPath, sendSearch, {
         "data": searchForm, 
         "path_root": locator, 
         "setter": setPath
