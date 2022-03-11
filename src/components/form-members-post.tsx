@@ -31,8 +31,7 @@ export default function FormMembersPost ( props: any ) {
             <fieldset>
                 <legend> Add a New Member </legend>
                 <p>
-                    Fill out the form below with the information of the new member. 
-                    Refresh page after pressing <i>Add Member</i> to see updated table.
+                    Fill out the form below with the information of the new member
                 </p>
                 <label>
                     First Name: <input 

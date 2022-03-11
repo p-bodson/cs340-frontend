@@ -10,10 +10,13 @@ export default function useSubmit(destination: string,
 
     const router = useRouter();
 
-    return (e:any) => {
+    return async (e:any) => {
       e.preventDefault()
-      someFunction(someParameters);
-      router.push(destination)
+      await someFunction(someParameters);
+      router.push(destination);
+      if (Object.keys(someParameters).length == 2){
+        location.reload();
+      }
     }
   }
 

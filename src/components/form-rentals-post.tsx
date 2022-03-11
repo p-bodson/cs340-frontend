@@ -32,8 +32,7 @@ export default function FormRentalsPost ( props: any ) {
             <fieldset>
                 <legend> Add a Rental Order </legend>
                 <p>
-                    Fill out the form below with the information of the new rental.
-                    Refresh page after pressing <i>Add Rental</i> to see updated table.
+                    Fill out the form below with the information of the new rental
                 </p>
                 <label>
                     Member ID: <input 
