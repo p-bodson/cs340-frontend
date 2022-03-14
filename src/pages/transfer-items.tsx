@@ -1,101 +1,49 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
+import FormTransferItems from '@/components/form-transfer-items'
+import FormTransferItemsPost from '@/components/form-transfer-items-post'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import Table from '@/components/table'
 
-const Transfer_Items: NextPage = () => {
+const TransferItems: NextPage = () => {
+
+  const router = useRouter();
+  const transfer_items_path_root = router.asPath.replace('/','')
+  const [transfer_items_path, setTransferItemsPath] = useState(transfer_items_path_root)
+  
     return (
       <div className={styles.container}>
         <Head>
           <title>Transfer Items</title>
-          <meta name="description" content="Transfer Items page" />
+          <meta name="description" content="transfer items page" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
   
         <main className={styles.main}>
 
           <h1 className={styles.title}>Transfer Items</h1>
-          <p>This is the Transfer Items page for Transfer with transfer_ID 202</p>
+          <p>Welcome to the Transfer Items page</p>
 
-          <form>
-            <fieldset>
-                <legend> Add a Transfer Item </legend>
-                <p>Provide the resource ID and quantity of the transfer item to add</p>
-                <label>
-                    Resource ID: <input type="number" name="resource_ID" />
-                </label>
-                <br />
-                <label>
-                    Quantity: <input type="number" name="quantity" />
-                </label>
-                <br />
-                <br />
-                <input type="submit" value="Add Transfer Item" />
-            </fieldset>
-          </form>
+          <FormTransferItems 
+            locator={transfer_items_path_root}
+            setPath={setTransferItemsPath}
+          />
           <br />
-          <table>
-              <caption><b>Selected Transfer</b></caption>
-              <thead>
-                <tr>
-                  <th>transfer_ID</th>
-                  <th>source_library_ID</th>
-                  <th>destination_library_ID</th>
-                  <th>transfer_date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>202</td>
-                  <td>1</td>
-                  <td>3</td>
-                  <td>2022-02-10</td>
-                </tr>
-              </tbody>
-          </table>
+          <FormTransferItemsPost
+            locator={transfer_items_path_root}
+          />
           <br />
-          <table>
-              <caption><b>Transfer Items for Selected Transfer</b></caption>
-              <thead>
-                <tr>
-                  <th>transfer_ID</th>
-                  <th>resource_ID</th>
-                  <th>quantity</th>
-                  <th>transfer_item_status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>202</td>
-                  <td>55</td>
-                  <td>1</td>
-                  <td>COMPLETE</td>
-                  <td>
-                      <button>DELETE</button>
-                  </td>
-                  <td>
-                      <button>UPDATE</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>202</td>
-                  <td>287</td>
-                  <td>2</td>
-                  <td>IN PROGRESS</td>
-                  <td>
-                      <button>DELETE</button>
-                  </td>
-                  <td>
-                      <button>UPDATE</button>
-                  </td>
-                </tr>
-              </tbody>
-          </table>
+          <Table 
+            locator={transfer_items_path}
+            caption={<b>Transfer Items</b>}
+          />
 
         </main>
-        
+  
       </div>
     )
   }
   
-  export default Transfer_Items
+  export default TransferItems

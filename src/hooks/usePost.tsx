@@ -1,6 +1,6 @@
 export default function usePost () {
 
-    const makePost = (args: any) => {
+    const makePost = async (args: any) => {
         const {url, data, trigger} = args;
                 
         const options: Object = {
@@ -18,7 +18,7 @@ export default function usePost () {
             return payload;
         }
 
-        fetcher(url, options);
+        await fetcher(url, options);
     }
 
     return makePost;    
