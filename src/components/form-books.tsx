@@ -1,4 +1,4 @@
-import useSubmit2 from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
 import { useState, useEffect } from 'react'; 
 import Dropdown from "@/components/dropdown";
@@ -17,14 +17,11 @@ export default function FormBooks ( props: any ) {
         book_title: ""
     }
     const [books_form, setBooksForm] = useState(default_state)
-
+    // handle changes to input from user
     const onChangeBookAdd = useChange(books_form, setBooksForm);
-
     const handleSubmit = (params: any) => {
-        
         sendPost(params);
         setBooksForm(default_state)  
-        
     }
     const sendPost = usePost();
     const handleBookAdd = useSubmit2("", handleSubmit,
@@ -33,7 +30,6 @@ export default function FormBooks ( props: any ) {
             "data": books_form
         }
     );
-
     useEffect( () => {
         setBooksForm(default_state)
     }, [])

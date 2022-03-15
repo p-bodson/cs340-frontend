@@ -20,13 +20,9 @@ export default function FormAuthors ( props: any ) {
 
     // handle changes to input from user 
     const onChangeAuthorAdd = useChange(authors_form, setAuthorsForm);
-
-    const handleSubmit = (params: any) => {
-        
+    const handleSubmit = (params: any) => {  
         sendPost(params);
-        setAuthorsForm(default_state)
-
-        
+        setAuthorsForm(default_state)  
     }
     const sendPost = usePost();
     const handleAuthorAdd = useSubmit2("", handleSubmit,
@@ -35,7 +31,6 @@ export default function FormAuthors ( props: any ) {
             "data": authors_form
         }
     );
-
     useEffect( () => {
         setAuthorsForm(default_state)
     }, [])
