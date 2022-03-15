@@ -1,4 +1,4 @@
-import useSubmit from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
 import { useState, useEffect } from 'react';
 
@@ -30,8 +30,14 @@ export default function FormBooksAndAuthors ( props: any ) {
         }
         console.log(path);
         args.setter(path);
+        setSearchForm({
+            isbn: "",
+            book_title: "",
+            author_name: "",
+            author_ID: ""
+        })
     };
-    const handleSearch = useSubmit("", sendSearch, {
+    const handleSearch = useSubmit2("", sendSearch, {
         "data": search_form, 
         "path_root": locator, 
         "setter": setPath

@@ -1,10 +1,10 @@
-import useSubmit from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit'
 import useChange from '@/hooks/useChange'
 import { useState, useEffect } from 'react'; 
 import Dropdown from "@/components/dropdown";
 import usePost from '@/hooks/usePost'
 
-export default function FormAuthors ( props: any ) {
+export default function FormBooks ( props: any ) {
 
     const {locator} = props;
 
@@ -12,17 +12,31 @@ export default function FormAuthors ( props: any ) {
     const apiUrl: string = `${apiTld}/${locator}`
 
     // make some controlled state for the form
-    const [books_form, setBooksForm] = useState({
+    const default_state = {
         isbn: "",
         book_title: ""
-    })
+    }
+    const [books_form, setBooksForm] = useState(default_state)
 
     const onChangeBookAdd = useChange(books_form, setBooksForm);
+
+    const handleSubmit = (params: any) => {
+        
+        sendPost(params);
+        setBooksForm(default_state)  
+        
+    }
     const sendPost = usePost();
-    const handleBookAdd = useSubmit("", sendPost, {
-        "url": apiUrl,
-        "data": books_form
-    });
+    const handleBookAdd = useSubmit2("", handleSubmit,
+        {        
+            "url": apiUrl,
+            "data": books_form
+        }
+    );
+
+    useEffect( () => {
+        setBooksForm(default_state)
+    }, [])
 
     return (
 
@@ -35,6 +49,7 @@ export default function FormAuthors ( props: any ) {
                         type="text" 
                         name="isbn"
                         onChange={onChangeBookAdd}
+                        value={books_form.isbn}
                         required
                     />
                 </label>
@@ -44,19 +59,10 @@ export default function FormAuthors ( props: any ) {
                         type="text" 
                         name="book_title"
                         onChange={onChangeBookAdd}
+                        value={books_form.book_title}
                         required
                     />
                 </label>
-                <br/>
-                <label>
-                    Author ID: {" "}
-                    <Dropdown 
-                      name="book_author_add"
-                      locator="authors"
-                      value_attribute="author_ID"
-                    />
-                </label>
-                <br/>
                 <br />
                 <input type="submit" value="Add Book" required/>
             </fieldset>

@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Table from '@/components/table'
+import Table2 from '@/components/table-2'
 import { useState} from 'react';
 import FormAuthors from '@/components/form-authors'
 import FormBooks from '@/components/form-books'
@@ -31,21 +32,23 @@ const Books_And_Authors: NextPage = () => {
             setPath={setBaaPath}
           />
           <br/>
-          <Table 
+          <Table2 
             locator={books_and_authors_path}
             caption={<b>Books {"&"} Authors</b>}
           />
           <br />
           <FormBooks locator="books"/>
           <br />
-          <Table 
+          <Table2 
             locator="books"
             caption={<b>Books</b>}
           />
           <br/>
-          <FormAuthors locator="authors" />
+          <FormAuthors 
+            locator="authors"
+            />
           <br/>
-          <Table 
+          <Table2 
             locator="authors"
             caption={<b>Authors</b>}
           />
