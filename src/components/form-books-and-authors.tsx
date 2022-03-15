@@ -6,14 +6,8 @@ import { useState, useEffect } from 'react';
 export default function FormBooksAndAuthors ( props: any ) {
 
     const {locator, setPath} = props;
+    const [search_form, setSearchForm] = props.stateStuff;
 
-    // make some controlled state for the search form
-    const [search_form, setSearchForm] = useState({
-        isbn: "",
-        book_title: "",
-        author_name: "",
-        author_ID: ""
-    })
     const onChangeSearchForm = useChange(search_form, setSearchForm);
     // for onChange to work, the names of each input
     // element in the forms must be unique and match

@@ -4,18 +4,15 @@ import { useState, useEffect } from 'react';
 import Dropdown from "@/components/dropdown";
 import usePost from '@/hooks/usePost'
 
-export default function FormAuthors ( props: any ) {
+export default function FormBooks ( props: any ) {
 
     const {locator} = props;
+    const [books_form, setBooksForm] = props.stateStuff;
 
     const apiTld = process.env.NEXT_PUBLIC_API_TLD;
     const apiUrl: string = `${apiTld}/${locator}`
 
-    // make some controlled state for the form
-    const [books_form, setBooksForm] = useState({
-        isbn: "",
-        book_title: ""
-    })
+
 
     const onChangeBookAdd = useChange(books_form, setBooksForm);
     const sendPost = usePost();

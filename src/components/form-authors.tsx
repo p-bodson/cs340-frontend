@@ -8,21 +8,27 @@ import usePost from '@/hooks/usePost'
 export default function FormAuthors ( props: any ) {
 
     const {locator} = props;
+    const [authors_form, setAuthorsForm] = props.stateStuff;
+    const {affectedData, affect} = props;
 
     const apiTld = process.env.NEXT_PUBLIC_API_TLD;
     const apiUrl: string = `${apiTld}/${locator}`
 
-    // make some controlled state for the form
-    const [authors_form, setAuthorsForm] = useState({
-        author_name: "",
-    })
-
     const onChangeAuthorAdd = useChange(authors_form, setAuthorsForm);
     const sendPost = usePost();
+
+
+
+    const postAndGet = (params: any) => {
+        sendPost(params.post);
+        affect("");
+    }
+
     const handleAuthorAdd = useSubmit("", sendPost, {
-        "url": apiUrl,
-        "data": authors_form
-    });
+        "url": apiUrl, 
+        "data": authors_form 
+        }
+    );
 
     return (
         <form onSubmit={handleAuthorAdd}>

@@ -1,7 +1,7 @@
 export default function usePost () {
 
     const makePost = async (args: any) => {
-        const {url, data, trigger} = args;
+        const {url, data} = args;
                 
         const options: Object = {
             method: 'POST',
