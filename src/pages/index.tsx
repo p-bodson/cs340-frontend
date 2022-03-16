@@ -48,7 +48,21 @@ const Home: NextPage = () => {
           <Link href="/books-and-authors">
             <a className={styles.card}>
               <h2>Books {'&'} Authors &rarr;</h2>
-              <p>See the Books and Authors known to the network.</p>
+              <p>Search all the Books and Authors known to the network.</p>
+            </a>
+          </Link>
+
+          <Link href="/authors">
+            <a className={styles.card}>
+              <h2>Authors &rarr;</h2>
+              <p>See and edit the Authors known to the network.</p>
+            </a>
+          </Link>
+
+          <Link href="/books">
+            <a className={styles.card}>
+              <h2>Books &rarr;</h2>
+              <p>See and edit the Books known to the network.</p>
             </a>
           </Link>
 

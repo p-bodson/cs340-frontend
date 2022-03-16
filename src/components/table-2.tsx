@@ -9,17 +9,9 @@ export default function Table( props: any ) {
   const {data, isLoading, isError} = props;
   const {caption} = props;
 
-  //const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-  //const apiUrl: string = `${apiTld}/${locator}`;
-  //let urlBase = locator.split('?')[0];
-  //if (urlBase == "rental-items" || urlBase == "transfer-items"){
-  //  urlBase = locator.split("&")[0];
-  //}
-
-  //const { data, isLoading, isError } = useData(apiUrl);
-
   const renderTableRows = (arrayData: Array<Object>) => {
     if (!arrayData) return null;
+    if (!arrayData[0]) return null;
     return arrayData.map( e => <TableRow
       props={e}
       key={uuidv4()}

@@ -21,18 +21,16 @@ export default function FormBooksAndAuthors ( props: any ) {
 
     // make some submission handlers for the different forms
     const sendSearch = (args: any) => {
-        console.log(args.path_root);
         let path = `${args.path_root}?`   
         for (const key in args.data) {
             if (`${args.data[key]}` !== "") {
                 path += `${key}=${encodeURIComponent(args.data[key])}&`;
             }   
         }
-        console.log(path);
         args.setter(path);
         setSearchForm(default_state)
     };
-    const handleSearch = useSubmit2("", sendSearch, {
+    const handleSearch = useSubmit2(sendSearch, {
         "data": search_form, 
         "path_root": locator, 
         "setter": setPath

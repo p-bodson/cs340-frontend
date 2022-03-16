@@ -3,11 +3,14 @@ import useChange from '@/hooks/useChange'
 import { useState, useEffect } from 'react'; 
 import Dropdown from "@/components/dropdown";
 import usePost from '@/hooks/usePost'
+import useGet from '@/hooks/useGet'
+
 
 export default function FormBooks ( props: any ) {
 
     const [books_form, setBooksForm] = props.stateStuff;
     const {apiUri} = props
+    const {affect} = props
 
     // make some controlled state for the form
     const default_state = {
@@ -19,10 +22,14 @@ export default function FormBooks ( props: any ) {
     const onChangeBookAdd = useChange(books_form, setBooksForm);
     const handleSubmit = (params: any) => {
         sendPost(params);
-        setBooksForm(default_state)  
+        setBooksForm(default_state)
+        sendGet(params).then(
+            (e) => {affect(e)}
+        );
     }
     const sendPost = usePost();
-    const handleBookAdd = useSubmit2("", handleSubmit,
+    const sendGet = useGet();
+    const handleBookAdd = useSubmit2(handleSubmit,
         {        
             "url": apiUri,
             "data": books_form
@@ -30,7 +37,6 @@ export default function FormBooks ( props: any ) {
     );
     useEffect( () => {
         setBooksForm(default_state)
-        console.log(apiUri);
     }, [])
 
     return (

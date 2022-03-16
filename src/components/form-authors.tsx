@@ -1,7 +1,8 @@
 import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import usePost from '@/hooks/usePost'
+import useGet from '@/hooks/useGet'
 
 
 
@@ -9,6 +10,7 @@ export default function FormAuthors ( props: any ) {
 
     const [authors_form, setAuthorsForm] = props.stateStuff;
     const {apiUri} = props
+    const {affect} = props
 
     // make some controlled state for the form
     const default_state = {
@@ -19,10 +21,15 @@ export default function FormAuthors ( props: any ) {
     const onChangeAuthorAdd = useChange(authors_form, setAuthorsForm);
     const handleSubmit = (params: any) => {  
         sendPost(params);
-        setAuthorsForm(default_state)  
+        setAuthorsForm(default_state)
+        sendGet(params).then(
+            (e) => {affect(e)}
+        );
+        
     }
     const sendPost = usePost();
-    const handleAuthorAdd = useSubmit2("", handleSubmit,
+    const sendGet = useGet();
+    const handleAuthorAdd = useSubmit2( handleSubmit,
         {        
             "url": apiUri,
             "data": authors_form
@@ -48,7 +55,7 @@ export default function FormAuthors ( props: any ) {
             </label>
             <br/>
             <br />
-            <input type="submit" value="Add Author" required/>
+            <input type="submit" value="Add Author"/>
         </fieldset>
         </form>
     )
