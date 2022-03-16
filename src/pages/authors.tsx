@@ -5,24 +5,32 @@ import Table2 from '@/components/table-2';
 import { useState, useEffect } from 'react';
 import FormAuthors from '@/components/form-authors'
 import useData from '@/hooks/useData';
+import UpdateFormAuthors from '@/components/update-form-authors'
 
 
 const Authors: NextPage = () => {
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
   const authorsUri: string = `${apiTld}/authors`
+  const updateUri: string = `${apiTld}/authors`
 
-  // make some controlled state for the form
+  // make some controlled state for the CREATE form
   const [authors_form, setAuthorsForm] = useState({
     author_name: "",
   })
 
+  // controlled state for the UPDATE form
+  const [update_form, setUpdateForm] = useState( {
+    author_ID: "",
+    author_name: ""
+  })
+
+  // state for the authors displayed in a table
   const [authors, setAuthors] = useState([]);
 
+  // used to initially fill in the table
   const { data: authorsData, 
     isLoading: authorsIsLoading, 
     isError: authorsIsError } = useData(authorsUri);
-
-  // effect for filling in Authors table
   useEffect( () => {
     setAuthors(authorsData);
   }, [authorsIsLoading, authorsData, authorsIsError])
@@ -42,9 +50,15 @@ const Authors: NextPage = () => {
 
           <br/>
           <FormAuthors 
-            locator="authors" 
             stateStuff={[authors_form, setAuthorsForm]}
             apiUri={authorsUri}
+            affect={setAuthors}
+          />
+          <br/>
+          <br/>
+          <UpdateFormAuthors 
+            stateStuff={[update_form, setUpdateForm]}
+            apiUri={updateUri}
             affect={setAuthors}
           />
           <br/>
