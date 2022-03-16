@@ -1,19 +1,19 @@
-import useSubmit from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react';
 
 export default function FormRentals ( props: any ) {
 
     const {locator, setPath} = props;
+    const [search_form, setSearchForm] = props.stateStuff;
 
-    // make some controlled state for the forms
-    const [searchForm, setSearchForm] = useState({
+    const default_state = {
         rental_ID: "",
         member_ID: "",
         library_ID: "",
         rental_date: ""
-    })
-    const onChangeSearchForm = useChange(searchForm, setSearchForm);
+    }
+
+    const onChangeSearchForm = useChange(search_form, setSearchForm);
     // for onChange to work, the names of each input
     // element in the forms must be unique and match
     // the names of the values in the form state
@@ -27,9 +27,10 @@ export default function FormRentals ( props: any ) {
             }   
         }
         args.setter(path);
+        setSearchForm(default_state)
     };
-    const handleSearch = useSubmit("", sendSearch, {
-        "data": searchForm, 
+    const handleSearch = useSubmit2(sendSearch, {
+        "data": search_form, 
         "path_root": locator, 
         "setter": setPath
     });
@@ -43,7 +44,7 @@ export default function FormRentals ( props: any ) {
                     Rental ID: <input 
                     type="number" 
                     name="rental_ID"
-                    value={searchForm.rental_ID}
+                    value={search_form.rental_ID}
                     onChange={onChangeSearchForm}
                     />
                 </label>
@@ -52,7 +53,7 @@ export default function FormRentals ( props: any ) {
                     Member ID: <input 
                     type="number" 
                     name="member_ID"
-                    value={searchForm.member_ID}
+                    value={search_form.member_ID}
                     onChange={onChangeSearchForm}
                     />
                 </label>
@@ -61,7 +62,7 @@ export default function FormRentals ( props: any ) {
                     Library ID: <input 
                     type="number" 
                     name="library_ID"
-                    value={searchForm.library_ID}
+                    value={search_form.library_ID}
                     onChange={onChangeSearchForm}
                     />
                 </label>
@@ -70,7 +71,7 @@ export default function FormRentals ( props: any ) {
                     Rental Date: <input 
                     type="date" 
                     name="rental_date"
-                    value={searchForm.rental_date}
+                    value={search_form.rental_date}
                     onChange={onChangeSearchForm}
                     />
                 </label>

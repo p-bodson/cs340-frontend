@@ -1,34 +1,50 @@
-import useSubmit from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react'; 
+import { useEffect } from 'react'; 
 import Dropdown from "@/components/dropdown";
 import usePost from '@/hooks/usePost'
+import useGet from '@/hooks/useGet'
+
 
 export default function FormRentalsPost ( props: any ) {
 
-    const {locator} = props;
+    const [create_form, setCreateForm] = props.stateStuff;
+    const {apiUri} = props
+    const {affect} = props
 
-    const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-    const apiUrl: string = `${apiTld}/${locator}`
-
-    // make some controlled state for the form
-    const [rentalsFormPost, setRentalsForm] = useState({
+    const default_state = {
         rental_ID: "",
-        source_library_ID: "",
-        destination_library_ID: "",
+        member_ID: "",
+        library_ID: "",
         rental_date: ""
-    })
+    }
 
-    const onChangeRentalAdd = useChange(rentalsFormPost, setRentalsForm);
+
+    // handle changes to input from user 
+    const onChangeCreate = useChange(create_form, setCreateForm);
+    const handleSubmit = (params: any) => {  
+        sendPost(params);
+        setCreateForm(default_state)
+        sendGet(params).then(
+            (e) => {affect(e)}
+        );
+    }
+    
     const sendPost = usePost();
-    const handleRentalAdd = useSubmit("", sendPost, {
-        "url": apiUrl,
-        "data": rentalsFormPost
-    });
+    const sendGet = useGet();
+    const handleCreate = useSubmit2( handleSubmit,
+        {        
+            "url": apiUri,
+            "data": create_form
+        }
+    );
+    useEffect( () => {
+        setCreateForm(default_state)
+    }, [])
 
     return (
 
-        <form onSubmit={handleRentalAdd}>
+        <form onSubmit={handleCreate}>
             <fieldset>
                 <legend> Add a Rental Order </legend>
                 <p>
@@ -38,7 +54,7 @@ export default function FormRentalsPost ( props: any ) {
                     Member ID: <input 
                     type="number" 
                     name="member_ID"
-                    onChange={onChangeRentalAdd} 
+                    onChange={onChangeCreate} 
                     required/>
                 </label>
                 <br/>
@@ -46,7 +62,7 @@ export default function FormRentalsPost ( props: any ) {
                     Library ID: <input 
                     type="number" 
                     name="library_ID"
-                    onChange={onChangeRentalAdd} 
+                    onChange={onChangeCreate} 
                     required/>
                 </label>
                 <br/>
@@ -54,7 +70,7 @@ export default function FormRentalsPost ( props: any ) {
                     Rental Date: <input 
                     type="date" 
                     name="rental_date"
-                    onChange={onChangeRentalAdd} 
+                    onChange={onChangeCreate} 
                     required/>
                 </label>
                 <br />

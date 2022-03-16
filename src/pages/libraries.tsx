@@ -21,7 +21,7 @@ const Libraries: NextPage = () => {
   const [search_form, setSearchForm] = useState({
     library_ID: "",
     library_name: "",
-    library_addres: ""
+    library_address: ""
   })
 
   // the Libraries table data
@@ -43,7 +43,7 @@ const Libraries: NextPage = () => {
   const [create_form, setCreateForm] = useState({
     library_ID: "",
     library_name: "",
-    library_addres: ""
+    library_address: ""
   })
 
   return (
