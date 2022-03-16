@@ -7,7 +7,7 @@ import usePost from '@/hooks/usePost'
 export default function FormBooks ( props: any ) {
 
     const [books_form, setBooksForm] = props.stateStuff;
-    const {apiUri} = props.apiUri
+    const {apiUri} = props
 
     // make some controlled state for the form
     const default_state = {
@@ -30,6 +30,7 @@ export default function FormBooks ( props: any ) {
     );
     useEffect( () => {
         setBooksForm(default_state)
+        console.log(apiUri);
     }, [])
 
     return (

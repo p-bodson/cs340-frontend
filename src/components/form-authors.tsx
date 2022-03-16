@@ -8,7 +8,7 @@ import usePost from '@/hooks/usePost'
 export default function FormAuthors ( props: any ) {
 
     const [authors_form, setAuthorsForm] = props.stateStuff;
-    const {apiUri} = props.apiUri
+    const {apiUri} = props
 
     // make some controlled state for the form
     const default_state = {
