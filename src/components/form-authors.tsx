@@ -12,7 +12,6 @@ export default function FormAuthors ( props: any ) {
     const {apiUri} = props
     const {affect} = props
 
-    // make some controlled state for the form
     const default_state = {
         author_name: "",
     }

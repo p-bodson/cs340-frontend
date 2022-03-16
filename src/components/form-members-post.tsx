@@ -1,33 +1,46 @@
-import useSubmit from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react'; 
+import { useEffect } from 'react';
 import usePost from '@/hooks/usePost'
+import useGet from '@/hooks/useGet'
 
 export default function FormMembersPost ( props: any ) {
 
-    const {locator} = props;
+    const [create_form, setCreateForm] = props.stateStuff;
+    const {apiUri} = props
+    const {affect} = props
 
-    const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-    const apiUrl: string = `${apiTld}/${locator}`
-
-    // make some controlled state for the form
-    const [membersFormPost, setMembersForm] = useState({
-        member_ID: "",
+    const default_state = {
         member_first_name: "",
         member_last_name: "",
         member_phone: ""
-    })
+    }
 
-    const onChangeMemberAdd = useChange(membersFormPost, setMembersForm);
+    // handle changes to input from user 
+    const onChangeCreate = useChange(create_form, setCreateForm);
+    const handleSubmit = (params: any) => {  
+        sendPost(params);
+        setCreateForm(default_state)
+        sendGet(params).then(
+            (e) => {affect(e)}
+        );
+        
+    }
     const sendPost = usePost();
-    const handleMemberAdd = useSubmit("", sendPost, {
-        "url": apiUrl,
-        "data": membersFormPost
-    });
+    const sendGet = useGet();
+    const handleCreate = useSubmit2( handleSubmit,
+        {        
+            "url": apiUri,
+            "data": create_form
+        }
+    );
+    useEffect( () => {
+        setCreateForm(default_state)
+    }, [])
 
     return (
 
-        <form onSubmit={handleMemberAdd}>
+        <form onSubmit={handleCreate}>
             <fieldset>
                 <legend> Add a New Member </legend>
                 <p>
@@ -37,7 +50,8 @@ export default function FormMembersPost ( props: any ) {
                     First Name: <input 
                     type="text" 
                     name="member_first_name" 
-                    onChange={onChangeMemberAdd}
+                    onChange={onChangeCreate}
+                    value={create_form.member_first_name}
                     required/>
                 </label>
                 <br/>
@@ -45,7 +59,8 @@ export default function FormMembersPost ( props: any ) {
                     Last Name: <input 
                     type="text" 
                     name="member_last_name" 
-                    onChange={onChangeMemberAdd}
+                    onChange={onChangeCreate}
+                    value={create_form.member_last_name}
                     required/>
                 </label>
                 <br/>
@@ -53,7 +68,8 @@ export default function FormMembersPost ( props: any ) {
                     Phone Number: <input 
                     type="number" 
                     name="member_phone" 
-                    onChange={onChangeMemberAdd}
+                    onChange={onChangeCreate}
+                    value={create_form.member_phone}
                     required/>
                 </label>
                 <br />
