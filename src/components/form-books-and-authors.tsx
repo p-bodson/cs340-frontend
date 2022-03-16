@@ -1,6 +1,5 @@
 import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react';
 
 
 export default function FormBooksAndAuthors ( props: any ) {
@@ -13,6 +12,13 @@ export default function FormBooksAndAuthors ( props: any ) {
     // element in the forms must be unique and match
     // the names of the values in the form state
 
+    const default_state = {
+        isbn: "",
+        book_title: "",
+        author_name: "",
+        author_ID: ""
+    }
+
     // make some submission handlers for the different forms
     const sendSearch = (args: any) => {
         console.log(args.path_root);
@@ -24,12 +30,7 @@ export default function FormBooksAndAuthors ( props: any ) {
         }
         console.log(path);
         args.setter(path);
-        setSearchForm({
-            isbn: "",
-            book_title: "",
-            author_name: "",
-            author_ID: ""
-        })
+        setSearchForm(default_state)
     };
     const handleSearch = useSubmit2("", sendSearch, {
         "data": search_form, 

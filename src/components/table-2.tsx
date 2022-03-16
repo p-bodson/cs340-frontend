@@ -6,18 +6,20 @@ import useData from '@/hooks/useData';
 
 
 export default function Table( props: any ) {
-  const {locator} = props;
+  const {data, isLoading, isError} = props;
   const {caption} = props;
 
-  const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-  const apiUrl: string = `${apiTld}/${locator}`;
-  let urlBase = locator.split('?')[0];
-  if (urlBase == "rental-items" || urlBase == "transfer-items"){
-    urlBase = locator.split("&")[0];
-  }
-  const { data, isLoading, isError } = useData(apiUrl);
+  //const apiTld = process.env.NEXT_PUBLIC_API_TLD;
+  //const apiUrl: string = `${apiTld}/${locator}`;
+  //let urlBase = locator.split('?')[0];
+  //if (urlBase == "rental-items" || urlBase == "transfer-items"){
+  //  urlBase = locator.split("&")[0];
+  //}
+
+  //const { data, isLoading, isError } = useData(apiUrl);
 
   const renderTableRows = (arrayData: Array<Object>) => {
+    if (!arrayData) return null;
     return arrayData.map( e => <TableRow
       props={e}
       key={uuidv4()}
@@ -27,7 +29,8 @@ export default function Table( props: any ) {
 
   const renderTableHeaders = (arrayData: Array<Object>) => {
     // there needs to be at least one item in
-    // arrayData for this to work. No error handling performed]
+    // arrayData for this to work. No error handling performed
+    if (!arrayData) return <th>no data matches the criteria...</th>
     if (!arrayData[0]) return <th>no data matches the criteria...</th>
     const keys: any = Object.keys(arrayData[0]);
     return keys.map( (e: any) => {

@@ -7,18 +7,13 @@ import usePost from '@/hooks/usePost'
 
 export default function FormAuthors ( props: any ) {
 
-    const {locator} = props;
     const [authors_form, setAuthorsForm] = props.stateStuff;
-    const {affectedData, affect} = props;
-
-    const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-    const apiUrl: string = `${apiTld}/${locator}`
+    const {apiUri} = props.apiUri
 
     // make some controlled state for the form
     const default_state = {
         author_name: "",
     }
-    const [authors_form, setAuthorsForm] = useState(default_state)
 
     // handle changes to input from user 
     const onChangeAuthorAdd = useChange(authors_form, setAuthorsForm);
@@ -29,7 +24,7 @@ export default function FormAuthors ( props: any ) {
     const sendPost = usePost();
     const handleAuthorAdd = useSubmit2("", handleSubmit,
         {        
-            "url": apiUrl,
+            "url": apiUri,
             "data": authors_form
         }
     );

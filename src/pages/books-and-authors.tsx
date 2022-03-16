@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import Table from '@/components/table'
 import Table2 from '@/components/table-2';
 import { useState, useEffect } from 'react';
 import FormAuthors from '@/components/form-authors'
@@ -12,15 +11,22 @@ import useData from '@/hooks/useData';
 
 
 const Books_And_Authors: NextPage = () => {
+  const apiTld = process.env.NEXT_PUBLIC_API_TLD;
+
+  const books_and_authors_path_root = `${apiTld}/books-and-authors` 
+  const [books_and_authors_path, setBaaPath] = useState(books_and_authors_path_root)
+
+  
+  const authorsUri: string = `${apiTld}/authors`
+  const booksUri: string = `${apiTld}/books`
 
   const [trigger, setTrigger] = useState(false);
 
-  const books_and_authors_path_root = "books-and-authors"  
-  const [books_and_authors_path, setBaaPath] = useState(books_and_authors_path_root)
+  
 
-  const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-  const authorsUri: string = `${apiTld}/authors`
-
+  // -----------------------
+  // Books & Authors
+  // -----------------------
   // make some controlled state for the search form
   const [search_form, setSearchForm] = useState({
     isbn: "",
@@ -29,11 +35,38 @@ const Books_And_Authors: NextPage = () => {
     author_ID: ""
   })
 
+  // the Books_Authors table data
+  const [books_and_authors, setBaa] = useState({
+    isbn: "",
+    book_title: ""
+  })
+  const { data: baaData, 
+    isLoading: baaIsLoading, 
+    isError: baaIsError } = useData(books_and_authors_path);
+
+  // effect for filling in Books_Authors table
+  useEffect( () => {
+    setBaa(baaData);
+  }, [books_and_authors, baaIsLoading, baaData, baaIsError, trigger])
+
+
+  // -----------------------
+  // Books
+  // -----------------------
   // make some controlled state for the form
   const [books_form, setBooksForm] = useState({
     isbn: "",
     book_title: ""
   })
+  const [books, setBooks] = useState([]);
+  const { data: booksData, 
+    isLoading: booksIsLoading, 
+    isError: booksIsError } = useData(booksUri);
+
+  // effect for filling in Books table
+  useEffect( () => {
+    setBooks(booksData);
+  }, [books, booksIsLoading, booksData, booksIsError, trigger])
 
 
   // -----------------------
@@ -53,8 +86,7 @@ const Books_And_Authors: NextPage = () => {
   // effect for filling in Authors table
   useEffect( () => {
     setAuthors(authorsData);
-    console.log(authors);
-  }, [authors, authorsIsLoading, authorsData, trigger])
+  }, [authors, authorsIsLoading, authorsData, authorsIsError, trigger])
 
     return (
       <div className={styles.container}>
@@ -76,21 +108,29 @@ const Books_And_Authors: NextPage = () => {
           />
           <br/>
           <Table2 
-            locator={books_and_authors_path}
+            data={books_and_authors}
+            isLoading={baaIsLoading}
+            isError={baaIsError}
             caption={<b>Books {"&"} Authors</b>}
           />
           <br />
-          <FormBooks locator="books" stateStuff={[books_form, setBooksForm]} />
+          <FormBooks 
+            locator="books" 
+            stateStuff={[books_form, setBooksForm]} 
+            apiUri={booksUri}
+          />
           <br />
           <Table2 
-            locator="books"
+            data={books}
+            isLoading={booksIsLoading}
+            isError={booksIsError}
             caption={<b>Books</b>}
           />
           <br/>
           <FormAuthors 
             locator="authors" 
             stateStuff={[authors_form, setAuthorsForm]}
-            affectedData={trigger}
+            apiUri={authorsUri}
             affect={setAuthors}
           />
           <br/>

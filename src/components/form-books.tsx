@@ -6,18 +6,15 @@ import usePost from '@/hooks/usePost'
 
 export default function FormBooks ( props: any ) {
 
-    const {locator} = props;
     const [books_form, setBooksForm] = props.stateStuff;
-
-    const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-    const apiUrl: string = `${apiTld}/${locator}`
+    const {apiUri} = props.apiUri
 
     // make some controlled state for the form
     const default_state = {
         isbn: "",
         book_title: ""
     }
-    const [books_form, setBooksForm] = useState(default_state)
+
     // handle changes to input from user
     const onChangeBookAdd = useChange(books_form, setBooksForm);
     const handleSubmit = (params: any) => {
@@ -27,7 +24,7 @@ export default function FormBooks ( props: any ) {
     const sendPost = usePost();
     const handleBookAdd = useSubmit2("", handleSubmit,
         {        
-            "url": apiUrl,
+            "url": apiUri,
             "data": books_form
         }
     );
