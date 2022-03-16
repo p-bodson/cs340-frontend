@@ -1,8 +1,11 @@
 import Link from "next/link"
 import styles from '@/styles/Home.module.css'
 import { v4 as uuidv4 } from 'uuid';
+import UpdateButton from '@/components/button-update'
 
 export default function TableRow(props: any) {
+
+    const {updater} = props
     
     const renderRow = (rowData: any) => {
         const attributeArray: any = [];
@@ -65,7 +68,7 @@ export default function TableRow(props: any) {
     return (
         <tr>
             {renderRow(props.props)}
-            <td><button>UPDATE</button></td>
+            <td><UpdateButton data={props.props} updater={updater}/></td>
             <td><button>DELETE</button></td>
         </tr>
     )

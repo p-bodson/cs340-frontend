@@ -2,18 +2,20 @@ import Link from "next/link"
 import styles from '@/styles/Home.module.css'
 import TableRow from "@/components/table-row";
 import { v4 as uuidv4 } from 'uuid';
-import useData from '@/hooks/useData';
 
 
 export default function Table( props: any ) {
   const {data, isLoading, isError} = props;
   const {caption} = props;
 
-  const renderTableRows = (arrayData: Array<Object>) => {
+  const {update_form} = props
+
+  const renderTableRows = (arrayData: Array<Object>, updater: any) => {
     if (!arrayData) return null;
     if (!arrayData[0]) return null;
     return arrayData.map( e => <TableRow
       props={e}
+      updater={updater}
       key={uuidv4()}
       />
     );
@@ -45,7 +47,7 @@ export default function Table( props: any ) {
             </tr>
           </thead>
           <tbody>
-            { renderTableRows(data) }
+            { renderTableRows(data, update_form) }
           </tbody>
         </table>
       </div>

@@ -64,6 +64,7 @@ const Authors: NextPage = () => {
           <br/>
           <Table2
             data={authors}
+            update_form={setUpdateForm}
             isLoading={authorsIsLoading}
             isError={authorsIsError}
             caption={<b>Authors</b>}
