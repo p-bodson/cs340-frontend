@@ -1,28 +1,43 @@
-import useSubmit from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
 import { useState, useEffect } from 'react'; 
 import Dropdown from "@/components/dropdown";
 import usePost from '@/hooks/usePost'
+import useGet from '@/hooks/useGet'
 
-export default function FormAuthors ( props: any ) {
 
-    const {locator} = props;
+export default function FormBooks ( props: any ) {
 
-    const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-    const apiUrl: string = `${apiTld}/${locator}`
+    const [books_form, setBooksForm] = props.stateStuff;
+    const {apiUri} = props
+    const {affect} = props
 
     // make some controlled state for the form
-    const [books_form, setBooksForm] = useState({
+    const default_state = {
         isbn: "",
         book_title: ""
-    })
+    }
 
+    // handle changes to input from user
     const onChangeBookAdd = useChange(books_form, setBooksForm);
+    const handleSubmit = (params: any) => {
+        sendPost(params);
+        setBooksForm(default_state)
+        sendGet(params).then(
+            (e) => {affect(e)}
+        );
+    }
     const sendPost = usePost();
-    const handleBookAdd = useSubmit("", sendPost, {
-        "url": apiUrl,
-        "data": books_form
-    });
+    const sendGet = useGet();
+    const handleBookAdd = useSubmit2(handleSubmit,
+        {        
+            "url": apiUri,
+            "data": books_form
+        }
+    );
+    useEffect( () => {
+        setBooksForm(default_state)
+    }, [])
 
     return (
 
@@ -35,6 +50,7 @@ export default function FormAuthors ( props: any ) {
                         type="text" 
                         name="isbn"
                         onChange={onChangeBookAdd}
+                        value={books_form.isbn}
                         required
                     />
                 </label>
@@ -44,19 +60,10 @@ export default function FormAuthors ( props: any ) {
                         type="text" 
                         name="book_title"
                         onChange={onChangeBookAdd}
+                        value={books_form.book_title}
                         required
                     />
                 </label>
-                <br/>
-                <label>
-                    Author ID: {" "}
-                    <Dropdown 
-                      name="book_author_add"
-                      locator="authors"
-                      value_attribute="author_ID"
-                    />
-                </label>
-                <br/>
                 <br />
                 <input type="submit" value="Add Book" required/>
             </fieldset>

@@ -12,11 +12,54 @@ export default function TableRow(props: any) {
         for (const key in rowData) {
             attributeArray.push(rowData[key]);
         }
-
-        // map the row data from array to component
-        return attributeArray.map( (e: any) => {
-            return <td key={uuidv4()}>{`${e}`}</td>
-        });
+        
+        const pathName = location.pathname;
+        // for rentals and transfer pages
+        if (pathName == "/rentals" || pathName == "/transfers"){
+            const rows: any = [];
+            for (let i in attributeArray){
+                let row = attributeArray[i];
+                // linked ID
+                if(i == "0"){
+                    if (pathName == "/rentals"){
+                        rows.push(
+                            <td key={uuidv4()}>
+                                <Link 
+                                href={{ pathname: '/rental-items', query:{rental_ID: `${row}`} }}>
+                                    <a>{`${row}`}</a>
+                                </Link>
+                            </td>
+                        );
+                    } else{
+                        rows.push(
+                            <td key={uuidv4()}>
+                                <Link href={{ pathname: '/transfer-items', query:{transfer_ID: `${row}`} }}>
+                                    <a>{`${row}`}</a>
+                                </Link>
+                            </td>
+                        );
+                    }
+                    
+                // get only date
+                } else if(i == "3"){
+                    rows.push(
+                        <td key={uuidv4()}>
+                            {`${row.split("T")[0]}`}
+                        </td>
+                    );
+                } else{
+                    rows.push(<td key={uuidv4()}>{`${row}`}</td>);
+                }
+            }
+            return rows;
+        // for every other page
+        } else{
+            // map the row data from array to component
+            return attributeArray.map( (e: any) => {
+                return <td key={uuidv4()}>{`${e}`}</td>
+            });
+        }
+        
     };
 
     return (

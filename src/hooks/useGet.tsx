@@ -1,15 +1,14 @@
-export default function usePost () {
+export default function useGet () {
 
-    const makePost = async (args: any) => {
-        const {url, data} = args;
+    const makeGet = async (args: any) => {
+        const {url} = args;
                 
         const options: Object = {
-            method: 'POST',
+            method: 'GET',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data)
         };
 
         const fetcher = async (url: any, options: any) => {
@@ -18,9 +17,10 @@ export default function usePost () {
             return payload;
         }
 
-        await fetcher(url, options);
+        const value = await fetcher(url, options);
+        return value;
     }
 
-    return makePost;    
+    return makeGet;    
 }
 

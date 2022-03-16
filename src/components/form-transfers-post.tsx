@@ -32,8 +32,7 @@ export default function FormTransfersPost ( props: any ) {
             <fieldset>
                 <legend> Add a Transfer Order </legend>
                 <p>
-                    Fill out the form below with the information of the new transfer.
-                    Refresh page after pressing <i>Add Transfer</i> to see updated table.
+                    Fill out the form below with the information of the new transfer
                 </p>
                 <label>
                     Source Library ID: <input 
