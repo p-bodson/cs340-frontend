@@ -7,6 +7,7 @@ export default function UpdateButton (props: any) {
 
     // fill in the form data with the row data
     const updateForm = () => {
+        if (!updater) return;
         updater(data);
     }
 

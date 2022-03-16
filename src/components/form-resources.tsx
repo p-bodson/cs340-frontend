@@ -1,40 +1,39 @@
-import useSubmit from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react';
 
 
 export default function FormResources ( props: any ) {
 
     const {locator, setPath} = props;
+    const [search_form, setSearchForm] = props.stateStuff;
 
-    // make some controlled state for the search form
-    const [search_form, setSearchForm] = useState({
-        isbn: '', 
-        book_title: '', 
-        library_ID: '', 
-        library_name: '',
-        resource_ID: '',
-        quantity_checked_out: '',
-        quantity_available: ''
-    })
     const onChangeSearchForm = useChange(search_form, setSearchForm);
     // for onChange to work, the names of each input
     // element in the forms must be unique and match
     // the names of the values in the form state
 
+    const default_state = {
+      isbn: '', 
+      book_title: '', 
+      library_ID: '', 
+      library_name: '',
+      resource_ID: '',
+      quantity_checked_out: '',
+      quantity_available: ''
+    }
+
     // make some submission handlers for the different forms
     const sendSearch = (args: any) => {
-        console.log(args.path_root);
         let path = `${args.path_root}?`   
         for (const key in args.data) {
             if (`${args.data[key]}` !== "") {
                 path += `${key}=${encodeURIComponent(args.data[key])}&`;
             }   
         }
-        console.log(path);
         args.setter(path);
+        setSearchForm(default_state)
     };
-    const handleSearch = useSubmit("", sendSearch, {
+    const handleSearch = useSubmit2(sendSearch, {
         "data": search_form, 
         "path_root": locator, 
         "setter": setPath

@@ -2,13 +2,47 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import FormResources from '@/components/form-resources'
-import { useState } from 'react'
-import Table from '@/components/table'
+import { useState, useEffect } from 'react'
+import Table2 from '@/components/table-2'
+import useData from '@/hooks/useData';
 
 const Resources: NextPage = () => {
+  const apiTld = process.env.NEXT_PUBLIC_API_TLD;
 
-  const resources_path_root = "resources"  
+  const resources_path_root = `${apiTld}/resources`  
   const [resources_path, setResourcePath] = useState(resources_path_root)
+
+  // controlled state for search form
+  const [search_form, setSearchForm] = useState({
+    isbn: '', 
+    book_title: '', 
+    library_ID: '', 
+    library_name: '',
+    resource_ID: '',
+    quantity_checked_out: '',
+    quantity_available: ''
+  })
+
+  // initial table data
+
+  const [resources, setResources] = useState({
+    isbn: '', 
+    book_title: '', 
+    library_ID: '', 
+    library_name: '',
+    resource_ID: '',
+    quantity_checked_out: '',
+    quantity_available: ''
+  })
+
+  const { data: resourcesData, 
+    isLoading: resourcesIsLoading, 
+    isError: resourcesIsError } = useData(resources_path);
+
+  // effect for filling in Books_Authors table
+  useEffect( () => {
+    setResources(resourcesData);
+  }, [resourcesIsLoading, resourcesData, resourcesIsError])
 
     return (
       <div className={styles.container}>
@@ -26,9 +60,12 @@ const Resources: NextPage = () => {
           <FormResources 
             locator={resources_path_root}
             setPath={setResourcePath}
+            stateStuff={[search_form, setSearchForm]}
           />
-          <Table 
-            locator={resources_path}
+          <Table2 
+            data={resources}
+            isLoading={resourcesIsLoading}
+            isError={resourcesIsError}
             caption={<b>Resources</b>}
           />
 

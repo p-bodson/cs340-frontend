@@ -3,8 +3,6 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Table2 from '@/components/table-2';
 import { useState, useEffect } from 'react';
-import FormAuthors from '@/components/form-authors'
-import FormBooks from '@/components/form-books'
 import FormBooksAndAuthors from '@/components/form-books-and-authors'
 
 import useData from '@/hooks/useData';
@@ -30,8 +28,11 @@ const Books_And_Authors: NextPage = () => {
   // the Books_Authors table data
   const [books_and_authors, setBaa] = useState({
     isbn: "",
-    book_title: ""
+    book_title: "",
+    author_ID: "",
+    author_name: "",
   })
+  
   const { data: baaData, 
     isLoading: baaIsLoading, 
     isError: baaIsError } = useData(books_and_authors_path);
