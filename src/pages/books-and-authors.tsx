@@ -75,14 +75,14 @@ const Books_And_Authors: NextPage = () => {
             stateStuff = {[search_form, setSearchForm]}
           />
           <br/>
-          <Table 
+          <Table2 
             locator={books_and_authors_path}
             caption={<b>Books {"&"} Authors</b>}
           />
           <br />
           <FormBooks locator="books" stateStuff={[books_form, setBooksForm]} />
           <br />
-          <Table 
+          <Table2 
             locator="books"
             caption={<b>Books</b>}
           />
