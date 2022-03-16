@@ -35,11 +35,6 @@ export default function Navbar() {
                   <a>Rentals</a>
                 </Link>
               </li>
-              <li>
-                <Link href="/transfers">
-                  <a>Transfers</a>
-                </Link>
-              </li>
             </ol>
         </nav>
     )

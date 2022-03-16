@@ -19,8 +19,7 @@ const Home: NextPage = () => {
 
         <p className={styles.description}>
           Here is the Super Duper Library Network that manages the {' '}
-          transfer of resources between  members and libraries. {' '}
-          The resources are books.
+          rental of resources between members and libraries. {' '}
         </p>
 
         <div className={styles.grid}>
@@ -58,13 +57,6 @@ const Home: NextPage = () => {
               <p>See the rental requests made.</p>
             </a>
           </Link> 
-
-          <Link href="/transfers">
-            <a className={styles.card}>
-              <h2>Transfers &rarr;</h2>
-              <p>See the transfers made between libraries.</p>
-            </a>
-          </Link>
 
         </div>
       </main>
