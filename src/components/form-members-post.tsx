@@ -24,8 +24,8 @@ export default function FormMembersPost ( props: any ) {
         sendGet(params).then(
             (e) => {affect(e)}
         );
-        
     }
+    
     const sendPost = usePost();
     const sendGet = useGet();
     const handleCreate = useSubmit2( handleSubmit,

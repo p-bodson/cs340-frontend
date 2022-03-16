@@ -42,50 +42,50 @@ const Members: NextPage = () => {
   //--------------
   // CREATE / POST
   //---------------
-    // make some controlled state for the CREATE form
-    const [create_form, setCreateForm] = useState({
-      member_ID: "",
-      member_first_name: "",
-      member_last_name: "",
-      member_phone: ""
-    })
+  // make some controlled state for the CREATE form
+  const [create_form, setCreateForm] = useState({
+    member_ID: "",
+    member_first_name: "",
+    member_last_name: "",
+    member_phone: ""
+  })
   
-    return (
-      <div className={styles.container}>
-        <Head>
-          <title>Members</title>
-          <meta name="description" content="members page" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-  
-        <main className={styles.main}>
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Members</title>
+        <meta name="description" content="members page" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-          <h1 className={styles.title}>Members</h1>
-          <p>Welcome to the Members page</p>
+      <main className={styles.main}>
 
-          <FormMembers 
-            locator={members_path_root}
-            setPath={setMembersPath}
-            stateStuff={[search_form, setSearchForm]}
-          />
-          <br />
-          <FormMembersPost 
-            stateStuff={[create_form, setCreateForm]}
-            apiUri={createUri}
-            affect={setMembers}
-          />
-          <br />
-          <Table2 
-            data={members}
-            isLoading={membersIsLoading}
-            isErro={membersIsError}
-            caption={<b>Members</b>}
-          />
+        <h1 className={styles.title}>Members</h1>
+        <p>Welcome to the Members page</p>
 
-        </main>
+        <FormMembers 
+          locator={members_path_root}
+          setPath={setMembersPath}
+          stateStuff={[search_form, setSearchForm]}
+        />
+        <br />
+        <FormMembersPost 
+          stateStuff={[create_form, setCreateForm]}
+          apiUri={createUri}
+          affect={setMembers}
+        />
+        <br />
+        <Table2 
+          data={members}
+          isLoading={membersIsLoading}
+          isErro={membersIsError}
+          caption={<b>Members</b>}
+        />
+
+      </main>
+
+    </div>
+  )
+}
   
-      </div>
-    )
-  }
-  
-  export default Members
+export default Members

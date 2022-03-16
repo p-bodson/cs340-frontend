@@ -6,8 +6,6 @@ export default function FormMembers ( props: any ) {
     const {locator, setPath} = props;
     const [search_form, setSearchForm] = props.stateStuff;
 
-
-    // make some controlled state for the forms
     const default_state = {
         member_ID: "",
         member_first_name: "",

@@ -1,32 +1,47 @@
-import useSubmit from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react'; 
+import { useEffect } from 'react';
 import usePost from '@/hooks/usePost'
+import useGet from '@/hooks/useGet'
+
 
 export default function FormLibrariesPost ( props: any ) {
 
-    const {locator} = props;
+    const [create_form, setCreateForm] = props.stateStuff;
+    const {apiUri} = props
+    const {affect} = props
 
-    const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-    const apiUrl: string = `${apiTld}/${locator}`
-
-    // make some controlled state for the form
-    const [librariesFormPost, setLibrariesForm] = useState({
+    const default_state = {
         library_ID: "",
         library_name: "",
         library_address: ""
-    })
+    }
 
-    const onChangeLibraryAdd = useChange(librariesFormPost, setLibrariesForm);
+    // handle changes to input from user 
+    const onChangeCreate = useChange(create_form, setCreateForm);
+    const handleSubmit = (params: any) => {  
+        sendPost(params);
+        setCreateForm(default_state)
+        sendGet(params).then(
+            (e) => {affect(e)}
+        );
+    }
+    
     const sendPost = usePost();
-    const handleLibraryAdd = useSubmit("", sendPost, {
-        "url": apiUrl,
-        "data": librariesFormPost
-    });
+    const sendGet = useGet();
+    const handleCreate = useSubmit2( handleSubmit,
+        {        
+            "url": apiUri,
+            "data": create_form
+        }
+    );
+    useEffect( () => {
+        setCreateForm(default_state)
+    }, [])
 
     return (
 
-        <form onSubmit={handleLibraryAdd}>
+        <form onSubmit={handleCreate}>
             <fieldset>
                 <legend> Add a New Library </legend>
                 <p>
@@ -36,7 +51,8 @@ export default function FormLibrariesPost ( props: any ) {
                     Name: <input 
                     type="text" 
                     name="library_name" 
-                    onChange={onChangeLibraryAdd}
+                    onChange={onChangeCreate}
+                    value={create_form.library_name}
                     required
                     />
                 </label>
@@ -45,7 +61,8 @@ export default function FormLibrariesPost ( props: any ) {
                     Address: <input 
                     type="text" 
                     name="library_address"
-                    onChange={onChangeLibraryAdd} 
+                    onChange={onChangeCreate}
+                    value={create_form.library_address}
                     required
                     />
                 </label>
