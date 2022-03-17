@@ -11,12 +11,11 @@ import UpdateFormBooks from '@/components/update-form-books'
 
 const Books: NextPage = () => {
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-  const booksUri: string = `${apiTld}/books`
+  const createUri: string = `${apiTld}/books`
   const updateUri: string = `${apiTld}/books`
 
   // make some controlled state for the CREATE form
   const [create_form, setCreateForm] = useState({
-    isbn: "",
     book_title: ""
   })
 
@@ -31,7 +30,7 @@ const Books: NextPage = () => {
 
   const { data: booksData, 
     isLoading: booksIsLoading, 
-    isError: booksIsError } = useData(booksUri);
+    isError: booksIsError } = useData(createUri);
 
   // effect for filling in Books table
   useEffect( () => {
@@ -54,7 +53,7 @@ const Books: NextPage = () => {
           <br />
           <FormBooks 
             stateStuff={[create_form, setCreateForm]} 
-            apiUri={booksUri}
+            apiUri={createUri}
             affect={setBooks}
           />
           <br/>

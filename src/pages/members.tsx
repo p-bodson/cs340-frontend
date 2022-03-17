@@ -6,6 +6,8 @@ import FormMembersPost from '@/components/form-members-post'
 import { useState, useEffect } from 'react'
 import Table2 from '@/components/table-2'
 import useData from '@/hooks/useData';
+import UpdateFormMembers from '@/components/update-form-members'
+
 
 
 const Members: NextPage = () => {
@@ -14,6 +16,7 @@ const Members: NextPage = () => {
   const members_path_root = `${apiTld}/members`
   const [members_path, setMembersPath] = useState(members_path_root)
   const createUri: string = `${apiTld}/members`
+  const updateUri: string = `${apiTld}/members`
 
   //---------------
   // SEARCHING
@@ -44,12 +47,22 @@ const Members: NextPage = () => {
   //---------------
   // make some controlled state for the CREATE form
   const [create_form, setCreateForm] = useState({
+    member_first_name: "",
+    member_last_name: "",
+    member_phone: ""
+  })
+
+  //--------------
+  // UPDATE / PUT
+  //---------------
+  // controlled state for the UPDATE form
+  const [update_form, setUpdateForm] = useState({
     member_ID: "",
     member_first_name: "",
     member_last_name: "",
     member_phone: ""
   })
-  
+
   return (
     <div className={styles.container}>
       <Head>
@@ -75,8 +88,15 @@ const Members: NextPage = () => {
           affect={setMembers}
         />
         <br />
+        <UpdateFormMembers 
+            stateStuff={[update_form, setUpdateForm]}
+            apiUri={updateUri}
+            affect={setMembers}
+          />
+          <br />
         <Table2 
           data={members}
+          update_form={setUpdateForm}
           isLoading={membersIsLoading}
           isErro={membersIsError}
           caption={<b>Members</b>}
