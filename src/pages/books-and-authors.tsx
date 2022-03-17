@@ -4,6 +4,8 @@ import styles from '@/styles/Home.module.css'
 import Table2 from '@/components/table-2';
 import { useState, useEffect } from 'react';
 import FormBooksAndAuthors from '@/components/form-books-and-authors'
+import FormBooksAndAuthorsPost from '@/components/form-books-and-authors-post'
+import UpdateFormBooksAndAuthors from '@/components/update-form-books-and-authors';
 
 import useData from '@/hooks/useData';
 
@@ -13,6 +15,8 @@ const Books_And_Authors: NextPage = () => {
 
   const books_and_authors_path_root = `${apiTld}/books-and-authors` 
   const [books_and_authors_path, setBaaPath] = useState(books_and_authors_path_root)
+  const createUri = `${apiTld}/books-and-authors`
+  const deleteUri = `${apiTld}/books-and-authors` 
 
   // -----------------------
   // Books & Authors
@@ -22,6 +26,12 @@ const Books_And_Authors: NextPage = () => {
     isbn: "",
     book_title: "",
     author_name: "",
+    author_ID: ""
+  })
+
+  // make some controlled state for the CREATE form
+  const [create_form, setCreateForm] = useState({
+    isbn: "",
     author_ID: ""
   })
 
@@ -56,11 +66,21 @@ const Books_And_Authors: NextPage = () => {
             stateStuff = {[search_form, setSearchForm]}
           />
           <br/>
+          <FormBooksAndAuthorsPost 
+            stateStuff={[create_form, setCreateForm]} 
+            apiUri={createUri}
+            affect={setBaa}
+          />
+          <br/>
+          <UpdateFormBooksAndAuthors/>
+          <br/>
           <Table2 
             data={books_and_authors}
             isLoading={baaIsLoading}
             isError={baaIsError}
             caption={<b>Books {"&"} Authors</b>}
+            affect={setBaa}
+            deleteUri={deleteUri}
           />
         </main>
       </div>
