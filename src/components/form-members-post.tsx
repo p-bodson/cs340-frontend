@@ -1,6 +1,6 @@
 import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 import usePost from '@/hooks/usePost'
 import useGet from '@/hooks/useGet'
 

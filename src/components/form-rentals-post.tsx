@@ -1,10 +1,8 @@
 import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
 import { useEffect } from 'react'; 
-import Dropdown from "@/components/dropdown";
 import usePost from '@/hooks/usePost'
 import useGet from '@/hooks/useGet'
-
 
 export default function FormRentalsPost ( props: any ) {
 
@@ -13,12 +11,10 @@ export default function FormRentalsPost ( props: any ) {
     const {affect} = props
 
     const default_state = {
-        rental_ID: "",
         member_ID: "",
         library_ID: "",
         rental_date: ""
     }
-
 
     // handle changes to input from user 
     const onChangeCreate = useChange(create_form, setCreateForm);
@@ -53,7 +49,8 @@ export default function FormRentalsPost ( props: any ) {
                     Member ID: <input 
                     type="number" 
                     name="member_ID"
-                    onChange={onChangeCreate} 
+                    onChange={onChangeCreate}
+                    value={create_form.member_ID}
                     required/>
                 </label>
                 <br/>
@@ -62,6 +59,7 @@ export default function FormRentalsPost ( props: any ) {
                     type="number" 
                     name="library_ID"
                     onChange={onChangeCreate} 
+                    value={create_form.library_ID}
                     required/>
                 </label>
                 <br/>
@@ -69,7 +67,8 @@ export default function FormRentalsPost ( props: any ) {
                     Rental Date: <input 
                     type="date" 
                     name="rental_date"
-                    onChange={onChangeCreate} 
+                    onChange={onChangeCreate}
+                    value={create_form.rental_date}
                     required/>
                 </label>
                 <br />

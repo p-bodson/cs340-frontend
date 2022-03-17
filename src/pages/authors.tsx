@@ -12,6 +12,7 @@ const Authors: NextPage = () => {
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
   const authorsUri: string = `${apiTld}/authors`
   const updateUri: string = `${apiTld}/authors`
+  const deleteUri: string = `${apiTld}/authors`
 
   // make some controlled state for the CREATE form
   const [create_form, setCreateForm] = useState({
@@ -69,6 +70,8 @@ const Authors: NextPage = () => {
             isLoading={authorsIsLoading}
             isError={authorsIsError}
             caption={<b>Authors</b>}
+            affect={setAuthors}
+            deleteUri={deleteUri}
           />
         </main>
       </div>
