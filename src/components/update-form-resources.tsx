@@ -3,6 +3,7 @@ import useChange from '@/hooks/useChange'
 import { useEffect } from 'react';
 import usePut from '@/hooks/usePut'
 import useGet from '@/hooks/useGet'
+import Dropdown from "@/components/dropdown"
 
 
 
@@ -11,14 +12,9 @@ export default function UpdateFormResources ( props: any ) {
     const [form_data, setFormData] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
-    // make some controlled state for the form
-    const default_state = {
-        resource_ID: '',
-        isbn: '', 
-        library_ID: '', 
-        quantity_available: '',
-        quantity_checked_out: ''
-    }
+    const {booksDD,
+        librariesDD,
+        default_state} = props;
 
     // handle changes to input from user 
     const onChangeHandleUpdate = useChange(form_data, setFormData);
@@ -48,7 +44,7 @@ export default function UpdateFormResources ( props: any ) {
     // make sure the page loads with nothing already in the forms
     useEffect( () => {
         setFormData(default_state)
-    }, [])
+    }, [default_state])
 
     return (
         <form onSubmit={handleUpdate}>
@@ -58,7 +54,7 @@ export default function UpdateFormResources ( props: any ) {
             <p>If you click on the UPDATE button of a row, the form will be prefilled with that row{"'"}s data</p>
             <label>
                 Resource ID: <input 
-                    type="number" 
+                    type="text" 
                     name="resource_ID"
                     onChange={onChangeHandleUpdate}
                     value={form_data.resource_ID}
@@ -67,22 +63,22 @@ export default function UpdateFormResources ( props: any ) {
             </label>
             <br/>
             <label>
-                ISBN: <input 
-                    type="text" 
-                    name="isbn"
+                ISBN: <Dropdown 
+                    name={"isbn"} 
                     onChange={onChangeHandleUpdate}
                     value={form_data.isbn}
-                    required
+                    descriptor={"book_title"}
+                    options={booksDD}
                 />
             </label>
             <br/>
             <label>
-                Library ID: <input 
-                    type="number" 
-                    name="library_ID"
+                Library ID: <Dropdown
+                    name={"library_ID"}
                     onChange={onChangeHandleUpdate}
                     value={form_data.library_ID}
-                    required
+                    descriptor={"library_name"}
+                    options={librariesDD}
                 />
             </label>
             <br/>

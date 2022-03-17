@@ -117,6 +117,46 @@ const Resources: NextPage = () => {
     quantity_available: ''
   })
 
+  // UPDATE form defaults
+  const [updateDefaults, setUpdateDefaults] = useState({
+    resource_ID: "",
+    isbn: "",
+    library_ID: "",
+    quantity_available: "",
+    quantity_checked_out: ""
+  })
+
+  const setupUpdateForm = async () => {
+    // get the dropdown data
+    let booksData = await sendGet({
+      "url": apiUri.booksUri
+    });
+    let librariesData = await sendGet({
+      "url": apiUri.librariesUri
+    });
+
+    setBooksDD(booksData);
+    setLibrariesDD(librariesData);
+
+    // get the default value as the 
+    // first element found
+    // no error handling present
+    const isbn_default = booksData[0]["isbn"];
+    const library_ID_default = librariesData[0]["library_ID"];
+
+    setUpdateDefaults({
+      resource_ID: "",
+      isbn: isbn_default,
+      library_ID: library_ID_default,
+      quantity_available: "",
+      quantity_checked_out: ""
+    })
+  }
+
+  useEffect( () => {
+    setupUpdateForm()
+  }, [] )
+
   return (
     <div className={styles.container}>
       <Head>
@@ -149,6 +189,9 @@ const Resources: NextPage = () => {
             stateStuff={[update_form, setUpdateForm]}
             apiUri={apiUri.updateUri}
             affect={setResources}
+            librariesDD={librariesDD}
+            booksDD={booksDD}
+            default_state={updateDefaults}
         />
         <br/>
         <Table2 
