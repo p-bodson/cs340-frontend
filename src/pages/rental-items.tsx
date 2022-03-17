@@ -110,6 +110,41 @@ const RentalItems: NextPage = () => {
     return_date: ""
   })
 
+  // UPDATE form defaults
+  const [updateDefaults, setUpdateDefaults] = useState({
+    rental_ID: "",
+    resource_ID: "",
+    queue_numb: "",
+    rental_item_status: "",
+    return_date: ""
+  })
+
+  const setupUpdateForm = async () => {
+    // get the dropdown data
+    let resourcesData = await sendGet({
+      "url": apiUri.resourcesUri
+    });
+
+    setResourcesDD(resourcesData);
+
+    // get the default value as the 
+    // first element found
+    // no error handling present
+    const resource_ID_default = resourcesData[0]["resource_ID"];
+
+    setUpdateDefaults({
+      rental_ID: "",
+      resource_ID: resource_ID_default,
+      queue_numb: "",
+      rental_item_status: "",
+      return_date: ""
+    })
+  }
+
+  useEffect( () => {
+    setupUpdateForm()
+  }, [] )
+
   return (
       <div className={styles.container}>
         <Head>
@@ -140,6 +175,8 @@ const RentalItems: NextPage = () => {
             stateStuff={[update_form, setUpdateForm]}
             apiUri={apiUri.updateUri}
             affect={setRentalItems}
+            resourcesDD={resourcesDD}
+            default_state={createDefaults}
         />
         <br/>
           <Table2 
