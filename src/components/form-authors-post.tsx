@@ -13,7 +13,7 @@ export default function FormAuthors ( props: any ) {
     const {affect} = props
 
     const default_state = {
-        author_name: "",
+        author_name: ""
     }
 
     // handle changes to input from user 
