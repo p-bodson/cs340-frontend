@@ -1,10 +1,8 @@
 import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react'; 
-import Dropdown from "@/components/dropdown";
+import { useEffect } from 'react'; 
 import usePost from '@/hooks/usePost'
 import useGet from '@/hooks/useGet'
-
 
 export default function FormBooks ( props: any ) {
 
@@ -44,7 +42,7 @@ export default function FormBooks ( props: any ) {
         <form onSubmit={handleBookAdd}>
             <fieldset>
                 <legend> Add a New Book </legend>
-                <p>Fill out the form below with the information of the new Book</p>
+                <p>Fill out the form below with the information of the new book</p>
                 <label>
                     ISBN: <input
                         type="text" 
@@ -64,7 +62,8 @@ export default function FormBooks ( props: any ) {
                         required
                     />
                 </label>
-                <br />
+                <br/>
+                <br/>
                 <input type="submit" value="Add Book" required/>
             </fieldset>
           </form>

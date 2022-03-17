@@ -16,7 +16,7 @@ export default function UpdateFormMembers ( props: any ) {
         member_ID: "",
         member_first_name: "",
         member_last_name: "",
-        member_phone: "",
+        member_phone: ""
     }
 
     // handle changes to input from user 
@@ -53,10 +53,10 @@ export default function UpdateFormMembers ( props: any ) {
         <form onSubmit={handleUpdate}>
         <fieldset>
             <legend> Edit a Member </legend>
-            <p>Fill out the form below with the information of the member to update one </p>
-            <p>If you click on the UPDATE button of a row, the form will be prefilled with data</p>
+            <p>Fill out the form below with the information of the member you want to update</p>
+            <p>If you click on the UPDATE button of a row, the form will be prefilled with that row{"'"}s data</p>
             <label>
-                ID: <input 
+                Member ID: <input 
                     type="number" 
                     name="member_ID"
                     onChange={onChangeHandleUpdate}
@@ -66,7 +66,7 @@ export default function UpdateFormMembers ( props: any ) {
             </label>
             <br/>
             <label>
-                First Name: <input 
+                Member First Name: <input 
                     type="text" 
                     name="member_first_name"
                     onChange={onChangeHandleUpdate}
@@ -76,7 +76,7 @@ export default function UpdateFormMembers ( props: any ) {
             </label>
             <br/>
             <label>
-                Last Name: <input 
+                Member Last Name: <input 
                     type="text" 
                     name="member_last_name"
                     onChange={onChangeHandleUpdate}
@@ -86,8 +86,8 @@ export default function UpdateFormMembers ( props: any ) {
             </label>
             <br/>
             <label>
-                Phone Number: <input 
-                    type="text" 
+                Member Phone Number: <input 
+                    type="number" 
                     name="member_phone"
                     onChange={onChangeHandleUpdate}
                     value={form_data.member_phone}

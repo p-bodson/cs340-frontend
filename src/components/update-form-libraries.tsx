@@ -52,10 +52,10 @@ export default function UpdateFormLibraries ( props: any ) {
         <form onSubmit={handleUpdate}>
         <fieldset>
             <legend> Edit a Library </legend>
-            <p>Fill out the form below with the information of the library to update one </p>
-            <p>If you click on the UPDATE button of a row, the form will be prefilled with data</p>
+            <p>Fill out the form below with the information of the library you want to update</p>
+            <p>If you click on the UPDATE button of a row, the form will be prefilled with that row{"'"}s data</p>
             <label>
-                ID: <input 
+                Library ID: <input 
                     type="number" 
                     name="library_ID"
                     onChange={onChangeHandleUpdate}
@@ -65,7 +65,7 @@ export default function UpdateFormLibraries ( props: any ) {
             </label>
             <br/>
             <label>
-                Name: <input 
+                Library Name: <input 
                     type="text" 
                     name="library_name"
                     onChange={onChangeHandleUpdate}
@@ -75,7 +75,7 @@ export default function UpdateFormLibraries ( props: any ) {
             </label>
             <br/>
             <label>
-                Address: <input 
+                Library Address: <input 
                     type="text" 
                     name="library_address"
                     onChange={onChangeHandleUpdate}
@@ -83,6 +83,7 @@ export default function UpdateFormLibraries ( props: any ) {
                     required
                 />
             </label>
+            <br />
             <br />
             <input type="submit" value="Update Library"/>
         </fieldset>

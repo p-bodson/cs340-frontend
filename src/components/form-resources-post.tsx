@@ -4,16 +4,17 @@ import { useEffect } from 'react'
 import usePost from '@/hooks/usePost'
 import useGet from '@/hooks/useGet'
 
-export default function FormMembersPost ( props: any ) {
+export default function FormResourcesPost ( props: any ) {
 
     const [create_form, setCreateForm] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
 
     const default_state = {
-        member_first_name: "",
-        member_last_name: "",
-        member_phone: ""
+        isbn: '', 
+        library_ID: '', 
+        quantity_available: '',
+        quantity_checked_out: ''
     }
 
     // handle changes to input from user 
@@ -41,39 +42,48 @@ export default function FormMembersPost ( props: any ) {
 
         <form onSubmit={handleCreate}>
             <fieldset>
-                <legend> Add a New Member </legend>
+                <legend> Add a New Resource </legend>
                 <p>
-                    Fill out the form below with the information of the new member
+                    Fill out the form below with the information of the new resource
                 </p>
                 <label>
-                    Member First Name: <input 
+                    ISBN: <input 
                     type="text" 
-                    name="member_first_name" 
+                    name="isbn" 
                     onChange={onChangeCreate}
-                    value={create_form.member_first_name}
+                    value={create_form.isbn}
                     required/>
                 </label>
                 <br/>
                 <label>
-                    Member Last Name: <input 
-                    type="text" 
-                    name="member_last_name" 
-                    onChange={onChangeCreate}
-                    value={create_form.member_last_name}
-                    required/>
-                </label>
-                <br/>
-                <label>
-                    Member Phone Number: <input 
+                    Library ID: <input 
                     type="number" 
-                    name="member_phone" 
+                    name="library_ID" 
                     onChange={onChangeCreate}
-                    value={create_form.member_phone}
+                    value={create_form.library_ID}
+                    required/>
+                </label>
+                <br/>
+                <label>
+                    Quantity Available: <input 
+                    type="number" 
+                    name="quantity_available" 
+                    onChange={onChangeCreate}
+                    value={create_form.quantity_available}
+                    required/>
+                </label>
+                <br />
+                <label>
+                    Quantity Checked Out: <input 
+                    type="number" 
+                    name="quantity_checked_out" 
+                    onChange={onChangeCreate}
+                    value={create_form.quantity_checked_out}
                     required/>
                 </label>
                 <br />
                 <br />
-                <input type="submit" value="Add Member" required/>
+                <input type="submit" value="Add Resource" required/>
             </fieldset>
           </form>
     )

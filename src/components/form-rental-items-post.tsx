@@ -1,79 +1,85 @@
-import useSubmit from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'
+import { useEffect } from 'react'; 
 import usePost from '@/hooks/usePost'
+import useGet from '@/hooks/useGet'
 
 export default function FormRentalItemsPost ( props: any ) {
 
-    const {locator} = props;
-    const router = useRouter();
-    const rentalID = router.query.rental_ID;
+    const [create_form, setCreateForm] = props.stateStuff;
+    const {apiUri} = props
+    const {affect} = props
 
-    const apiTld = process.env.NEXT_PUBLIC_API_TLD;
-    const apiUrl: string = `${apiTld}/${locator}`
-
-    // make some controlled state for the form
-    const [rentalItemsFormPost, setRentalItemsForm] = useState({
-        rental_ID: rentalID,
+    const default_state = {
         resource_ID: "",
         queue_numb: "",
         rental_item_status: "",
         return_date: ""
-    })
+    }
 
-    const onChangeRentalItemAdd = useChange(rentalItemsFormPost, setRentalItemsForm);
+    // handle changes to input from user 
+    const onChangeCreate = useChange(create_form, setCreateForm);
+    const handleSubmit = async (params: any) => {  
+        await sendPost(params);
+        setCreateForm(default_state)
+        const data = await sendGet(params);
+        affect(data)
+    }
+    
     const sendPost = usePost();
-    const handleRentalItemAdd = useSubmit(router.asPath, sendPost, {
-        "url": apiUrl,
-        "data": rentalItemsFormPost
-    });
+    const sendGet = useGet();
+    const handleCreate = useSubmit2( handleSubmit,
+        {        
+            "url": apiUri,
+            "data": create_form
+        }
+    );
+    useEffect( () => {
+        setCreateForm(default_state)
+    }, [])
 
     return (
 
-        <form onSubmit={handleRentalItemAdd}>
+        <form onSubmit={handleCreate}>
             <fieldset>
-                <legend> Add a New Rental Item </legend>
+                <legend> Add a Rental Item </legend>
                 <p>
-                    Fill out the form below with the information of the new rental item to add to this rental
+                    Fill out the form below with the information of the new rental item for this rental
                 </p>
-                {/* <label>
-                    Rental ID: <input 
-                    type="number" 
-                    name="rental_ID"
-                    onChange={onChangeRentalItemAdd}
-                    required/>
-                </label>
-                <br/> */}
                 <label>
                     Resource ID: <input 
                     type="number" 
-                    name="resource_ID" 
-                    onChange={onChangeRentalItemAdd}
+                    name="resource_ID"
+                    onChange={onChangeCreate}
+                    value={create_form.resource_ID}
                     required/>
                 </label>
                 <br/>
                 <label>
                     Queue Number: <input 
                     type="number" 
-                    name="queue_numb" 
-                    onChange={onChangeRentalItemAdd}
+                    name="queue_numb"
+                    onChange={onChangeCreate}
+                    value={create_form.queue_numb}
                     required/>
                 </label>
                 <br/>
                 <label>
                     Rental Item Status: <input 
                     type="text" 
-                    name="rental_item_status" 
-                    onChange={onChangeRentalItemAdd}
+                    name="rental_item_status"
+                    onChange={onChangeCreate} 
+                    value={create_form.rental_item_status}
                     required/>
                 </label>
-                <br/>
+                <br />
                 <label>
                     Return Date: <input 
                     type="date" 
-                    name="return_date" 
-                    onChange={onChangeRentalItemAdd}/>
+                    name="return_date"
+                    onChange={onChangeCreate} 
+                    value={create_form.return_date}
+                    required/>
                 </label>
                 <br />
                 <br />

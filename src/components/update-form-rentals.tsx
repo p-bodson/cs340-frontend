@@ -6,15 +6,17 @@ import useGet from '@/hooks/useGet'
 
 
 
-export default function UpdateFormAuthors ( props: any ) {
+export default function UpdateFormRentals ( props: any ) {
 
     const [form_data, setFormData] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
     // make some controlled state for the form
     const default_state = {
-        author_ID: "",
-        author_name: ""
+        rental_ID: "",
+        member_ID: "",
+        library_ID: "",
+        rental_date: ""
     }
 
     // handle changes to input from user 
@@ -50,31 +52,51 @@ export default function UpdateFormAuthors ( props: any ) {
     return (
         <form onSubmit={handleUpdate}>
         <fieldset>
-            <legend> Edit a Author </legend>
-            <p>Fill out the form below with the information of the author you want to update</p>
+            <legend> Edit a Rental </legend>
+            <p>Fill out the form below with the information of the rental you want to update</p>
             <p>If you click on the UPDATE button of a row, the form will be prefilled with that row{"'"}s data</p>
             <label>
-                Author ID: <input 
+                Rental ID: <input 
                     type="number" 
-                    name="author_ID"
+                    name="rental_ID"
                     onChange={onChangeHandleUpdate}
-                    value={form_data.author_ID}
+                    value={form_data.rental_ID}
                     required
                 />
             </label>
             <br/>
             <label>
-                Author Name: <input 
-                    type="text" 
-                    name="author_name"
+                Member ID: <input 
+                    type="number" 
+                    name="member_ID"
                     onChange={onChangeHandleUpdate}
-                    value={form_data.author_name}
+                    value={form_data.member_ID}
                     required
                 />
             </label>
             <br/>
-            <br />
-            <input type="submit" value="Update Author"/>
+            <label>
+                Library ID: <input 
+                    type="number" 
+                    name="library_ID"
+                    onChange={onChangeHandleUpdate}
+                    value={form_data.library_ID}
+                    required
+                />
+            </label>
+            <br/>
+            <label>
+                Rental Date: <input 
+                    type="text" 
+                    name="rental_date"
+                    onChange={onChangeHandleUpdate}
+                    value={form_data.rental_date}
+                    required
+                />
+            </label>
+            <br/>
+            <br/>
+            <input type="submit" value="Update Rental"/>
         </fieldset>
         </form>
     )

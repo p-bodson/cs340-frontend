@@ -47,7 +47,7 @@ export default function FormLibrariesPost ( props: any ) {
                     Fill out the form below with the information of the new library
                 </p>
                 <label>
-                    Name: <input 
+                    Library Name: <input 
                     type="text" 
                     name="library_name" 
                     onChange={onChangeCreate}
@@ -57,7 +57,7 @@ export default function FormLibrariesPost ( props: any ) {
                 </label>
                 <br/>
                 <label>
-                    Address: <input 
+                    Library Address: <input 
                     type="text" 
                     name="library_address"
                     onChange={onChangeCreate}

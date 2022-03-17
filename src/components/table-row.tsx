@@ -20,7 +20,7 @@ export default function TableRow(props: any) {
         }
         
         const pathName = location.pathname;
-        // for rentals and transfer pages
+        // for rentals pages
         if (pathName == "/rentals"){
             const rows: any = [];
             for (let i in attributeArray){

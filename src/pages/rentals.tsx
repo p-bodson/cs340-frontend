@@ -5,7 +5,9 @@ import FormRentals from '@/components/form-rentals'
 import FormRentalsPost from '@/components/form-rentals-post'
 import { useState, useEffect } from 'react'
 import Table2 from '@/components/table-2'
-import useData from '@/hooks/useData';
+import useData from '@/hooks/useData'
+import UpdateFormRentals from '@/components/update-form-rentals'
+
 
 
 const Rentals: NextPage = () => {
@@ -14,30 +16,48 @@ const Rentals: NextPage = () => {
   const rentals_path_root = `${apiTld}/rentals`
   const [rentals_path, setRentalsPath] = useState(rentals_path_root)
   const createUri: string = `${apiTld}/rentals`
+  const updateUri: string = `${apiTld}/rentals`
+  const deleteUri: string = `${apiTld}/rentals`
 
   //---------------
   // SEARCHING
   //----------------
   // make some controlled state for the search form
-  const [search_form, setSearchForm] = useState({})
+  const [search_form, setSearchForm] = useState({
+    rental_ID: "",
+    member_ID: "",
+    library_ID: "",
+    rental_date: ""
+  })
 
   // the Rentals table data
   const [rentals, setRentals] = useState([])
   
-  const { data: rentalsData, 
+  const { data: rentalData, 
     isLoading: rentalsIsLoading, 
     isError: rentalsIsError } = useData(rentals_path);
 
   // effect for filling in Libraries table
   useEffect( () => {
-    setRentals(rentalsData);
-  }, [rentalsData, rentalsIsLoading, rentalsIsError])
+    setRentals(rentalData);
+  }, [rentalData, rentalsIsLoading, rentalsIsError])
+
 
   //--------------
   // CREATE / POST
   //---------------
   // make some controlled state for the CREATE form
   const [create_form, setCreateForm] = useState({
+    member_ID: "",
+    library_ID: "",
+    rental_date: ""
+  })
+
+  //--------------
+  // UPDATE / PUT
+  //---------------
+  // controlled state for the UPDATE form
+  const [update_form, setUpdateForm] = useState({
     rental_ID: "",
     member_ID: "",
     library_ID: "",
@@ -68,11 +88,19 @@ const Rentals: NextPage = () => {
             affect={setRentals}
           />
           <br />
+          <UpdateFormRentals 
+            stateStuff={[update_form, setUpdateForm]}
+            apiUri={updateUri}
+            affect={setRentals}
+        />
           <Table2 
             data={rentals}
+            update_form={setUpdateForm}
             isLoading={rentalsIsLoading}
             isError={rentalsIsError}
             caption={<b>Rentals</b>}
+            affect={setRentals}
+            deleteUri={deleteUri}
           />
           <ul>
             <li>Clicking on a rental_ID above redirects to that rental{"'"}s rental_items page</li>

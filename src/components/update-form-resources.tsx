@@ -6,15 +6,18 @@ import useGet from '@/hooks/useGet'
 
 
 
-export default function UpdateFormAuthors ( props: any ) {
+export default function UpdateFormResources ( props: any ) {
 
     const [form_data, setFormData] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
     // make some controlled state for the form
     const default_state = {
-        author_ID: "",
-        author_name: ""
+        resource_ID: '',
+        isbn: '', 
+        library_ID: '', 
+        quantity_available: '',
+        quantity_checked_out: ''
     }
 
     // handle changes to input from user 
@@ -50,31 +53,61 @@ export default function UpdateFormAuthors ( props: any ) {
     return (
         <form onSubmit={handleUpdate}>
         <fieldset>
-            <legend> Edit a Author </legend>
-            <p>Fill out the form below with the information of the author you want to update</p>
+            <legend> Edit a Resource </legend>
+            <p>Fill out the form below with the information of the resource you want to update</p>
             <p>If you click on the UPDATE button of a row, the form will be prefilled with that row{"'"}s data</p>
             <label>
-                Author ID: <input 
+                Resource ID: <input 
                     type="number" 
-                    name="author_ID"
+                    name="resource_ID"
                     onChange={onChangeHandleUpdate}
-                    value={form_data.author_ID}
+                    value={form_data.resource_ID}
                     required
                 />
             </label>
             <br/>
             <label>
-                Author Name: <input 
+                ISBN: <input 
                     type="text" 
-                    name="author_name"
+                    name="isbn"
                     onChange={onChangeHandleUpdate}
-                    value={form_data.author_name}
+                    value={form_data.isbn}
+                    required
+                />
+            </label>
+            <br/>
+            <label>
+                Library ID: <input 
+                    type="number" 
+                    name="library_ID"
+                    onChange={onChangeHandleUpdate}
+                    value={form_data.library_ID}
+                    required
+                />
+            </label>
+            <br/>
+            <label>
+                Quantity Available: <input 
+                    type="number" 
+                    name="quantity_available"
+                    onChange={onChangeHandleUpdate}
+                    value={form_data.quantity_available}
+                    required
+                />
+            </label>
+            <br/>
+            <label>
+                Quantity Checked Out: <input 
+                    type="number" 
+                    name="quantity_checked_out"
+                    onChange={onChangeHandleUpdate}
+                    value={form_data.quantity_checked_out}
                     required
                 />
             </label>
             <br/>
             <br />
-            <input type="submit" value="Update Author"/>
+            <input type="submit" value="Update Resource"/>
         </fieldset>
         </form>
     )

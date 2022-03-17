@@ -16,6 +16,7 @@ const Libraries: NextPage = () => {
   const [libraries_path, setLibrariesPath] = useState(libraries_path_root)
   const createUri: string = `${apiTld}/libraries`
   const updateUri: string = `${apiTld}/libraries`
+  const deleteUri: string = `${apiTld}/libraries`
 
   //---------------
   // SEARCHING
@@ -44,7 +45,6 @@ const Libraries: NextPage = () => {
   //---------------
   // make some controlled state for the CREATE form
   const [create_form, setCreateForm] = useState({
-    library_ID: "",
     library_name: "",
     library_address: ""
   })
@@ -95,6 +95,8 @@ const Libraries: NextPage = () => {
           isLoading={librariesIsLoading}
           isError={librariesIsError}
           caption={<b>Libraries</b>}
+          affect={setLibraries}
+          deleteUri={deleteUri}
         />
       </main>
     </div>

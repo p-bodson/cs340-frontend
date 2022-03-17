@@ -9,7 +9,6 @@ import useData from '@/hooks/useData';
 import UpdateFormMembers from '@/components/update-form-members'
 
 
-
 const Members: NextPage = () => {
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
 
