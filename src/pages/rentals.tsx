@@ -114,6 +114,44 @@ const Rentals: NextPage = () => {
     rental_date: ""
   })
 
+  // UPDATE form defaults
+  const [updateDefaults, setUpdateDefaults] = useState({
+    rental_ID: "",
+    member_ID: "",
+    library_ID: "",
+    rental_date: ""
+  })
+
+  const setupUpdateForm = async () => {
+    // get the dropdown data
+    let membersData = await sendGet({
+      "url": apiUri.membersUri
+    });
+    let librariesData = await sendGet({
+      "url": apiUri.librariesUri
+    });
+
+    setMembersDD(membersData);
+    setLibrariesDD(librariesData);
+
+    // get the default value as the 
+    // first element found
+    // no error handling present
+    const member_ID_default = membersData[0]["member_ID"];
+    const library_ID_default = librariesData[0]["library_ID"];
+
+    setUpdateDefaults({
+      rental_ID: "",
+      member_ID: member_ID_default,
+      library_ID: library_ID_default,
+      rental_date: ""
+    })
+  }
+
+  useEffect( () => {
+    setupUpdateForm()
+  }, [] )
+
   return (
       <div className={styles.container}>
         <Head>
@@ -145,6 +183,9 @@ const Rentals: NextPage = () => {
             stateStuff={[update_form, setUpdateForm]}
             apiUri={apiUri.updateUri}
             affect={setRentals}
+            librariesDD={librariesDD}
+            membersDD={membersDD}
+            default_state={updateDefaults}
         />
           <Table2 
             data={rentals}

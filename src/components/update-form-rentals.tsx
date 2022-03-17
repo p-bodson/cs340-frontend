@@ -3,6 +3,7 @@ import useChange from '@/hooks/useChange'
 import { useEffect } from 'react';
 import usePut from '@/hooks/usePut'
 import useGet from '@/hooks/useGet'
+import Dropdown from "@/components/dropdown"
 
 
 
@@ -11,13 +12,9 @@ export default function UpdateFormRentals ( props: any ) {
     const [form_data, setFormData] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
-    // make some controlled state for the form
-    const default_state = {
-        rental_ID: "",
-        member_ID: "",
-        library_ID: "",
-        rental_date: ""
-    }
+    const {membersDD,
+        librariesDD,
+        default_state} = props;
 
     // handle changes to input from user 
     const onChangeHandleUpdate = useChange(form_data, setFormData);
@@ -47,7 +44,7 @@ export default function UpdateFormRentals ( props: any ) {
     // make sure the page loads with nothing already in the forms
     useEffect( () => {
         setFormData(default_state)
-    }, [])
+    }, [default_state])
 
     return (
         <form onSubmit={handleUpdate}>
@@ -66,22 +63,22 @@ export default function UpdateFormRentals ( props: any ) {
             </label>
             <br/>
             <label>
-                Member ID: <input 
-                    type="number" 
-                    name="member_ID"
+                Member ID: <Dropdown
+                    name={"member_ID"}
                     onChange={onChangeHandleUpdate}
                     value={form_data.member_ID}
-                    required
+                    descriptor={"member_first_name"}
+                    options={membersDD}
                 />
             </label>
             <br/>
             <label>
-                Library ID: <input 
-                    type="number" 
-                    name="library_ID"
+                Library ID: <Dropdown
+                    name={"library_ID"}
                     onChange={onChangeHandleUpdate}
                     value={form_data.library_ID}
-                    required
+                    descriptor={"library_name"}
+                    options={librariesDD}
                 />
             </label>
             <br/>
