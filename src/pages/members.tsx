@@ -92,8 +92,8 @@ const Members: NextPage = () => {
             stateStuff={[update_form, setUpdateForm]}
             apiUri={updateUri}
             affect={setMembers}
-          />
-          <br />
+        />
+        <br />
         <Table2 
           data={members}
           update_form={setUpdateForm}
