@@ -87,7 +87,7 @@ export default function UpdateFormRentals ( props: any ) {
             <br/>
             <label>
                 Rental Date: <input 
-                    type="date" 
+                    type="text" 
                     name="rental_date"
                     onChange={onChangeHandleUpdate}
                     value={form_data.rental_date}
