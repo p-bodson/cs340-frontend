@@ -5,23 +5,20 @@ import useSubmit2 from '@/hooks/useSubmit-2'
 export default function DeleteButton (props: any) {
 
     // get the object containg the row data
-    // and the form updater
+    // and the state changer and 
     const { data, affecter, apiUri } = props
     const sendDelete = useDelete();
     const sendGet = useGet();
 
     // and handle the button submission
-    const handleSubmit = (params: any) => {  
+    const handleSubmit = async (params: any) => {  
         // send the request
-        sendDelete(params);
+        await sendDelete(params);
         // update the date displayed on the table
-        sendGet(params).then(
-            (e) => {affecter(e)}
-        );
-        
+        const data = await sendGet(params);
+        affecter(data);
     }
 
-    // this is the actually function for form submission to run
     const handleDelete = useSubmit2( handleSubmit,
         {        
             "url": apiUri,

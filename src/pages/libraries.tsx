@@ -93,7 +93,7 @@ const Libraries: NextPage = () => {
           data={libraries}
           update_form={setUpdateForm}
           isLoading={librariesIsLoading}
-          isErro={librariesIsError}
+          isError={librariesIsError}
           caption={<b>Libraries</b>}
         />
       </main>
