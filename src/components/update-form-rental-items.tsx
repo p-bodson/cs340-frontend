@@ -3,6 +3,8 @@ import useChange from '@/hooks/useChange'
 import { useEffect } from 'react';
 import usePut from '@/hooks/usePut'
 import useGet from '@/hooks/useGet'
+import Dropdown from "@/components/dropdown"
+
 
 
 
@@ -11,14 +13,8 @@ export default function UpdateFormRentalItems ( props: any ) {
     const [form_data, setFormData] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
-    // make some controlled state for the form
-    const default_state = {
-        rental_ID: "",
-        resource_ID: "",
-        queue_numb: "",
-        rental_item_status: "",
-        return_date: ""
-    }
+    const {resourcesDD,
+        default_state} = props;
 
     // handle changes to input from user 
     const onChangeHandleUpdate = useChange(form_data, setFormData);
@@ -48,7 +44,7 @@ export default function UpdateFormRentalItems ( props: any ) {
     // make sure the page loads with nothing already in the forms
     useEffect( () => {
         setFormData(default_state)
-    }, [])
+    }, [default_state])
 
     return (
         <form onSubmit={handleUpdate}>
@@ -67,12 +63,12 @@ export default function UpdateFormRentalItems ( props: any ) {
             </label>
             <br/>
             <label>
-                Resource ID: <input 
-                    type="number" 
-                    name="resource_ID"
+                Resource ID: <Dropdown
+                    name={"resource_ID"}
                     onChange={onChangeHandleUpdate}
-                    value={form_data.resource_ID}
-                    required
+                    value={form_data.library_ID}
+                    descriptor={""}
+                    options={resourcesDD}
                 />
             </label>
             <br/>
@@ -98,7 +94,7 @@ export default function UpdateFormRentalItems ( props: any ) {
             <br/>
             <label>
                 Return Date: <input 
-                    type="text" 
+                    type="date" 
                     name="return_date"
                     onChange={onChangeHandleUpdate}
                     value={form_data.return_date}

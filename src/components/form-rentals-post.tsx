@@ -3,18 +3,17 @@ import useChange from '@/hooks/useChange'
 import { useEffect } from 'react'; 
 import usePost from '@/hooks/usePost'
 import useGet from '@/hooks/useGet'
+import Dropdown from "@/components/dropdown"
+
 
 export default function FormRentalsPost ( props: any ) {
 
     const [create_form, setCreateForm] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
-
-    const default_state = {
-        member_ID: "",
-        library_ID: "",
-        rental_date: ""
-    }
+    const {membersDD} = props
+    const {librariesDD} = props
+    const {default_state} = props
 
     // handle changes to input from user 
     const onChangeCreate = useChange(create_form, setCreateForm);
@@ -35,7 +34,7 @@ export default function FormRentalsPost ( props: any ) {
     );
     useEffect( () => {
         setCreateForm(default_state)
-    }, [])
+    }, [default_state])
 
     return (
 
@@ -46,21 +45,23 @@ export default function FormRentalsPost ( props: any ) {
                     Fill out the form below with the information of the new rental
                 </p>
                 <label>
-                    Member ID: <input 
-                    type="number" 
-                    name="member_ID"
-                    onChange={onChangeCreate}
-                    value={create_form.member_ID}
-                    required/>
+                    Member ID: <Dropdown
+                        name={"member_ID"}
+                        onChange={onChangeCreate}
+                        value={create_form.member_ID}
+                        descriptor={"member_first_name"}
+                        options={membersDD}
+                    />
                 </label>
                 <br/>
                 <label>
-                    Library ID: <input 
-                    type="number" 
-                    name="library_ID"
-                    onChange={onChangeCreate} 
-                    value={create_form.library_ID}
-                    required/>
+                    Library ID: <Dropdown
+                        name={"library_ID"}
+                        onChange={onChangeCreate}
+                        value={create_form.library_ID}
+                        descriptor={"library_name"}
+                        options={librariesDD}
+                    />
                 </label>
                 <br/>
                 <label>

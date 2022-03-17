@@ -28,7 +28,7 @@ export default function FormBooksAndAuthorsPost ( props: any ) {
     const sendGet = useGet();
     const handleCreate = useSubmit2(handleSubmit,
         {        
-            "url": apiUri.createUri,
+            "url": apiUri,
             "data": create_form
         }
     );

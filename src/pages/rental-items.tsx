@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import Table2 from '@/components/table-2'
 import useData from '@/hooks/useData'
 import UpdateFormRentalItems from '@/components/update-form-rental-items'
+import useGet from "@/hooks/useGet"
 
 
 
@@ -15,9 +16,12 @@ const RentalItems: NextPage = () => {
 
   const rental_items_path_root = `${apiTld}/rental-items`
   const [rental_items_path, setRentalItemsPath] = useState(rental_items_path_root)
-  const createUri: string = `${apiTld}/rental-items`
-  const updateUri: string = `${apiTld}/rental-items`
-  const deleteUri: string = `${apiTld}/rental-items`
+  const apiUri = {
+    createUri: `${apiTld}/rental-items`,
+    updateUri: `${apiTld}/rental-items`,
+    deleteUri: `${apiTld}/rental-items`,
+    resourcesUri: `${apiTld}/resources`,
+  }
 
   //---------------
   // SEARCHING
@@ -55,6 +59,45 @@ const RentalItems: NextPage = () => {
     return_date: ""
   })
 
+  // create state for any FK dropdowns
+  // Resources
+  const [resourcesDD, setResourcesDD] = useState([])
+
+  // CREATE form defaults
+  const [createDefaults, setCreateDefaults] = useState({
+      resource_ID: "",
+      queue_numb: "",
+      rental_item_status: "",
+      return_date: ""
+  })
+
+  const sendGet = useGet()
+
+  const setupCreateForm = async () => {
+    // get the dropdown data
+    let resourcesData = await sendGet({
+      "url": apiUri.resourcesUri
+    });
+
+    setResourcesDD(resourcesData);
+
+    // get the default value as the 
+    // first element found
+    // no error handling present
+    const resource_ID_default = resourcesData[0]["resource_ID"];
+
+    setCreateDefaults({
+      resource_ID: resource_ID_default,
+      queue_numb: "",
+      rental_item_status: "",
+      return_date: ""
+    })
+  }
+
+  useEffect( () => {
+    setupCreateForm()
+  }, [] )
+
   //--------------
   // UPDATE / PUT
   //---------------
@@ -66,6 +109,41 @@ const RentalItems: NextPage = () => {
     rental_item_status: "",
     return_date: ""
   })
+
+  // UPDATE form defaults
+  const [updateDefaults, setUpdateDefaults] = useState({
+    rental_ID: "",
+    resource_ID: "",
+    queue_numb: "",
+    rental_item_status: "",
+    return_date: ""
+  })
+
+  const setupUpdateForm = async () => {
+    // get the dropdown data
+    let resourcesData = await sendGet({
+      "url": apiUri.resourcesUri
+    });
+
+    setResourcesDD(resourcesData);
+
+    // get the default value as the 
+    // first element found
+    // no error handling present
+    const resource_ID_default = resourcesData[0]["resource_ID"];
+
+    setUpdateDefaults({
+      rental_ID: "",
+      resource_ID: resource_ID_default,
+      queue_numb: "",
+      rental_item_status: "",
+      return_date: ""
+    })
+  }
+
+  useEffect( () => {
+    setupUpdateForm()
+  }, [] )
 
   return (
       <div className={styles.container}>
@@ -87,14 +165,18 @@ const RentalItems: NextPage = () => {
           />
           <FormRentalItemsPost 
             stateStuff={[create_form, setCreateForm]}
-            apiUri={createUri}
+            apiUri={apiUri.createUri}
             affect={setRentalItems}
+            resourcesDD={resourcesDD}
+            default_state={createDefaults}
           />
           <br />
           <UpdateFormRentalItems 
             stateStuff={[update_form, setUpdateForm]}
-            apiUri={updateUri}
+            apiUri={apiUri.updateUri}
             affect={setRentalItems}
+            resourcesDD={resourcesDD}
+            default_state={createDefaults}
         />
         <br/>
           <Table2 
@@ -104,7 +186,7 @@ const RentalItems: NextPage = () => {
             isError={rentalItemsIsError}
             caption={<b>Rentals</b>}
             affect={setRentalItems}
-            deleteUri={deleteUri}
+            deleteUri={apiUri.deleteUri}
           />
         </main>
       </div>

@@ -7,15 +7,20 @@ import Table2 from '@/components/table-2'
 import useData from '@/hooks/useData';
 import FormResourcesPost from '@/components/form-resources-post'
 import UpdateFormResources from '@/components/update-form-resources'
+import useGet from "@/hooks/useGet"
 
 const Resources: NextPage = () => {
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
 
   const resources_path_root = `${apiTld}/resources`  
   const [resources_path, setResourcePath] = useState(resources_path_root)
-  const createUri: string = `${apiTld}/resources`
-  const updateUri: string = `${apiTld}/resources`
-  const deleteUri: string = `${apiTld}/resources`
+  const apiUri = {
+    createUri: `${apiTld}/resources`,
+    updateUri: `${apiTld}/resources`,
+    deleteUri: `${apiTld}/resources`,
+    librariesUri: `${apiTld}/libraries`,
+    booksUri: `${apiTld}/books`
+  }
 
   //---------------
   // SEARCHING
@@ -54,6 +59,52 @@ const Resources: NextPage = () => {
     quantity_available: ''
   })
 
+  // create state for any FK dropdowns
+  // Libraries
+  const [librariesDD, setLibrariesDD] = useState([])
+  // Books
+  const [booksDD, setBooksDD] = useState([])
+
+  // CREATE form defaults
+  const [createDefaults, setCreateDefaults] = useState({
+      isbn: "",
+      library_ID: "",
+      quantity_available: "",
+      quantity_checked_out: ""
+  })
+
+  const sendGet = useGet()
+
+  const setupCreateForm = async () => {
+    // get the dropdown data
+    let booksData = await sendGet({
+      "url": apiUri.booksUri
+    });
+    let librariesData = await sendGet({
+      "url": apiUri.librariesUri
+    });
+
+    setBooksDD(booksData);
+    setLibrariesDD(librariesData);
+
+    // get the default value as the 
+    // first element found
+    // no error handling present
+    const isbn_default = booksData[0]["isbn"];
+    const library_ID_default = librariesData[0]["library_ID"];
+
+    setCreateDefaults({
+      isbn: isbn_default,
+      library_ID: library_ID_default,
+      quantity_available: "",
+      quantity_checked_out: ""
+    })
+  }
+
+  useEffect( () => {
+    setupCreateForm()
+  }, [] )
+
   //--------------
   // UPDATE / PUT
   //---------------
@@ -65,6 +116,46 @@ const Resources: NextPage = () => {
     quantity_checked_out: '',
     quantity_available: ''
   })
+
+  // UPDATE form defaults
+  const [updateDefaults, setUpdateDefaults] = useState({
+    resource_ID: "",
+    isbn: "",
+    library_ID: "",
+    quantity_available: "",
+    quantity_checked_out: ""
+  })
+
+  const setupUpdateForm = async () => {
+    // get the dropdown data
+    let booksData = await sendGet({
+      "url": apiUri.booksUri
+    });
+    let librariesData = await sendGet({
+      "url": apiUri.librariesUri
+    });
+
+    setBooksDD(booksData);
+    setLibrariesDD(librariesData);
+
+    // get the default value as the 
+    // first element found
+    // no error handling present
+    const isbn_default = booksData[0]["isbn"];
+    const library_ID_default = librariesData[0]["library_ID"];
+
+    setUpdateDefaults({
+      resource_ID: "",
+      isbn: isbn_default,
+      library_ID: library_ID_default,
+      quantity_available: "",
+      quantity_checked_out: ""
+    })
+  }
+
+  useEffect( () => {
+    setupUpdateForm()
+  }, [] )
 
   return (
     <div className={styles.container}>
@@ -87,14 +178,20 @@ const Resources: NextPage = () => {
         <br/>
         <FormResourcesPost 
           stateStuff={[create_form, setCreateForm]}
-          apiUri={createUri}
+          apiUri={apiUri.createUri}
           affect={setResources}
+          librariesDD={librariesDD}
+          booksDD={booksDD}
+          default_state={createDefaults}
         />
         <br />
         <UpdateFormResources
             stateStuff={[update_form, setUpdateForm]}
-            apiUri={updateUri}
+            apiUri={apiUri.updateUri}
             affect={setResources}
+            librariesDD={librariesDD}
+            booksDD={booksDD}
+            default_state={updateDefaults}
         />
         <br/>
         <Table2 
@@ -104,7 +201,7 @@ const Resources: NextPage = () => {
           isError={resourcesIsError}
           caption={<b>Resources</b>}
           affect={setResources}
-          deleteUri={deleteUri}
+          deleteUri={apiUri.deleteUri}
         />
 
       </main>

@@ -125,7 +125,7 @@ const Books_And_Authors: NextPage = () => {
           <br/>
           <FormBooksAndAuthorsPost 
             stateStuff={[create_form, setCreateForm]} 
-            apiUri={apiUri}
+            apiUri={apiUri.createUri}
             affect={setBaa}
             authorsDD={authorsDD}
             booksDD={booksDD}

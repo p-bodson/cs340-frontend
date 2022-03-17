@@ -46,6 +46,7 @@ const Books: NextPage = () => {
   //---------------
   // make some controlled state for the CREATE form
   const [create_form, setCreateForm] = useState({
+    isbn: "",
     book_title: ""
   })
 
