@@ -1,6 +1,6 @@
 import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useEffect } from 'react'; 
+import { useEffect, useState } from 'react'; 
 import Dropdown from "@/components/dropdown";
 import usePost from '@/hooks/usePost'
 import useGet from '@/hooks/useGet'
@@ -11,14 +11,9 @@ export default function FormBooksAndAuthorsPost ( props: any ) {
     const [create_form, setCreateForm] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
-
-
-
-    // make some controlled state for the form
-    const default_state = {
-        isbn: "",
-        author_ID: ""
-    }
+    const {authorsDD} = props
+    const {booksDD} = props
+    const {default_state} = props;
 
     // handle changes to input from user
     const onChangeCreate = useChange(create_form, setCreateForm);
@@ -37,9 +32,10 @@ export default function FormBooksAndAuthorsPost ( props: any ) {
             "data": create_form
         }
     );
+
     useEffect( () => {
         setCreateForm(default_state)
-    }, [])
+    }, [default_state])
 
     return (
 
@@ -53,9 +49,7 @@ export default function FormBooksAndAuthorsPost ( props: any ) {
                         onChange={onChangeCreate}
                         value={create_form.isbn}
                         descriptor={"book_title"}
-                        apiUri={apiUri.booksUri}
-                        form_data={create_form}
-                        setter={setCreateForm}
+                        options={booksDD}
                     />
                 </label>
                 <br/>
@@ -65,9 +59,7 @@ export default function FormBooksAndAuthorsPost ( props: any ) {
                         onChange={onChangeCreate}
                         value={create_form.author_ID}
                         descriptor={"author_name"}
-                        apiUri={apiUri.authorsUri}
-                        form_data={create_form}
-                        setter={setCreateForm}
+                        options={authorsDD}
                     />
                 </label>
                 <br />
