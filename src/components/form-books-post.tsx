@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import usePost from '@/hooks/usePost'
 import useGet from '@/hooks/useGet'
 
-export default function FormBooks ( props: any ) {
+export default function FormBooksPost ( props: any ) {
 
     const [create_form, setCreateForm] = props.stateStuff;
     const {apiUri} = props
@@ -17,7 +17,7 @@ export default function FormBooks ( props: any ) {
     }
 
     // handle changes to input from user
-    const onChangeBookAdd = useChange(create_form, setCreateForm);
+    const onChangeCreate = useChange(create_form, setCreateForm);
     const handleSubmit = async (params: any) => {  
         await sendPost(params);
         setCreateForm(default_state)
@@ -27,7 +27,7 @@ export default function FormBooks ( props: any ) {
 
     const sendPost = usePost();
     const sendGet = useGet();
-    const handleBookAdd = useSubmit2(handleSubmit,
+    const handleCreate = useSubmit2(handleSubmit,
         {        
             "url": apiUri,
             "data": create_form
@@ -39,7 +39,7 @@ export default function FormBooks ( props: any ) {
 
     return (
 
-        <form onSubmit={handleBookAdd}>
+        <form onSubmit={handleCreate}>
             <fieldset>
                 <legend> Add a New Book </legend>
                 <p>Fill out the form below with the information of the new book</p>
@@ -47,7 +47,7 @@ export default function FormBooks ( props: any ) {
                     ISBN: <input
                         type="text" 
                         name="isbn"
-                        onChange={onChangeBookAdd}
+                        onChange={onChangeCreate}
                         value={create_form.isbn}
                         required
                     />
@@ -57,7 +57,7 @@ export default function FormBooks ( props: any ) {
                     Title: <input 
                         type="text" 
                         name="book_title"
-                        onChange={onChangeBookAdd}
+                        onChange={onChangeCreate}
                         value={create_form.book_title}
                         required
                     />
