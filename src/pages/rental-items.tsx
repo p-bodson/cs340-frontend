@@ -16,7 +16,7 @@ const RentalItems: NextPage = () => {
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
   const router = useRouter();
   const rentalIdPath = "?" + router.asPath.split("?")[1]
-  const rentalID = router.query.rental_ID
+  const rentalID: any = router.query.rental_ID
 
   const rental_items_path_root = `${apiTld}/rental-items` + rentalIdPath
   const [rental_items_path, setRentalItemsPath] = useState(rental_items_path_root)
