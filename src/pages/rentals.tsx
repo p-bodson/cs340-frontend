@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react'
 import Table2 from '@/components/table-2'
 import useData from '@/hooks/useData'
 import UpdateFormRentals from '@/components/update-form-rentals'
+import useGet from "@/hooks/useGet"
+
 
 
 
@@ -15,9 +17,13 @@ const Rentals: NextPage = () => {
 
   const rentals_path_root = `${apiTld}/rentals`
   const [rentals_path, setRentalsPath] = useState(rentals_path_root)
-  const createUri: string = `${apiTld}/rentals`
-  const updateUri: string = `${apiTld}/rentals`
-  const deleteUri: string = `${apiTld}/rentals`
+  const apiUri = {
+    createUri: `${apiTld}/rentals`,
+    updateUri: `${apiTld}/rentals`,
+    deleteUri: `${apiTld}/rentals`,
+    librariesUri: `${apiTld}/libraries`,
+    membersUri: `${apiTld}/members`
+  }
 
   //---------------
   // SEARCHING
@@ -53,6 +59,50 @@ const Rentals: NextPage = () => {
     rental_date: ""
   })
 
+    // create state for any FK dropdowns
+  // Libraries
+  const [librariesDD, setLibrariesDD] = useState([])
+  // Books
+  const [membersDD, setMembersDD] = useState([])
+
+  // CREATE form defaults
+  const [createDefaults, setCreateDefaults] = useState({
+      member_ID: "",
+      library_ID: "",
+      rental_date: ""
+  })
+
+  const sendGet = useGet()
+
+  const setupCreateForm = async () => {
+    // get the dropdown data
+    let membersData = await sendGet({
+      "url": apiUri.membersUri
+    });
+    let librariesData = await sendGet({
+      "url": apiUri.librariesUri
+    });
+
+    setMembersDD(membersData);
+    setLibrariesDD(librariesData);
+
+    // get the default value as the 
+    // first element found
+    // no error handling present
+    const member_ID_default = membersData[0]["member_ID"];
+    const library_ID_default = librariesData[0]["library_ID"];
+
+    setCreateDefaults({
+      member_ID: member_ID_default,
+      library_ID: library_ID_default,
+      rental_date: ""
+    })
+  }
+
+  useEffect( () => {
+    setupCreateForm()
+  }, [] )
+
   //--------------
   // UPDATE / PUT
   //---------------
@@ -84,13 +134,16 @@ const Rentals: NextPage = () => {
           />
           <FormRentalsPost 
             stateStuff={[create_form, setCreateForm]}
-            apiUri={createUri}
+            apiUri={apiUri.createUri}
             affect={setRentals}
+            librariesDD={librariesDD}
+            membersDD={membersDD}
+            default_state={createDefaults}
           />
           <br />
           <UpdateFormRentals 
             stateStuff={[update_form, setUpdateForm]}
-            apiUri={updateUri}
+            apiUri={apiUri.updateUri}
             affect={setRentals}
         />
           <Table2 
@@ -100,7 +153,7 @@ const Rentals: NextPage = () => {
             isError={rentalsIsError}
             caption={<b>Rentals</b>}
             affect={setRentals}
-            deleteUri={deleteUri}
+            deleteUri={apiUri.deleteUri}
           />
           <ul>
             <li>Clicking on a rental_ID above redirects to that rental{"'"}s rental_items page</li>
