@@ -51,10 +51,10 @@ export default function UpdateFormBooks ( props: any ) {
         <form onSubmit={handleUpdate}>
         <fieldset>
             <legend> Edit a Book </legend>
-            <p>Fill out the form below with the information of the book to update one </p>
-            <p>If you click on the UPDATE button of a row, the form will be prefilled with data</p>
+            <p>Fill out the form below with the information of the book you want to update</p>
+            <p>If you click on the UPDATE button of a row, the form will be prefilled with that row{"'"}s data</p>
             <label>
-                ID: <input 
+                ISBN: <input 
                     type="text" 
                     name="isbn"
                     onChange={onChangeHandleUpdate}
@@ -64,7 +64,7 @@ export default function UpdateFormBooks ( props: any ) {
             </label>
             <br/>
             <label>
-                Name: <input 
+                Title: <input 
                     type="text" 
                     name="book_title"
                     onChange={onChangeHandleUpdate}
