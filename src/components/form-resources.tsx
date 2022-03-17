@@ -13,11 +13,11 @@ export default function FormResources ( props: any ) {
     // the names of the values in the form state
 
     const default_state = {
+      resource_ID: '',
       isbn: '', 
       book_title: '', 
       library_ID: '', 
       library_name: '',
-      resource_ID: '',
       quantity_checked_out: '',
       quantity_available: ''
     }
@@ -43,10 +43,10 @@ export default function FormResources ( props: any ) {
         <form onSubmit={handleSearch}>
             <fieldset>
                 <legend> Find Super Duper Resources in the Network </legend>
-                <p>Fill out zero or more of the fields below to find matching Books or Authors</p>
+                <p>Fill out zero or more of the fields below to find matching resources</p>
                 <label>
                     Resource ID: <input 
-                      type="text" 
+                      type="number" 
                       name="resource_ID"
                       value={search_form.resource_ID}
                       onChange={onChangeSearchForm}
@@ -54,7 +54,7 @@ export default function FormResources ( props: any ) {
                 </label>
                 <br/>
                 <label>
-                    Resource ISBN: <input 
+                    ISBN: <input 
                       type="text" 
                       name="isbn"
                       value={search_form.isbn}
@@ -63,7 +63,7 @@ export default function FormResources ( props: any ) {
                 </label>
                 <br/>
                 <label>
-                    Resource Title: <input 
+                    Title: <input 
                       type="text"
                       name="book_title" 
                       value={search_form.book_title}
@@ -72,8 +72,8 @@ export default function FormResources ( props: any ) {
                 </label>
                 <br/>
                 <label>
-                    Resource Location ID: <input
-                      type="text"
+                    Library ID: <input
+                      type="number"
                       name="library_ID"
                       value={search_form.library_ID}
                       onChange={onChangeSearchForm}
@@ -81,7 +81,7 @@ export default function FormResources ( props: any ) {
                 </label>
                 <br/>
                 <label>
-                    Resource Location Name: <input
+                    Library Name: <input
                       type="text"
                       name="library_name"
                       value={search_form.library_name}
@@ -90,8 +90,8 @@ export default function FormResources ( props: any ) {
                 </label>
                 <br/>
                 <label>
-                    Quantity Availble: <input
-                      type="text"
+                    Quantity Available: <input
+                      type="number"
                       name="quantity_available"
                       value={search_form.quantity_available}
                       onChange={onChangeSearchForm}
@@ -100,7 +100,7 @@ export default function FormResources ( props: any ) {
                 <br/>
                 <label>
                     Quantity Checked Out: <input
-                      type="text"
+                      type="number"
                       name="quantity_checked_out"
                       value={search_form.quantity_checked_out}
                       onChange={onChangeSearchForm}

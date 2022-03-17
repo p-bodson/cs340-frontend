@@ -54,8 +54,8 @@ export default function UpdateFormResources ( props: any ) {
         <form onSubmit={handleUpdate}>
         <fieldset>
             <legend> Edit a Resource </legend>
-            <p>Fill out the form below with the information of the resource to update one </p>
-            <p>If you click on the UPDATE button of a row, the form will be prefilled with data</p>
+            <p>Fill out the form below with the information of the resource you want to update</p>
+            <p>If you click on the UPDATE button of a row, the form will be prefilled with that row{"'"}s data</p>
             <label>
                 Resource ID: <input 
                     type="number" 
@@ -88,7 +88,7 @@ export default function UpdateFormResources ( props: any ) {
             <br/>
             <label>
                 Quantity Available: <input 
-                    type="text" 
+                    type="number" 
                     name="quantity_available"
                     onChange={onChangeHandleUpdate}
                     value={form_data.quantity_available}
@@ -98,7 +98,7 @@ export default function UpdateFormResources ( props: any ) {
             <br/>
             <label>
                 Quantity Checked Out: <input 
-                    type="text" 
+                    type="number" 
                     name="quantity_checked_out"
                     onChange={onChangeHandleUpdate}
                     value={form_data.quantity_checked_out}

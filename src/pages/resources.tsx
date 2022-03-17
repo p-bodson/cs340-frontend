@@ -96,6 +96,7 @@ const Resources: NextPage = () => {
             apiUri={updateUri}
             affect={setResources}
         />
+        <br/>
         <Table2 
           data={resources}
           update_form={setUpdateForm}

@@ -13,7 +13,8 @@ export default function FormResourcesPost ( props: any ) {
     const default_state = {
         isbn: '', 
         library_ID: '', 
-        quantity_available: ''
+        quantity_available: '',
+        quantity_checked_out: ''
     }
 
     // handle changes to input from user 
@@ -56,7 +57,7 @@ export default function FormResourcesPost ( props: any ) {
                 <br/>
                 <label>
                     Library ID: <input 
-                    type="text" 
+                    type="number" 
                     name="library_ID" 
                     onChange={onChangeCreate}
                     value={create_form.library_ID}
@@ -69,6 +70,15 @@ export default function FormResourcesPost ( props: any ) {
                     name="quantity_available" 
                     onChange={onChangeCreate}
                     value={create_form.quantity_available}
+                    required/>
+                </label>
+                <br />
+                <label>
+                    Quantity Checked Out: <input 
+                    type="number" 
+                    name="quantity_checked_out" 
+                    onChange={onChangeCreate}
+                    value={create_form.quantity_checked_out}
                     required/>
                 </label>
                 <br />
