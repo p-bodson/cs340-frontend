@@ -97,7 +97,7 @@ export default function UpdateFormRentalItems ( props: any ) {
                     name="return_date"
                     onChange={onChangeHandleUpdate}
                     value={form_data.return_date}
-                    required
+                    
                 />
             </label>
             <br/>
