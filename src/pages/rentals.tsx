@@ -71,7 +71,7 @@ const Rentals: NextPage = () => {
           <Table2 
             data={rentals}
             isLoading={rentalsIsLoading}
-            isErro={rentalsIsError}
+            isError={rentalsIsError}
             caption={<b>Rentals</b>}
           />
           <ul>

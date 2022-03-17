@@ -17,6 +17,7 @@ const Members: NextPage = () => {
   const [members_path, setMembersPath] = useState(members_path_root)
   const createUri: string = `${apiTld}/members`
   const updateUri: string = `${apiTld}/members`
+  const deleteUri: string = `${apiTld}/members`
 
   //---------------
   // SEARCHING
@@ -98,8 +99,10 @@ const Members: NextPage = () => {
           data={members}
           update_form={setUpdateForm}
           isLoading={membersIsLoading}
-          isErro={membersIsError}
+          isError={membersIsError}
           caption={<b>Members</b>}
+          affect={setMembers}
+          deleteUri={deleteUri}
         />
 
       </main>

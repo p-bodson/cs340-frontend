@@ -7,15 +7,18 @@ import { v4 as uuidv4 } from 'uuid';
 export default function Table( props: any ) {
   const {data, isLoading, isError} = props;
   const {caption} = props;
-
+  const {affect} = props;
+  const {deleteUri} = props;
   const {update_form} = props
 
-  const renderTableRows = (arrayData: Array<Object>, updater: any) => {
+  const renderTableRows = (arrayData: Array<Object>, updater: any, affecter: any, apiUri:any) => {
     if (!arrayData) return null;
     if (!arrayData[0]) return null;
     return arrayData.map( e => <TableRow
       props={e}
       updater={updater}
+      affecter={affecter}
+      apiUri={apiUri}
       key={uuidv4()}
       />
     );
@@ -47,7 +50,7 @@ export default function Table( props: any ) {
             </tr>
           </thead>
           <tbody>
-            { renderTableRows(data, update_form) }
+            { renderTableRows(data, update_form, affect, deleteUri) }
           </tbody>
         </table>
       </div>
