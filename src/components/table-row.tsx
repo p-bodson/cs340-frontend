@@ -2,10 +2,13 @@ import Link from "next/link"
 import styles from '@/styles/Home.module.css'
 import { v4 as uuidv4 } from 'uuid';
 import UpdateButton from '@/components/button-update'
+import DeleteButton from '@/components/button-delete'
 
 export default function TableRow(props: any) {
 
     const {updater} = props
+    const {affecter} = props
+    const {apiUri} = props
     
     const renderRow = (rowData: any) => {
         const attributeArray: any = [];
@@ -18,31 +21,20 @@ export default function TableRow(props: any) {
         
         const pathName = location.pathname;
         // for rentals and transfer pages
-        if (pathName == "/rentals" || pathName == "/transfers"){
+        if (pathName == "/rentals"){
             const rows: any = [];
             for (let i in attributeArray){
                 let row = attributeArray[i];
                 // linked ID
                 if(i == "0"){
-                    if (pathName == "/rentals"){
-                        rows.push(
-                            <td key={uuidv4()}>
-                                <Link 
-                                href={{ pathname: '/rental-items', query:{rental_ID: `${row}`} }}>
-                                    <a>{`${row}`}</a>
-                                </Link>
-                            </td>
-                        );
-                    } else{
-                        rows.push(
-                            <td key={uuidv4()}>
-                                <Link href={{ pathname: '/transfer-items', query:{transfer_ID: `${row}`} }}>
-                                    <a>{`${row}`}</a>
-                                </Link>
-                            </td>
-                        );
-                    }
-                    
+                    rows.push(
+                        <td key={uuidv4()}>
+                            <Link 
+                            href={{ pathname: '/rental-items', query:{rental_ID: `${row}`} }}>
+                                <a>{`${row}`}</a>
+                            </Link>
+                        </td>
+                    );
                 // get only date
                 } else if(i == "3"){
                     rows.push(
@@ -69,7 +61,7 @@ export default function TableRow(props: any) {
         <tr>
             {renderRow(props.props)}
             <td><UpdateButton data={props.props} updater={updater}/></td>
-            <td><button>DELETE</button></td>
+            <td><DeleteButton data={props.props} affecter={affecter} apiUri={apiUri}/></td>
         </tr>
     )
 }
