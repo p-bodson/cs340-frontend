@@ -100,6 +100,8 @@ const Members: NextPage = () => {
           isLoading={membersIsLoading}
           isErro={membersIsError}
           caption={<b>Members</b>}
+          affect={setMembers}
+          createUri={createUri}
         />
 
       </main>
