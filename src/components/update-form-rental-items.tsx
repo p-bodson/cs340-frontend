@@ -66,7 +66,7 @@ export default function UpdateFormRentalItems ( props: any ) {
                 Resource ID: <Dropdown
                     name={"resource_ID"}
                     onChange={onChangeHandleUpdate}
-                    value={form_data.library_ID}
+                    value={form_data.resource_ID}
                     descriptor={""}
                     options={resourcesDD}
                 />
