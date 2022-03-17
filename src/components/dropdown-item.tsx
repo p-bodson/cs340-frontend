@@ -5,7 +5,15 @@ export default function DropdownItem(props: any) {
         descriptor,
         id_descriptor
     } = props;
-    const visual_value = data[descriptor];
+
+    let visual_value = ""
+    if (data[descriptor] === undefined) {
+        visual_value = `${descriptor}`;
+    }
+    else {
+        visual_value = data[descriptor];
+    }
+
     const actual_value = data[id_descriptor];
     
     return (

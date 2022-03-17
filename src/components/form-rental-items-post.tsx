@@ -3,19 +3,16 @@ import useChange from '@/hooks/useChange'
 import { useEffect } from 'react'; 
 import usePost from '@/hooks/usePost'
 import useGet from '@/hooks/useGet'
+import Dropdown from "@/components/dropdown"
+
 
 export default function FormRentalItemsPost ( props: any ) {
 
     const [create_form, setCreateForm] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
-
-    const default_state = {
-        resource_ID: "",
-        queue_numb: "",
-        rental_item_status: "",
-        return_date: ""
-    }
+    const {resourcesDD} = props
+    const {default_state} = props
 
     // handle changes to input from user 
     const onChangeCreate = useChange(create_form, setCreateForm);
@@ -36,7 +33,7 @@ export default function FormRentalItemsPost ( props: any ) {
     );
     useEffect( () => {
         setCreateForm(default_state)
-    }, [])
+    }, [default_state])
 
     return (
 
@@ -47,12 +44,13 @@ export default function FormRentalItemsPost ( props: any ) {
                     Fill out the form below with the information of the new rental item for this rental
                 </p>
                 <label>
-                    Resource ID: <input 
-                    type="number" 
-                    name="resource_ID"
-                    onChange={onChangeCreate}
-                    value={create_form.resource_ID}
-                    required/>
+                    Resource ID: <Dropdown 
+                        name={"resource_ID"} 
+                        onChange={onChangeCreate}
+                        value={create_form.resource_ID}
+                        descriptor={""}
+                        options={resourcesDD}
+                    />
                 </label>
                 <br/>
                 <label>
