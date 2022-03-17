@@ -50,11 +50,11 @@ export default function UpdateFormAuthors ( props: any ) {
     return (
         <form onSubmit={handleUpdate}>
         <fieldset>
-            <legend> Edit an Author </legend>
-            <p>Fill out the form below with the information of the author to update one</p>
-            <p>If you click on the UPDATE button of a row, the form will be prefilled with data</p>
+            <legend> Edit a Author </legend>
+            <p>Fill out the form below with the information of the author you want to update</p>
+            <p>If you click on the UPDATE button of a row, the form will be prefilled with that row{"'"}s data</p>
             <label>
-                ID: <input 
+                Author ID: <input 
                     type="number" 
                     name="author_ID"
                     onChange={onChangeHandleUpdate}
@@ -64,7 +64,7 @@ export default function UpdateFormAuthors ( props: any ) {
             </label>
             <br/>
             <label>
-                Name: <input 
+                Author Name: <input 
                     type="text" 
                     name="author_name"
                     onChange={onChangeHandleUpdate}
