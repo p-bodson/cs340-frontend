@@ -6,8 +6,8 @@ import { useState, useEffect } from 'react';
 import FormBooksAndAuthors from '@/components/form-books-and-authors'
 import FormBooksAndAuthorsPost from '@/components/form-books-and-authors-post'
 import UpdateFormBooksAndAuthors from '@/components/update-form-books-and-authors';
-
 import useData from '@/hooks/useData';
+import useGet from '@/hooks/useGet';
 
 
 const Books_And_Authors: NextPage = () => {
@@ -15,8 +15,13 @@ const Books_And_Authors: NextPage = () => {
 
   const books_and_authors_path_root = `${apiTld}/books-and-authors` 
   const [books_and_authors_path, setBaaPath] = useState(books_and_authors_path_root)
-  const createUri = `${apiTld}/books-and-authors`
-  const deleteUri = `${apiTld}/books-and-authors` 
+
+  const apiUri = {
+    createUri: `${apiTld}/books-and-authors`,
+    deleteUri: `${apiTld}/books-and-authors`,
+    authorsUri: `${apiTld}/authors`,
+    booksUri: `${apiTld}/books`
+  }
 
   // -----------------------
   // Books & Authors
@@ -29,15 +34,9 @@ const Books_And_Authors: NextPage = () => {
     author_ID: ""
   })
 
-  // make some controlled state for the CREATE form
-  const [create_form, setCreateForm] = useState({
-    isbn: "",
-    author_ID: ""
-  })
-
   // the Books_Authors table data
   const [books_and_authors, setBaa] = useState([])
-  
+
   const { data: baaData, 
     isLoading: baaIsLoading, 
     isError: baaIsError } = useData(books_and_authors_path);
@@ -46,6 +45,64 @@ const Books_And_Authors: NextPage = () => {
   useEffect( () => {
     setBaa(baaData);
   }, [baaIsLoading, baaData, baaIsError])
+
+
+  ////////////////////////
+  // CREATE form setup
+  // --------------
+
+  // make some controlled state for the CREATE form
+  const [create_form, setCreateForm] = useState({
+    isbn: "",
+    author_ID: ""
+  })
+
+  // create state for any FK dropdowns
+  // Authors
+  const [authorsDD, setAuthorsDD] = useState([])
+  // Books
+  const [booksDD, setBooksDD] = useState([])
+
+  // CREATE form defaults
+  const [createDefaults, setCreateDefaults] = useState({
+      isbn: "",
+      author_ID: ""
+  })
+
+  const sendGet = useGet()
+
+  const setupCreateForm = async () => {
+    // get the dropdown data
+    let booksData = await sendGet({
+      "url": apiUri.booksUri
+    });
+    let authorsData = await sendGet({
+      "url": apiUri.authorsUri
+    });
+
+    setBooksDD(booksData);
+    setAuthorsDD(authorsData);
+
+    // get the default value as the 
+    // first element found
+    // no error handling present
+    const isbn_default = booksData[0]["isbn"];
+    const author_ID_default = authorsData[0]["author_ID"];
+
+    setCreateDefaults({
+      isbn: isbn_default,
+      author_ID: author_ID_default
+    })
+  }
+
+  useEffect( () => {
+    setupCreateForm()
+  }, [] )
+
+  // -----------------------
+  // END Create form setup
+  /////////////////////////
+  
 
     return (
       <div className={styles.container}>
@@ -68,8 +125,11 @@ const Books_And_Authors: NextPage = () => {
           <br/>
           <FormBooksAndAuthorsPost 
             stateStuff={[create_form, setCreateForm]} 
-            apiUri={createUri}
+            apiUri={apiUri}
             affect={setBaa}
+            authorsDD={authorsDD}
+            booksDD={booksDD}
+            default_state={createDefaults}
           />
           <br/>
           <UpdateFormBooksAndAuthors/>
@@ -80,7 +140,7 @@ const Books_And_Authors: NextPage = () => {
             isError={baaIsError}
             caption={<b>Books {"&"} Authors</b>}
             affect={setBaa}
-            deleteUri={deleteUri}
+            deleteUri={apiUri.deleteUri}
           />
         </main>
       </div>

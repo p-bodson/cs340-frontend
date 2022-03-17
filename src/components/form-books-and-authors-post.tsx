@@ -1,6 +1,6 @@
 import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useEffect } from 'react'; 
+import { useEffect, useState } from 'react'; 
 import Dropdown from "@/components/dropdown";
 import usePost from '@/hooks/usePost'
 import useGet from '@/hooks/useGet'
@@ -11,15 +11,12 @@ export default function FormBooksAndAuthorsPost ( props: any ) {
     const [create_form, setCreateForm] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
-
-    // make some controlled state for the form
-    const default_state = {
-        isbn: "",
-        author_ID: ""
-    }
+    const {authorsDD} = props
+    const {booksDD} = props
+    const {default_state} = props;
 
     // handle changes to input from user
-    const onChangeBookAdd = useChange(create_form, setCreateForm);
+    const onChangeCreate = useChange(create_form, setCreateForm);
     const handleSubmit = async (params: any) => {  
         await sendPost(params);
         setCreateForm(default_state)
@@ -29,39 +26,40 @@ export default function FormBooksAndAuthorsPost ( props: any ) {
 
     const sendPost = usePost();
     const sendGet = useGet();
-    const handleBookAdd = useSubmit2(handleSubmit,
+    const handleCreate = useSubmit2(handleSubmit,
         {        
-            "url": apiUri,
+            "url": apiUri.createUri,
             "data": create_form
         }
     );
+
     useEffect( () => {
         setCreateForm(default_state)
-    }, [])
+    }, [default_state])
 
     return (
 
-        <form onSubmit={handleBookAdd}>
+        <form onSubmit={handleCreate}>
             <fieldset>
                 <legend> Connect Books with Authors </legend>
                 <p>Fill out the form below with the information of the connection</p>
                 <label>
-                    ISBN: <input
-                        type="text" 
-                        name="isbn"
-                        onChange={onChangeBookAdd}
+                    ISBN:<Dropdown
+                        name={"isbn"}
+                        onChange={onChangeCreate}
                         value={create_form.isbn}
-                        required
+                        descriptor={"book_title"}
+                        options={booksDD}
                     />
                 </label>
                 <br/>
                 <label>
-                    Author ID: <input 
-                        type="text" 
-                        name="author_ID"
-                        onChange={onChangeBookAdd}
+                    Author ID:<Dropdown
+                        name={"author_ID"}
+                        onChange={onChangeCreate}
                         value={create_form.author_ID}
-                        required
+                        descriptor={"author_name"}
+                        options={authorsDD}
                     />
                 </label>
                 <br />
@@ -70,4 +68,3 @@ export default function FormBooksAndAuthorsPost ( props: any ) {
           </form>
     )
 }
-
