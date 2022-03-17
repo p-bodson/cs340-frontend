@@ -9,6 +9,7 @@ export default function UpdateButton (props: any) {
     const updateForm = () => {
         if (!updater) return;
         updater(data);
+        console.log(data);
     }
 
     return (

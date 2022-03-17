@@ -6,6 +6,8 @@ import FormLibrariesPost from '@/components/form-libraries-post'
 import { useState, useEffect } from 'react'
 import Table2 from '@/components/table-2'
 import useData from '@/hooks/useData';
+import UpdateFormLibraries from '@/components/update-form-libraries'
+
 
 const Libraries: NextPage = () => {
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
@@ -13,6 +15,7 @@ const Libraries: NextPage = () => {
   const libraries_path_root = `${apiTld}/libraries`
   const [libraries_path, setLibrariesPath] = useState(libraries_path_root)
   const createUri: string = `${apiTld}/libraries`
+  const updateUri: string = `${apiTld}/libraries`
 
   //---------------
   // SEARCHING
@@ -46,6 +49,16 @@ const Libraries: NextPage = () => {
     library_address: ""
   })
 
+  //--------------
+  // UPDATE / PUT
+  //---------------
+  // controlled state for the UPDATE form
+  const [update_form, setUpdateForm] = useState({
+    library_ID: "",
+    library_name: "",
+    library_address: ""
+  })
+
   return (
     <div className={styles.container}>
       <Head>
@@ -70,8 +83,15 @@ const Libraries: NextPage = () => {
           apiUri={createUri}
           affect={setLibraries}/>
         <br />
+        <UpdateFormLibraries 
+            stateStuff={[update_form, setUpdateForm]}
+            apiUri={updateUri}
+            affect={setLibraries}
+        />
+        <br />
         <Table2 
           data={libraries}
+          update_form={setUpdateForm}
           isLoading={librariesIsLoading}
           isErro={librariesIsError}
           caption={<b>Libraries</b>}

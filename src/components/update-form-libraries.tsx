@@ -6,15 +6,16 @@ import useGet from '@/hooks/useGet'
 
 
 
-export default function UpdateFormAuthors ( props: any ) {
+export default function UpdateFormLibraries ( props: any ) {
 
     const [form_data, setFormData] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
     // make some controlled state for the form
     const default_state = {
-        author_ID: "",
-        author_name: "",
+        library_ID: "",
+        library_name: "",
+        library_address: ""
     }
 
     // handle changes to input from user 
@@ -52,15 +53,15 @@ export default function UpdateFormAuthors ( props: any ) {
     return (
         <form onSubmit={handleUpdate}>
         <fieldset>
-            <legend> Edit an Author </legend>
-            <p>Fill out the form below with the information of the author to update one</p>
+            <legend> Edit a Library </legend>
+            <p>Fill out the form below with the information of the library to update one </p>
             <p>If you click on the UPDATE button of a row, the form will be prefilled with data</p>
             <label>
                 ID: <input 
                     type="number" 
-                    name="author_ID"
+                    name="library_ID"
                     onChange={onChangeHandleUpdate}
-                    value={form_data.author_ID}
+                    value={form_data.library_ID}
                     required
                 />
             </label>
@@ -68,15 +69,24 @@ export default function UpdateFormAuthors ( props: any ) {
             <label>
                 Name: <input 
                     type="text" 
-                    name="author_name"
+                    name="library_name"
                     onChange={onChangeHandleUpdate}
-                    value={form_data.author_name}
+                    value={form_data.library_name}
                     required
                 />
             </label>
             <br/>
+            <label>
+                Address: <input 
+                    type="text" 
+                    name="library_address"
+                    onChange={onChangeHandleUpdate}
+                    value={form_data.library_address}
+                    required
+                />
+            </label>
             <br />
-            <input type="submit" value="Update Author"/>
+            <input type="submit" value="Update Library"/>
         </fieldset>
         </form>
     )
