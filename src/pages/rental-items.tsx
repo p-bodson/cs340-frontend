@@ -8,18 +8,22 @@ import Table2 from '@/components/table-2'
 import useData from '@/hooks/useData'
 import UpdateFormRentalItems from '@/components/update-form-rental-items'
 import useGet from "@/hooks/useGet"
+import { useRouter } from 'next/router'
 
 
 
 const RentalItems: NextPage = () => {
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
+  const router = useRouter();
+  const rentalIdPath = "?" + router.asPath.split("?")[1]
+  const rentalID = router.query.rental_ID
 
-  const rental_items_path_root = `${apiTld}/rental-items`
+  const rental_items_path_root = `${apiTld}/rental-items` + rentalIdPath
   const [rental_items_path, setRentalItemsPath] = useState(rental_items_path_root)
   const apiUri = {
-    createUri: `${apiTld}/rental-items`,
-    updateUri: `${apiTld}/rental-items`,
-    deleteUri: `${apiTld}/rental-items`,
+    createUri: `${apiTld}/rental-items` + rentalIdPath,
+    updateUri: `${apiTld}/rental-items` + rentalIdPath,
+    deleteUri: `${apiTld}/rental-items` + rentalIdPath,
     resourcesUri: `${apiTld}/resources`,
   }
 
@@ -28,7 +32,6 @@ const RentalItems: NextPage = () => {
   //----------------
   // make some controlled state for the search form
   const [search_form, setSearchForm] = useState({
-    rental_ID: "",
     resource_ID: "",
     queue_numb: "",
     rental_item_status: "",
@@ -53,6 +56,7 @@ const RentalItems: NextPage = () => {
   //---------------
   // make some controlled state for the CREATE form
   const [create_form, setCreateForm] = useState({
+    rental_ID: "",
     resource_ID: "",
     queue_numb: "",
     rental_item_status: "",
@@ -65,6 +69,7 @@ const RentalItems: NextPage = () => {
 
   // CREATE form defaults
   const [createDefaults, setCreateDefaults] = useState({
+      rental_ID: "",
       resource_ID: "",
       queue_numb: "",
       rental_item_status: "",
@@ -87,6 +92,7 @@ const RentalItems: NextPage = () => {
     const resource_ID_default = resourcesData[0]["resource_ID"];
 
     setCreateDefaults({
+      rental_ID: rentalID,
       resource_ID: resource_ID_default,
       queue_numb: "",
       rental_item_status: "",

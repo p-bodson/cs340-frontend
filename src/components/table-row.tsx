@@ -56,7 +56,7 @@ export default function TableRow(props: any) {
         }
         
     };
-
+    
     return (
         <tr>
             {renderRow(props.props)}
