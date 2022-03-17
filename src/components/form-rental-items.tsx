@@ -7,7 +7,6 @@ export default function FormRentalItems ( props: any ) {
     const [search_form, setSearchForm] = props.stateStuff;
 
     const default_state = {
-        rental_ID: "",
         resource_ID: "",
         queue_numb: "",
         rental_item_status: "",
@@ -21,7 +20,7 @@ export default function FormRentalItems ( props: any ) {
 
     // make some submission handlers for the different forms
     const sendSearch = (args: any) => {   
-        let path = `${args.path_root}?`   
+        let path = `${args.path_root}&`   
         for (const key in args.data) {
             if (`${args.data[key]}` !== "") {
                 path += `${key}=${encodeURIComponent(args.data[key])}&`;
@@ -35,13 +34,14 @@ export default function FormRentalItems ( props: any ) {
         "path_root": locator, 
         "setter": setPath
     });
+ 
 
     return (
         <form onSubmit={handleSearch}>
             <fieldset>
                 <legend> Find Rental Items in the Super Duper Library Network </legend>
                 <p>Fill out zero or more of the fields below to find matching rental items</p>
-                <label>
+                {/* <label>
                     Rental ID: <input 
                     type="number" 
                     name="rental_ID"
@@ -49,7 +49,7 @@ export default function FormRentalItems ( props: any ) {
                     onChange={onChangeSearchForm}
                     />
                 </label>
-                <br/>
+                <br/> */}
                 <label>
                     Resource ID: <input 
                     type="number" 

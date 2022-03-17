@@ -77,7 +77,7 @@ export default function FormRentalItemsPost ( props: any ) {
                     name="return_date"
                     onChange={onChangeCreate} 
                     value={create_form.return_date}
-                    required/>
+                    />
                 </label>
                 <br />
                 <br />

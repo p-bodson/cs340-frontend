@@ -13,8 +13,7 @@ export default function UpdateFormRentalItems ( props: any ) {
     const [form_data, setFormData] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
-    const {resourcesDD,
-        default_state} = props;
+    const {resourcesDD, default_state} = props;
 
     // handle changes to input from user 
     const onChangeHandleUpdate = useChange(form_data, setFormData);
@@ -66,7 +65,7 @@ export default function UpdateFormRentalItems ( props: any ) {
                 Resource ID: <Dropdown
                     name={"resource_ID"}
                     onChange={onChangeHandleUpdate}
-                    value={form_data.library_ID}
+                    value={form_data.resource_ID}
                     descriptor={""}
                     options={resourcesDD}
                 />
@@ -98,7 +97,7 @@ export default function UpdateFormRentalItems ( props: any ) {
                     name="return_date"
                     onChange={onChangeHandleUpdate}
                     value={form_data.return_date}
-                    required
+                    
                 />
             </label>
             <br/>
