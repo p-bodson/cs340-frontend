@@ -22,12 +22,11 @@ export default function FormRentalsPost ( props: any ) {
 
     // handle changes to input from user 
     const onChangeCreate = useChange(create_form, setCreateForm);
-    const handleSubmit = (params: any) => {  
-        sendPost(params);
+    const handleSubmit = async (params: any) => {  
+        await sendPost(params);
         setCreateForm(default_state)
-        sendGet(params).then(
-            (e) => {affect(e)}
-        );
+        const data = await sendGet(params);
+        affect(data)
     }
     
     const sendPost = usePost();

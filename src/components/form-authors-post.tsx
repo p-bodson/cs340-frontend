@@ -8,7 +8,7 @@ import useGet from '@/hooks/useGet'
 
 export default function FormAuthors ( props: any ) {
 
-    const [authors_form, setAuthorsForm] = props.stateStuff;
+    const [create_form, setCreateForm] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
 
@@ -17,25 +17,24 @@ export default function FormAuthors ( props: any ) {
     }
 
     // handle changes to input from user 
-    const onChangeAuthorAdd = useChange(authors_form, setAuthorsForm);
-    const handleSubmit = (params: any) => {  
-        sendPost(params);
-        setAuthorsForm(default_state)
-        sendGet(params).then(
-            (e) => {affect(e)}
-        );
-        
+    const onChangeAuthorAdd = useChange(create_form, setCreateForm);
+    const handleSubmit = async (params: any) => {  
+        await sendPost(params);
+        setCreateForm(default_state)
+        const data = await sendGet(params);
+        affect(data)
     }
+
     const sendPost = usePost();
     const sendGet = useGet();
     const handleAuthorAdd = useSubmit2( handleSubmit,
         {        
             "url": apiUri,
-            "data": authors_form
+            "data": create_form
         }
     );
     useEffect( () => {
-        setAuthorsForm(default_state)
+        setCreateForm(default_state)
     }, [])
 
     return (
@@ -48,7 +47,7 @@ export default function FormAuthors ( props: any ) {
                     type="text" 
                     name="author_name"
                     onChange={onChangeAuthorAdd}
-                    value={authors_form.author_name}
+                    value={create_form.author_name}
                     required
                 />
             </label>

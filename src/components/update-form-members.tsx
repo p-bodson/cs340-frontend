@@ -26,16 +26,14 @@ export default function UpdateFormMembers ( props: any ) {
     const sendGet = useGet();
 
     // and handle the button submission
-    const handleSubmit = (params: any) => {  
+    const handleSubmit = async (params: any) => {  
         // send the request
-        sendPut(params);
+        await sendPut(params);
         // clear the form for more input
         setFormData(default_state)
-        // update the date displayed on the table
-        sendGet(params).then(
-            (e) => {affect(e)}
-        );
-        
+        // update the data displayed on the table
+        const data = await sendGet(params)
+        affect(data);
     }
 
     // this is the actually function for form submission to run

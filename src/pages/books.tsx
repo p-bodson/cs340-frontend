@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Table2 from '@/components/table-2';
 import { useState, useEffect } from 'react';
-import FormBooks from '@/components/form-books'
+import FormBooks from '@/components/form-books-post'
 import useData from '@/hooks/useData';
 import UpdateFormBooks from '@/components/update-form-books'
 

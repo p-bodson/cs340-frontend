@@ -8,7 +8,7 @@ import useGet from '@/hooks/useGet'
 
 export default function FormBooks ( props: any ) {
 
-    const [books_form, setBooksForm] = props.stateStuff;
+    const [create_form, setCreateForm] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
 
@@ -19,24 +19,24 @@ export default function FormBooks ( props: any ) {
     }
 
     // handle changes to input from user
-    const onChangeBookAdd = useChange(books_form, setBooksForm);
-    const handleSubmit = (params: any) => {
-        sendPost(params);
-        setBooksForm(default_state)
-        sendGet(params).then(
-            (e) => {affect(e)}
-        );
+    const onChangeBookAdd = useChange(create_form, setCreateForm);
+    const handleSubmit = async (params: any) => {  
+        await sendPost(params);
+        setCreateForm(default_state)
+        const data = await sendGet(params);
+        affect(data)
     }
+
     const sendPost = usePost();
     const sendGet = useGet();
     const handleBookAdd = useSubmit2(handleSubmit,
         {        
             "url": apiUri,
-            "data": books_form
+            "data": create_form
         }
     );
     useEffect( () => {
-        setBooksForm(default_state)
+        setCreateForm(default_state)
     }, [])
 
     return (
@@ -50,7 +50,7 @@ export default function FormBooks ( props: any ) {
                         type="text" 
                         name="isbn"
                         onChange={onChangeBookAdd}
-                        value={books_form.isbn}
+                        value={create_form.isbn}
                         required
                     />
                 </label>
@@ -60,7 +60,7 @@ export default function FormBooks ( props: any ) {
                         type="text" 
                         name="book_title"
                         onChange={onChangeBookAdd}
-                        value={books_form.book_title}
+                        value={create_form.book_title}
                         required
                     />
                 </label>

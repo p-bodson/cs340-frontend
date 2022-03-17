@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Table2 from '@/components/table-2';
 import { useState, useEffect } from 'react';
-import FormAuthors from '@/components/form-authors'
+import FormAuthors from '@/components/form-authors-post'
 import useData from '@/hooks/useData';
 import UpdateFormAuthors from '@/components/update-form-authors'
 
