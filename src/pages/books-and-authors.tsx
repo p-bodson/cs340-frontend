@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import FormBooksAndAuthors from '@/components/form-books-and-authors'
 import FormBooksAndAuthorsPost from '@/components/form-books-and-authors-post'
 import UpdateFormBooksAndAuthors from '@/components/update-form-books-and-authors';
-
 import useData from '@/hooks/useData';
 
 
@@ -15,8 +14,13 @@ const Books_And_Authors: NextPage = () => {
 
   const books_and_authors_path_root = `${apiTld}/books-and-authors` 
   const [books_and_authors_path, setBaaPath] = useState(books_and_authors_path_root)
-  const createUri = `${apiTld}/books-and-authors`
-  const deleteUri = `${apiTld}/books-and-authors` 
+
+  const apiUri = {
+    createUri: `${apiTld}/books-and-authors`,
+    deleteUri: `${apiTld}/books-and-authors`,
+    authorsUri: `${apiTld}/authors`,
+    booksUri: `${apiTld}/books`
+  }
 
   // -----------------------
   // Books & Authors
@@ -68,7 +72,7 @@ const Books_And_Authors: NextPage = () => {
           <br/>
           <FormBooksAndAuthorsPost 
             stateStuff={[create_form, setCreateForm]} 
-            apiUri={createUri}
+            apiUri={apiUri}
             affect={setBaa}
           />
           <br/>
@@ -80,7 +84,7 @@ const Books_And_Authors: NextPage = () => {
             isError={baaIsError}
             caption={<b>Books {"&"} Authors</b>}
             affect={setBaa}
-            deleteUri={deleteUri}
+            deleteUri={apiUri.deleteUri}
           />
         </main>
       </div>

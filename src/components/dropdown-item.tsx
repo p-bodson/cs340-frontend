@@ -2,10 +2,17 @@ import styles from '@/styles/Home.module.css'
 
 export default function DropdownItem(props: any) {
 
-    const {value_attribute} = props;
-    const value = props.props[value_attribute];
+    const {
+        data,
+        descriptor,
+        id_descriptor
+    } = props;
+    const visual_value = data[descriptor];
+    const actual_value = data[id_descriptor];
     
     return (
-        <option value={value}>{value}</option>
+        <option value={actual_value}>
+            {`${actual_value} | ${visual_value}`}
+        </option>
     )
 }
