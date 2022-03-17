@@ -1,19 +1,19 @@
-import useSubmit from '@/hooks/useSubmit'
+import useSubmit2 from '@/hooks/useSubmit-2'
 import useChange from '@/hooks/useChange'
-import { useState, useEffect } from 'react';
 
 export default function FormMembers ( props: any ) {
 
     const {locator, setPath} = props;
+    const [search_form, setSearchForm] = props.stateStuff;
 
-    // make some controlled state for the forms
-    const [searchForm, setSearchForm] = useState({
+    const default_state = {
         member_ID: "",
         member_first_name: "",
         member_last_name: "",
         member_phone: ""
-    })
-    const onChangeSearchForm = useChange(searchForm, setSearchForm);
+    }
+
+    const onChangeSearchForm = useChange(search_form, setSearchForm);
     // for onChange to work, the names of each input
     // element in the forms must be unique and match
     // the names of the values in the form state
@@ -27,9 +27,10 @@ export default function FormMembers ( props: any ) {
             }   
         }
         args.setter(path);
+        setSearchForm(default_state)
     };
-    const handleSearch = useSubmit("", sendSearch, {
-        "data": searchForm, 
+    const handleSearch = useSubmit2( sendSearch, {
+        "data": search_form, 
         "path_root": locator, 
         "setter": setPath
     });
@@ -43,7 +44,7 @@ export default function FormMembers ( props: any ) {
                     Member ID: <input 
                     type="number"
                     name="member_ID"
-                    value={searchForm.member_ID}
+                    value={search_form.member_ID}
                     onChange={onChangeSearchForm}
                     />
                 </label>
@@ -52,7 +53,7 @@ export default function FormMembers ( props: any ) {
                     Member First Name: <input
                     type="text" 
                     name="member_first_name" 
-                    value={searchForm.member_first_name}
+                    value={search_form.member_first_name}
                     onChange={onChangeSearchForm}
                     />
                 </label>
@@ -61,7 +62,7 @@ export default function FormMembers ( props: any ) {
                     Member Last Name: <input 
                     type="text" 
                     name="member_last_name" 
-                    value={searchForm.member_last_name}
+                    value={search_form.member_last_name}
                     onChange={onChangeSearchForm}
                     />
                 </label>
@@ -70,7 +71,7 @@ export default function FormMembers ( props: any ) {
                     Member Phone Number: <input 
                     type="number" 
                     name="member_phone" 
-                    value={searchForm.member_phone}
+                    value={search_form.member_phone}
                     onChange={onChangeSearchForm}
                     />
                 </label>

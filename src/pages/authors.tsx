@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import Table2 from '@/components/table-2';
 import { useState, useEffect } from 'react';
-import FormAuthors from '@/components/form-authors'
+import FormAuthors from '@/components/form-authors-post'
 import useData from '@/hooks/useData';
 import UpdateFormAuthors from '@/components/update-form-authors'
 
@@ -14,7 +14,7 @@ const Authors: NextPage = () => {
   const updateUri: string = `${apiTld}/authors`
 
   // make some controlled state for the CREATE form
-  const [authors_form, setAuthorsForm] = useState({
+  const [create_form, setCreateForm] = useState({
     author_name: "",
   })
 
@@ -31,6 +31,7 @@ const Authors: NextPage = () => {
   const { data: authorsData, 
     isLoading: authorsIsLoading, 
     isError: authorsIsError } = useData(authorsUri);
+    
   useEffect( () => {
     setAuthors(authorsData);
   }, [authorsIsLoading, authorsData, authorsIsError])
@@ -50,7 +51,7 @@ const Authors: NextPage = () => {
 
           <br/>
           <FormAuthors 
-            stateStuff={[authors_form, setAuthorsForm]}
+            stateStuff={[create_form, setCreateForm]}
             apiUri={authorsUri}
             affect={setAuthors}
           />

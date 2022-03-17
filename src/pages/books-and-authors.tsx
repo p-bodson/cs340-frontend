@@ -26,12 +26,7 @@ const Books_And_Authors: NextPage = () => {
   })
 
   // the Books_Authors table data
-  const [books_and_authors, setBaa] = useState({
-    isbn: "",
-    book_title: "",
-    author_ID: "",
-    author_name: "",
-  })
+  const [books_and_authors, setBaa] = useState([])
   
   const { data: baaData, 
     isLoading: baaIsLoading, 

@@ -69,7 +69,7 @@ const Resources: NextPage = () => {
             caption={<b>Resources</b>}
           />
 
-            <br />
+          <br />
           <form>
             <fieldset>
                 <legend> Add a New Resource </legend>

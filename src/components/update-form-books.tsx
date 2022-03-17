@@ -6,15 +6,15 @@ import useGet from '@/hooks/useGet'
 
 
 
-export default function UpdateFormAuthors ( props: any ) {
+export default function UpdateFormBooks ( props: any ) {
 
     const [form_data, setFormData] = props.stateStuff;
     const {apiUri} = props
     const {affect} = props
     // make some controlled state for the form
     const default_state = {
-        author_ID: "",
-        author_name: "",
+        isbn: "",
+        book_title: "",
     }
 
     // handle changes to input from user 
@@ -50,15 +50,15 @@ export default function UpdateFormAuthors ( props: any ) {
     return (
         <form onSubmit={handleUpdate}>
         <fieldset>
-            <legend> Edit an Author </legend>
-            <p>Fill out the form below with the information of the author to update one</p>
+            <legend> Edit a Book </legend>
+            <p>Fill out the form below with the information of the book to update one </p>
             <p>If you click on the UPDATE button of a row, the form will be prefilled with data</p>
             <label>
                 ID: <input 
-                    type="number" 
-                    name="author_ID"
+                    type="text" 
+                    name="isbn"
                     onChange={onChangeHandleUpdate}
-                    value={form_data.author_ID}
+                    value={form_data.isbn}
                     required
                 />
             </label>
@@ -66,15 +66,15 @@ export default function UpdateFormAuthors ( props: any ) {
             <label>
                 Name: <input 
                     type="text" 
-                    name="author_name"
+                    name="book_title"
                     onChange={onChangeHandleUpdate}
-                    value={form_data.author_name}
+                    value={form_data.book_title}
                     required
                 />
             </label>
             <br/>
             <br />
-            <input type="submit" value="Update Author"/>
+            <input type="submit" value="Update Book"/>
         </fieldset>
         </form>
     )
