@@ -14,7 +14,7 @@ export default function UpdateFormBooks ( props: any ) {
     // make some controlled state for the form
     const default_state = {
         isbn: "",
-        book_title: "",
+        book_title: ""
     }
 
     // handle changes to input from user 

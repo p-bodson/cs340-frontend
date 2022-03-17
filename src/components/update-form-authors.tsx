@@ -14,7 +14,7 @@ export default function UpdateFormAuthors ( props: any ) {
     // make some controlled state for the form
     const default_state = {
         author_ID: "",
-        author_name: "",
+        author_name: ""
     }
 
     // handle changes to input from user 

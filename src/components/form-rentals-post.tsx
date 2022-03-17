@@ -41,7 +41,7 @@ export default function FormRentalsPost ( props: any ) {
 
         <form onSubmit={handleCreate}>
             <fieldset>
-                <legend> Add a Rental Order </legend>
+                <legend> Add a Rental </legend>
                 <p>
                     Fill out the form below with the information of the new rental
                 </p>

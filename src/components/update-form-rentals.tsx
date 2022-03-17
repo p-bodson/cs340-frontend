@@ -53,8 +53,8 @@ export default function UpdateFormRentals ( props: any ) {
         <form onSubmit={handleUpdate}>
         <fieldset>
             <legend> Edit a Rental </legend>
-            <p>Fill out the form below with the information of the rental to update one </p>
-            <p>If you click on the UPDATE button of a row, the form will be prefilled with data</p>
+            <p>Fill out the form below with the information of the rental you want to update</p>
+            <p>If you click on the UPDATE button of a row, the form will be prefilled with that row{"'"}s data</p>
             <label>
                 Rental ID: <input 
                     type="number" 

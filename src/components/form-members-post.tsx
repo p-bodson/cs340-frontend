@@ -46,7 +46,7 @@ export default function FormMembersPost ( props: any ) {
                     Fill out the form below with the information of the new member
                 </p>
                 <label>
-                    First Name: <input 
+                    Member First Name: <input 
                     type="text" 
                     name="member_first_name" 
                     onChange={onChangeCreate}
@@ -55,7 +55,7 @@ export default function FormMembersPost ( props: any ) {
                 </label>
                 <br/>
                 <label>
-                    Last Name: <input 
+                    Member Last Name: <input 
                     type="text" 
                     name="member_last_name" 
                     onChange={onChangeCreate}
@@ -64,7 +64,7 @@ export default function FormMembersPost ( props: any ) {
                 </label>
                 <br/>
                 <label>
-                    Phone Number: <input 
+                    Member Phone Number: <input 
                     type="number" 
                     name="member_phone" 
                     onChange={onChangeCreate}

@@ -38,7 +38,7 @@ export default function FormRentals ( props: any ) {
     return (
         <form onSubmit={handleSearch}>
             <fieldset>
-                <legend> Find Rental Orders in the Super Duper Library Network </legend>
+                <legend> Find Rentals in the Super Duper Library Network </legend>
                 <p>Fill out zero or more of the fields below to find matching rentals</p>
                 <label>
                     Rental ID: <input 
