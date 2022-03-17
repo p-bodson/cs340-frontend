@@ -5,18 +5,28 @@ import Table2 from '@/components/table-2';
 import { useState, useEffect } from 'react';
 import FormBooks from '@/components/form-books'
 import useData from '@/hooks/useData';
+import UpdateFormBooks from '@/components/update-form-books'
+
 
 
 const Books: NextPage = () => {
   const apiTld = process.env.NEXT_PUBLIC_API_TLD;
   const booksUri: string = `${apiTld}/books`
+  const updateUri: string = `${apiTld}/books`
 
-  // make some controlled state for the form
-  const [books_form, setBooksForm] = useState({
+  // make some controlled state for the CREATE form
+  const [create_form, setCreateForm] = useState({
     isbn: "",
     book_title: ""
   })
 
+  // controlled state for the UPDATE form
+  const [update_form, setUpdateForm] = useState( {
+    isbn:"",
+    book_title: ""
+  })
+
+  // state for books displayed in table
   const [books, setBooks] = useState([]);
 
   const { data: booksData, 
@@ -43,14 +53,20 @@ const Books: NextPage = () => {
 
           <br />
           <FormBooks 
-            locator="books" 
-            stateStuff={[books_form, setBooksForm]} 
+            stateStuff={[create_form, setCreateForm]} 
             apiUri={booksUri}
+            affect={setBooks}
+          />
+          <br/>
+          <UpdateFormBooks 
+            stateStuff={[update_form, setUpdateForm]}
+            apiUri={updateUri}
             affect={setBooks}
           />
           <br />
           <Table2 
             data={books}
+            update_form={setUpdateForm}
             isLoading={booksIsLoading}
             isError={booksIsError}
             caption={<b>Books</b>}

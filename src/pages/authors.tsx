@@ -14,7 +14,7 @@ const Authors: NextPage = () => {
   const updateUri: string = `${apiTld}/authors`
 
   // make some controlled state for the CREATE form
-  const [authors_form, setAuthorsForm] = useState({
+  const [create_form, setCreateForm] = useState({
     author_name: "",
   })
 
@@ -31,6 +31,7 @@ const Authors: NextPage = () => {
   const { data: authorsData, 
     isLoading: authorsIsLoading, 
     isError: authorsIsError } = useData(authorsUri);
+    
   useEffect( () => {
     setAuthors(authorsData);
   }, [authorsIsLoading, authorsData, authorsIsError])
@@ -50,7 +51,7 @@ const Authors: NextPage = () => {
 
           <br/>
           <FormAuthors 
-            stateStuff={[authors_form, setAuthorsForm]}
+            stateStuff={[create_form, setCreateForm]}
             apiUri={authorsUri}
             affect={setAuthors}
           />
