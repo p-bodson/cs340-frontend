@@ -94,7 +94,7 @@ export default function UpdateFormRentalItems ( props: any ) {
             <br/>
             <label>
                 Return Date: <input 
-                    type="text" 
+                    type="date" 
                     name="return_date"
                     onChange={onChangeHandleUpdate}
                     value={form_data.return_date}
